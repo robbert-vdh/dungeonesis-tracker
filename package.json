@@ -1,0 +1,27 @@
+{
+  "name": "dungeonesis",
+  "version": "0.1.0",
+  "description": "An experience tracker for use with the Gate Marches campaign.",
+  "author": "Robbert van der Helm <mail@robbertvanderhelm.nl>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "NODE_ENV=production webpack --mode production",
+    "watch": "webpack-dev-server --open --mode development"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^2.0.2",
+    "copy-webpack-plugin": "^5.0.3",
+    "css-loader": "^2.1.1",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "mini-css-extract-plugin": "^0.6.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^6.0.1",
+    "typescript": "^3.4.5",
+    "vue-loader": "^15.7.0",
+    "webpack": "^4.32.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
+  }
+}
