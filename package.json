@@ -11,6 +11,7 @@
     "watch": "webpack-dev-server --open --mode development"
   },
   "devDependencies": {
+    "bootstrap": "^4.3.1",
     "clean-webpack-plugin": "^2.0.2",
     "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^2.1.1",
