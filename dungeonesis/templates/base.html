@@ -1,0 +1,19 @@
+{% load static %}
+
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Gate Marches Experience Tracker{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static "dist/app.css" %}" type="text/css">
+  </head>
+  <body>
+    {% block body %}
+    {% endblock %}
+
+    <script type="text/javascript" src="{% static "dist/bundle.js" %}"></script>
+  </body>
+</html>
