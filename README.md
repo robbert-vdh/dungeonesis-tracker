@@ -13,6 +13,7 @@ the dependencies and run the application, simply run:
 
 ```shell
 docker-compose up -d
+yarn build  # Or `yarn dev` for a quicker build without optimizations
 poetry run ./manage.py migrate
 poetry run ./manage.py runserver
 ```
