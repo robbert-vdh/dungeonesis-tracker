@@ -5,6 +5,8 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ImageMinPlugin = require("imagemin-webpack-plugin").default;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserJSPlugin = require("terser-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const MODULE_NAME = "dungeonesis";
@@ -50,12 +52,7 @@ module.exports = (env, argv) => {
           test: /\.scss$/,
           use: [
             isProduction ? MiniCssExtractPlugin.loader : "style-loader",
-            {
-              loader: "css-loader",
-              options: {
-                minimize: isProduction
-              }
-            },
+            "css-loader",
             "sass-loader"
           ]
         },
@@ -64,6 +61,9 @@ module.exports = (env, argv) => {
           use: "file-loader"
         }
       ]
+    },
+    optimization: {
+      minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin({})]
     },
     plugins: [
       new CleanWebpackPlugin(),
