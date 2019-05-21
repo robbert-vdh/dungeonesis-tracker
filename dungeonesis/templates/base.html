@@ -12,6 +12,12 @@
   </head>
   <body>
     {% block body %}
+      <div class="wrapper">
+        <main class="page-card">
+          {% block content %}
+          {% endblock %}
+        </main>
+      </div>
     {% endblock %}
 
     <script type="text/javascript" src="{% static "dist/bundle.js" %}"></script>

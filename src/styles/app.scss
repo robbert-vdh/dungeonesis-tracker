@@ -1,1 +1,28 @@
+// TODO: Refactor this into multiple files once and if it grows out of hand
+
+// Equivalent to $gray-200
+$body-bg: #e9ecef;
+
 @import "~bootstrap/scss/bootstrap";
+
+html,
+body {
+  height: 100%;
+}
+
+.page-card {
+  @include make-container-max-widths();
+
+  background: $white;
+  border-radius: $border-radius-sm;
+  box-shadow: $box-shadow-sm;
+  padding: 1rem;
+  margin: 3rem;
+}
+
+.wrapper {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  min-height: 100%;
+}

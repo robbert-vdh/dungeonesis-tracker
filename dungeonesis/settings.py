@@ -136,6 +136,20 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "public", "static")
 
 
-# Use Postgres's JSONB fields for OAuth2 related data
+# Social authentication
+# Make sure to configure the OAuth backend, see the readme for more information
+
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 SOCIAL_AUTH_URL_NAMESPACE = "social"
+
+LOGIN_URL = "/auth/login/google-oauth2/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+
+# Local overrides
+
+try:
+    from .local import *
+except ImportError:
+    pass
