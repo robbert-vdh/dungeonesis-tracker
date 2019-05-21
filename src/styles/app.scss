@@ -16,8 +16,18 @@ body {
   background: $white;
   border-radius: $border-radius-sm;
   box-shadow: $box-shadow-sm;
-  padding: 1rem;
+  padding: 2rem;
   margin: 2rem;
+}
+
+.subtitle {
+  color: $gray-700;
+  font-size: 1.5rem;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 0;
 }
 
 .wrapper {

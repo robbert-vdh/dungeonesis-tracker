@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container">
-    <h1 class="text-center">Hello, world!</h1>
+  {% if user.is_authenticated %}
+    <p>Welcome back, {{ user.first_name }}</p>
 
-    <a href="{% url "social:begin" "google-oauth2" %}">Google+</a>
+    <a class="btn btn-outline-secondary" href="{% url "logout" %}">
+      Log out
+    </a>
+  {% else %}
+    <div class="d-f flex-column align-items-center text-center">
+      <h1 class="title">Gate Marches</h1>
+      <h2 class="subtitle">EXP tracker</h2>
 
-    <p>
-      {{ user.first_name|pprint }}
-    </p>
-  </div>
+      <a class="btn btn-primary mt-3 mb-1"
+         href="{% url "social:begin" "google-oauth2" %}">
+        Sign in
+      </a>
+    </div>
+  {% endif %}
 {% endblock %}
