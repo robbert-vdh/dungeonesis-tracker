@@ -1,6 +1,8 @@
 from enum import Enum
 
 from django.contrib.auth.models import AbstractUser
+from django.contrib.postgres.fields import JSONField
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -58,14 +60,31 @@ class LogEntry(models.Model):
     """
     A log storing all changes made by a player.
 
-    This is mostly useful for reference.
+    This is mostly useful for later reference. The value column right now only
+    stores integers or NULL values, but we'll store it as JSON in the database
+    to make it slightly easier to work with.
 
     """
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="logs")
     character = models.ForeignKey(
-        User, null=True, on_delete=models.DO_NOTHING, related_name="logs"
+        Character,
+        blank=True,
+        null=True,
+        on_delete=models.DO_NOTHING,
+        related_name="logs",
     )
 
-    # TODO: Type
-    # TODO: Value
+    type = models.CharField(
+        max_length=32, choices=((tag.name, tag.value) for tag in LogType)
+    )
+    value = JSONField(blank=True, null=True)
+
+    def clean(self):
+        # Verify that the type of `self.value` matches the log entry's type
+        if self.type in {"POINTS_MODIFIED", "POINTS_SPENT"}:
+            if type(self.value) != int:
+                raise ValidationError({"value": "Incorrect value type, expected 'int'"})
+        elif self.type in {"CHARACTER_ADDED", "CHARACTER_DELETED"}:
+            if self.value is not None:
+                raise ValidationError({"value": "Incorrect value type, expected 'int'"})
