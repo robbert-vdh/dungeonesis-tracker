@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <p>{{ Object.keys(characters).length }} characters:</p>
+  <div>
+    <h1>{{ Object.keys(characters).length }} characters</h1>
 
     <ul>
       <li v-for="character in characters">
@@ -10,4 +10,4 @@
   </div>
 </template>
 
-<script src="./overview.ts"></script>
+<script src="./overview-page.ts"></script>
