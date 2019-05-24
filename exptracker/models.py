@@ -53,7 +53,7 @@ class Character(models.Model):
         stars_to_level(self.points)[1]
 
     @property
-    def progress(self):
+    def progression(self):
         """
         The character's level, the number of banners and the number of points
         towards the next banner.
