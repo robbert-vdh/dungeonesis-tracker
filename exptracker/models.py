@@ -5,6 +5,8 @@ from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from .utils import stars_to_level
+
 
 class User(AbstractUser):
     """
@@ -12,13 +14,13 @@ class User(AbstractUser):
 
     Attributes
     ----------
-    unspent_points : int
+    unspent_stars : int
         The number of stars that the player can still distribute amongst his
         or her characters.
 
     """
 
-    unspent_points = models.PositiveIntegerField(default=0)
+    unspent_stars = models.PositiveIntegerField(default=0)
 
 
 class Character(models.Model):
@@ -27,7 +29,7 @@ class Character(models.Model):
 
     Attributes
     ----------
-    points : int
+    stars : int
         The number stars allocated to this character. From this we can
         calculate the character's level and the banners used for character
         progression. This should be set accordingly when adding a character.
@@ -40,9 +42,7 @@ class Character(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="characters")
 
     name = models.CharField(max_length=255)
-    points = models.PositiveIntegerField()
-
-    # TODO: Attributes to retrieve a character's level and banner progression
+    stars = models.PositiveIntegerField()
 
 
 class LogType(Enum):
@@ -51,9 +51,9 @@ class LogType(Enum):
     # The value for this event can be negative when stars are explicitely
     # removed instead of being spent on a character, i.e. after having added
     # too many or when stars are used to buy inspiration.
-    POINTS_MODIFIED = "POINTS_MODIFIED"
-    # Points spent on a character.
-    POINTS_SPENT = "POINTS_SPENT"
+    STARS_MODIFIED = "STARS_MODIFIED"
+    # Stars spent on a character.
+    STARS_SPENT = "STARS_SPENT"
 
 
 class LogEntry(models.Model):
@@ -82,7 +82,7 @@ class LogEntry(models.Model):
 
     def clean(self):
         # Verify that the type of `self.value` matches the log entry's type
-        if self.type in {"POINTS_MODIFIED", "POINTS_SPENT"}:
+        if self.type in {"STARS_MODIFIED", "STARS_SPENT"}:
             if type(self.value) != int:
                 raise ValidationError({"value": "Incorrect value type, expected 'int'"})
         elif self.type in {"CHARACTER_ADDED", "CHARACTER_DELETED"}:
