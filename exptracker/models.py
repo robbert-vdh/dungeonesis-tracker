@@ -44,6 +44,34 @@ class Character(models.Model):
     name = models.CharField(max_length=255)
     stars = models.PositiveIntegerField()
 
+    @property
+    def level(self):
+        stars_to_level(self.points)[0]
+
+    @property
+    def banners(self):
+        stars_to_level(self.points)[1]
+
+    @property
+    def progress(self):
+        """
+        The character's level, the number of banners and the number of points
+        towards the next banner.
+
+        Returns
+        -------
+        level : int
+            The character's current level.
+        banners : int
+            The number of banners towards the next level the character currently
+            possesses.
+        stars : int
+            The number of stars towards the next banner the character currently
+            possesses.
+
+        """
+        stars_to_level(self.points)
+
 
 class LogType(Enum):
     CHARACTER_ADDED = "CHARACTER_ADDED"
@@ -82,7 +110,7 @@ class LogEntry(models.Model):
 
     def clean(self):
         # Verify that the type of `self.value` matches the log entry's type
-        if self.type in {"STARS_MODIFIED", "STARS_SPENT"}:
+        if self.type in {"STARS_MODIFIED", "TARS_SPENT"}:
             if type(self.value) != int:
                 raise ValidationError({"value": "Incorrect value type, expected 'int'"})
         elif self.type in {"CHARACTER_ADDED", "CHARACTER_DELETED"}:
