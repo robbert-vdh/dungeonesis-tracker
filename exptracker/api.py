@@ -2,6 +2,8 @@ from rest_framework import viewsets, permissions, serializers
 
 from .models import Character
 
+# TODO: An API for adding and spending stars to and from the star pool
+
 
 class CharacterSelializer(serializers.ModelSerializer):
     class Meta:
