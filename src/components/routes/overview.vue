@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <p>{{ Object.keys(characters).length }} characters:</p>
+
+    <ul>
+      <li v-for="character in characters">
+        {{ character.name }} ({{ character.stars }} stars)
+      </li>
+    </ul>
   </div>
 </template>
 

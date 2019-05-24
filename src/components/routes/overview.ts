@@ -1,7 +1,6 @@
 import Vue from 'vue'
+import { mapState } from 'vuex';
 import Component from 'vue-class-component'
 
-@Component({})
-export default class Overview extends Vue {
-  message: string = 'Hello, world!'
-}
+@Component({ computed: mapState(['characters']) })
+export default class Overview extends Vue { }
