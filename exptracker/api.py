@@ -7,7 +7,7 @@ from .permissions import IsOwner
 class CharacterSelializer(serializers.ModelSerializer):
     class Meta:
         model = Character
-        fields = ("name", "stars")
+        fields = ("id", "name", "stars")
 
 
 class CharacterViewSet(viewsets.ModelViewSet):
