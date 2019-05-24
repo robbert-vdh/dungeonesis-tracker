@@ -10,7 +10,8 @@ if (document.getElementById('app')) {
 
   const router = new VueRouter({
     routes: [
-      { path: '*', component: Overview }
+      { path: '/', component: Overview },
+      { path: '*', redirect: '/' }
     ]
   });
 
