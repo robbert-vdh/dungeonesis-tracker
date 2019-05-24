@@ -1,7 +1,6 @@
 from rest_framework import viewsets, permissions, serializers
 
 from .models import Character
-from .permissions import IsOwner
 
 
 class CharacterSelializer(serializers.ModelSerializer):
@@ -16,3 +15,6 @@ class CharacterViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.characters.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
