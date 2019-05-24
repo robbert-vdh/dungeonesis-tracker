@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "social_django",
 ]
 
@@ -137,6 +138,14 @@ STATIC_URL = "/static/"
 # This directory will be used to collect all static files to and can be served
 # by a regular HTTP server such as NGINX
 STATIC_ROOT = os.path.join(BASE_DIR, "public", "static")
+
+
+# REST API
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"]
+}
 
 
 # Social authentication
