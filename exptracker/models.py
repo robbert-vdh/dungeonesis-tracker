@@ -46,16 +46,16 @@ class Character(models.Model):
 
     @property
     def level(self):
-        stars_to_level(self.points)[0]
+        stars_to_level(self.stars)[0]
 
     @property
     def banners(self):
-        stars_to_level(self.points)[1]
+        stars_to_level(self.stars)[1]
 
     @property
     def progression(self):
         """
-        The character's level, the number of banners and the number of points
+        The character's level, the number of banners and the number of stars
         towards the next banner.
 
         Returns
@@ -70,7 +70,7 @@ class Character(models.Model):
             possesses.
 
         """
-        stars_to_level(self.points)
+        stars_to_level(self.stars)
 
 
 class LogType(Enum):
