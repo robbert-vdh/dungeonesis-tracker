@@ -30,12 +30,7 @@ module.exports = (env, argv) => {
       hot: true
     },
     resolve: {
-      extensions: [".js", ".ts", ".tsx"],
-      alias: {
-        // We need the compiler + runtime version of Vue as we don't have a full
-        // blown SPA on our hands here
-        vue$: "vue/dist/vue.esm.js"
-      }
+      extensions: [".js", ".ts", ".tsx"]
     },
     devtool: isProduction ? "source-map" : "cheap-module-eval-source-map",
     module: {
@@ -49,7 +44,7 @@ module.exports = (env, argv) => {
           loader: "vue-loader"
         },
         {
-          test: /\.scss$/,
+          test: /\.s?css$/,
           use: [
             isProduction ? MiniCssExtractPlugin.loader : "style-loader",
             "css-loader",

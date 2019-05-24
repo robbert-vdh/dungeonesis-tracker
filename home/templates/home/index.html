@@ -4,6 +4,12 @@
   {% if user.is_authenticated %}
     <p>Welcome back, {{ user.first_name }}</p>
 
+    <div id="app">
+      <noscript>
+        This application requires JavaScript to be enabled.
+      </noscript>
+    </div>
+
     <a class="btn btn-outline-secondary" href="{% url "logout" %}">
       Log out
     </a>
