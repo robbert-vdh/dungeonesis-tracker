@@ -108,6 +108,8 @@ class LogEntry(models.Model):
     )
     value = JSONField(blank=True, null=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def clean(self):
         # Verify that the type of `self.value` matches the log entry's type
         if self.type in {"STARS_MODIFIED", "TARS_SPENT"}:
