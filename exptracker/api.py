@@ -2,12 +2,10 @@ from django.db import transaction
 from django.db.models import F
 from rest_framework import permissions, serializers, viewsets
 from rest_framework.exceptions import APIException
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
 
 from .models import Character, LogType
-
-# TODO: Routes for modifying the user's star pool.
 
 
 class CharacterSerializer(serializers.ModelSerializer):
@@ -24,6 +22,34 @@ class StarRequestSerializer(serializers.Serializer):
     """
 
     stars = serializers.IntegerField()
+    reason = serializers.CharField(required=False)
+
+
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+def adjust_stars(request):
+    serializer = StarRequestSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    stars = serializer.validated_data["stars"]
+    with transaction.atomic():
+        if request.user.unspent_stars + stars < 0:
+            raise APIException(
+                "You can't have a negative number of stars. That would be silly."
+            )
+
+        request.user.unspent_stars = F("unspent_stars") + stars
+        request.user.save()
+
+        # To make the log actually useful we will also optionally log the cause
+        # of this star increase. This value is freeform and can be null.
+        request.user.logs.create(
+            type=LogType.STARS_ADDED,
+            value={"amount": stars, "reason": serializer.validated_data.get("reason")},
+            character=None,
+        )
+
+    return Response({"added_stars": stars})
 
 
 class CharacterViewSet(viewsets.ModelViewSet):
