@@ -1,4 +1,3 @@
-// TODO: Refactor this into multiple files once and if it grows out of hand
 // TODO: Add a webfont instead of Bootstrap's default for consistency
 
 // Equivalent to $gray-200
@@ -6,34 +5,4 @@ $body-bg: #e9ecef;
 
 @import "~bootstrap/scss/bootstrap";
 
-html,
-body {
-  height: 100%;
-}
-
-.page-card {
-  @include make-container-max-widths();
-
-  background: $white;
-  border-radius: $border-radius-sm;
-  box-shadow: $box-shadow-sm;
-  padding: 2rem;
-  margin: 2rem;
-}
-
-.subtitle {
-  color: $gray-700;
-  font-size: 1.5rem;
-}
-
-.title {
-  font-size: 3rem;
-  margin-bottom: 0;
-}
-
-.wrapper {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  min-height: 100%;
-}
+@import 'page';
