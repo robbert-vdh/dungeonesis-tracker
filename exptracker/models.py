@@ -101,24 +101,28 @@ class LogEntry(models.Model):
     )
 
     type = models.CharField(
-        max_length=32, choices=((tag.name, tag.value) for tag in LogType)
+        max_length=32, choices=((str(tag), tag.value) for tag in LogType)
     )
     value = JSONField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def clean(self):
-        if self.type in {"STARS_SPENT", "CHARACTER_ADDED", "CHARACTER_DELETED"}:
+        if self.type in {
+            LogType.STARS_SPENT,
+            LogType.CHARACTER_ADDED,
+            LogType.CHARACTER_DELETED,
+        }:
             if self.character_id is None:
                 raise ValidationError({"character": "Missing character."})
 
         # Verify that the type of `self.value` matches the log entry's type
-        if self.type in {"STARS_ADDED", "STARS_SPENT"}:
+        if self.type in {LogType.STARS_ADDED, LogType.STARS_SPENT}:
             if type(self.value) != int:
                 raise ValidationError(
                     {"value": "Incorrect value type, expected 'int'."}
                 )
-        elif self.type in {"CHARACTER_ADDED", "CHARACTER_DELETED"}:
+        elif self.type in {LogType.CHARACTER_ADDED, LogType.CHARACTER_DELETED}:
             if self.value is not None:
                 raise ValidationError(
                     {"value": "Incorrect value type, expected 'int'."}

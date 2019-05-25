@@ -5,7 +5,7 @@ from rest_framework.exceptions import APIException
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Character
+from .models import Character, LogType
 
 # TODO: An API for adding and spending stars to and from the star pool
 
@@ -64,6 +64,8 @@ class CharacterViewSet(viewsets.ModelViewSet):
             character.save()
             request.user.save()
 
-            # TODO: Write to the log
+            request.user.logs.create(
+                type=LogType.STARS_SPENT, value=stars, character=character
+            )
 
         return Response({"spent_stars": stars})
