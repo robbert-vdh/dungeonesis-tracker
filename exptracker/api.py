@@ -10,6 +10,10 @@ class CharacterSelializer(serializers.ModelSerializer):
         model = Character
         fields = ("id", "name", "stars")
 
+        # Stars should only be modified using transacitonal methods so that we
+        # can keep a log
+        read_only_fields = ("id", "stars")
+
 
 class CharacterViewSet(viewsets.ModelViewSet):
     serializer_class = CharacterSelializer
