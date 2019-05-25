@@ -63,10 +63,10 @@ module.exports = (env, argv) => {
     plugins: [
       new CleanWebpackPlugin(),
       new CopyWebpackPlugin([
-        // {
-        //   from: "src/images/",
-        //   to: "images/"
-        // }
+        {
+          from: "src/images/",
+          to: "images/"
+        }
       ]),
       new MiniCssExtractPlugin({
         filename: "app.css"

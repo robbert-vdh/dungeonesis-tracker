@@ -10,7 +10,31 @@ body {
   border-radius: $border-radius-sm;
   box-shadow: $box-shadow-sm;
   padding: 2rem;
-  margin: 2rem;
+  margin: 2rem 2rem 1rem 2rem;
+}
+
+.page-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+}
+
+// The little banner that links to the GitHub repo
+.repo-link {
+  margin-bottom: 2rem;
+  opacity: 1.0;
+  transition: opacity 150ms ease-in-out;
+
+  @include hover-focus {
+    opacity: 0.8;
+  }
+
+  img {
+    display: block;
+    width: 1.5rem;
+  }
 }
 
 .subtitle {
@@ -21,11 +45,4 @@ body {
 .title {
   font-size: 3rem;
   margin-bottom: 0;
-}
-
-.wrapper {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  min-height: 100%;
 }

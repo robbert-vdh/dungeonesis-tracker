@@ -12,11 +12,17 @@
   </head>
   <body>
     {% block body %}
-      <div class="wrapper">
+      <div class="page-wrapper">
         <main class="page-card">
           {% block content %}
           {% endblock %}
         </main>
+
+        <a href="https://github.com/robbert-vdh/dungeonesis-tracker"
+           class="repo-link" target="_blank"
+           title="View source code">
+          <img src="{% static "dist/images/github.svg" %}" alt="GitHub repo">
+        </a>
       </div>
     {% endblock %}
 
