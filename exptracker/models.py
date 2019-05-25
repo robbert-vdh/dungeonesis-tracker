@@ -111,10 +111,18 @@ class LogEntry(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def clean(self):
+        if self.type in {"STARS_SPENT", "CHARACTER_ADDED", "CHARACTER_DELETED"}:
+            if self.character_id is None:
+                raise ValidationError({"character": "Missing character."})
+
         # Verify that the type of `self.value` matches the log entry's type
-        if self.type in {"STARS_MODIFIED", "TARS_SPENT"}:
+        if self.type in {"STARS_ADDED", "STARS_SPENT"}:
             if type(self.value) != int:
-                raise ValidationError({"value": "Incorrect value type, expected 'int'"})
+                raise ValidationError(
+                    {"value": "Incorrect value type, expected 'int'."}
+                )
         elif self.type in {"CHARACTER_ADDED", "CHARACTER_DELETED"}:
             if self.value is not None:
-                raise ValidationError({"value": "Incorrect value type, expected 'int'"})
+                raise ValidationError(
+                    {"value": "Incorrect value type, expected 'int'."}
+                )
