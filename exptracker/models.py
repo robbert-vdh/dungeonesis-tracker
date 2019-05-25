@@ -76,11 +76,8 @@ class Character(models.Model):
 class LogType(Enum):
     CHARACTER_ADDED = "CHARACTER_ADDED"
     CHARACTER_DELETED = "CHARACTER_DELETED"
-    # The value for this event can be negative when stars are explicitely
-    # removed instead of being spent on a character, i.e. after having added
-    # too many or when stars are used to buy inspiration.
-    STARS_MODIFIED = "STARS_MODIFIED"
-    # Stars spent on a character.
+    STARS_ADDED = "STARS_ADDED"
+    # Stars spent on a character from the pool of unspent stars.
     STARS_SPENT = "STARS_SPENT"
 
 
