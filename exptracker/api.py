@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from .models import Character, LogType
 
-# TODO: An API for adding and spending stars to and from the star pool
+# TODO: Routes for modifying the user's star pool.
 
 
 class CharacterSerializer(serializers.ModelSerializer):
@@ -27,6 +27,21 @@ class StarRequestSerializer(serializers.Serializer):
 
 
 class CharacterViewSet(viewsets.ModelViewSet):
+    """
+    The viewset for modifying characters.
+
+    There are very few restrictions here since there is not really a reason to.
+    It's important to note that there are two ways to add stars to a character
+    and they both have a different purpose:
+
+    - `POST /api/characters/<id>/spend` allows you to move stars from the pool
+      of unallocated stars to a character.
+    - `PUT or PATCH /api/characters/<id>` can be used to update a character's
+      number of stars in place. This is useful when clamining star rewards that
+      can only be spent on a certain character.
+
+    """
+
     serializer_class = CharacterSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -57,8 +72,24 @@ class CharacterViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-    # TODO: Merge the update method with this
-    @action(detail=True, methods=["post"], name="Allocate stars from pool")
+    def update(self, request, *args, **kwargs):
+        character = self.get_object()
+        old_stars = character.stars
+        response = super().update(request, *args, **kwargs)
+        new_stars = response.data["stars"]
+
+        # As explained above we'll simply log when a character's number of
+        # stars changes
+        if old_stars != new_stars:
+            request.user.logs.create(
+                type=LogType.STARS_SPENT,
+                value=new_stars - old_stars,
+                character=character,
+            )
+
+        return response
+
+    @action(detail=True, methods=["post"], name="Spend stars from pool")
     def spend(self, request, pk):
         """Spend stars from the pool on this character."""
 
