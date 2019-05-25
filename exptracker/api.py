@@ -44,6 +44,16 @@ class CharacterViewSet(viewsets.ModelViewSet):
 
         return response
 
+    def destroy(self, request, *args, **kwargs):
+        character_data = CharacterSerializer(self.get_object()).data
+        response = super().destroy(request, *args, **kwargs)
+
+        request.user.logs.create(
+            type=LogType.CHARACTER_DELETED, value=character_data, character_id=None
+        )
+
+        return response
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 

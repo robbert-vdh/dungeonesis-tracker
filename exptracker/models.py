@@ -119,7 +119,7 @@ class LogEntry(models.Model):
                     {"value": "Incorrect value type, expected 'int'."}
                 )
         elif self.type in {LogType.CHARACTER_ADDED, LogType.CHARACTER_DELETED}:
-            if self.value is not None:
+            if type(self.value) != dict:
                 raise ValidationError(
-                    {"value": "Incorrect value type, expected 'int'."}
+                    {"value": "Incorrect value type, expected 'dict'."}
                 )
