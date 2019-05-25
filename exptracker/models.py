@@ -91,13 +91,9 @@ class LogEntry(models.Model):
 
     """
 
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="logs")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="logs")
     character = models.ForeignKey(
-        Character,
-        blank=True,
-        null=True,
-        on_delete=models.DO_NOTHING,
-        related_name="logs",
+        Character, blank=True, null=True, on_delete=models.SET_NULL, related_name="logs"
     )
 
     type = models.CharField(
