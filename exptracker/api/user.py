@@ -1,11 +1,11 @@
 from django.db import transaction
 from django.db.models import F
-from rest_framework import permissions
+from rest_framework import generics, permissions
 from rest_framework.exceptions import APIException
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .serializers import StarRequestSerializer
+from .serializers import StarRequestSerializer, UserInfoSerializer
 
 from ..models import LogType
 
@@ -35,3 +35,21 @@ def adjust_stars(request):
         )
 
     return Response({"added_stars": stars})
+
+
+class UserInfo(generics.RetrieveAPIView):
+    """
+    An API view for retrieving basic player information.
+
+    This will return:
+
+    - The user's name
+    - How many unspent stars the user has
+
+    """
+
+    serializer_class = UserInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user

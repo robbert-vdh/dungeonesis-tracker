@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Character
+from ..models import Character, User
 
 
 class CharacterSerializer(serializers.ModelSerializer):
@@ -18,3 +18,9 @@ class StarRequestSerializer(serializers.Serializer):
 
     stars = serializers.IntegerField()
     reason = serializers.CharField(required=False)
+
+
+class UserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "unspent_stars")
