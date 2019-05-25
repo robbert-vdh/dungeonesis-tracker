@@ -15,10 +15,6 @@ class CharacterSerializer(serializers.ModelSerializer):
         model = Character
         fields = ("id", "name", "stars")
 
-        # Stars should only be modified using transacitonal methods so that we
-        # can keep a log
-        read_only_fields = ("id", "stars")
-
 
 class StarRequestSerializer(serializers.Serializer):
     """
@@ -37,9 +33,21 @@ class CharacterViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.characters.all()
 
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+
+        request.user.logs.create(
+            type=LogType.CHARACTER_ADDED,
+            value=response.data,
+            character_id=response.data["id"],
+        )
+
+        return response
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    # TODO: Merge the update method with this
     @action(detail=True, methods=["post"], name="Allocate stars from pool")
     def spend(self, request, pk):
         """Spend stars from the pool on this character."""
