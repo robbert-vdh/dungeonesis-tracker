@@ -4,6 +4,6 @@ from rest_framework import routers
 from . import api
 
 router = routers.SimpleRouter()
-router.register("characters", api.CharacterViewSet, "character")
+router.register("characters", api.characters.CharacterViewSet, "characters")
 
-urlpatterns = router.urls + [path("user/adjust", api.adjust_stars)]
+urlpatterns = router.urls + [path("user/adjust", api.user.adjust_stars)]
