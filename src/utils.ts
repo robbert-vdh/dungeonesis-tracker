@@ -7,6 +7,8 @@
  * leveling characters and adding rewards.
  */
 
+import * as _ from "lodash";
+
 // TODO: Add a function to calculate the current progress to the next level.
 
 export const BANNERS_PER_LEVEL: number = 8;
@@ -89,7 +91,7 @@ export function starsToLevel(characterStars: number): CharacterProgression {
 }
 
 export function levelToStars(level: number): number {
-  return STARS_FOR_LEVEL[level] || 0;
+  return _.get(STARS_FOR_LEVEL, level, 0);
 }
 
 /**
