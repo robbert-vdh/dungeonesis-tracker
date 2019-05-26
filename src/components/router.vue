@@ -1,9 +1,13 @@
 <template>
   <div id="app">
     <transition name="instant-fade" mode="out-in">
-      <router-view v-if="hasLoaded"></router-view>
+      <div v-if="hasLoaded">
+        <p>Welcome back, {{ user.first_name }}</p>
 
-      <p v-else>Loading...</p>
+        <router-view></router-view>
+      </div>
+
+      <span v-else>Loading...</span>
     </transition>
   </div>
 </template>

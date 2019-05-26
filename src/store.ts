@@ -28,7 +28,7 @@ export interface UserInfo {
 export var store = new Vuex.Store({
   state: {
     characters: <{ [id: number]: Character }>{},
-    userInfo: <UserInfo | null>null
+    user: <UserInfo | null>null
   },
   mutations: {
     addCharacter(state, character: ApiCharacter) {
@@ -40,12 +40,12 @@ export var store = new Vuex.Store({
     adjustStars(state, delta: number) {
       // This mutation should only be callable after the user's initial
       // information has been loaded
-      if (state.userInfo !== null) {
-        state.userInfo.unspent_stars += delta;
+      if (state.user !== null) {
+        state.user.unspent_stars += delta;
       }
     },
     initUserInfo(state, info: UserInfo) {
-      state.userInfo = info;
+      state.user = info;
     }
   },
   actions: {
