@@ -85,14 +85,13 @@ def stars_to_level(character_stars):
 
     # We can determine a character's level from the leveling table above and
     # calculate the rest from there
-    # x = (level, stars for level, stars in reversed(STARS_FOR_LEVEL.items()) if character_stars >= stars)
     level, level_cost = next(
         (
             (level, STARS_FOR_LEVEL[level])
             for level in reversed(LEVELS)
             if character_stars >= STARS_FOR_LEVEL[level]
         ),
-        0,
+        (0, STARS_FOR_LEVEL[2]),
     )
 
     banner_cost = STARS_PER_BANNER[level]
