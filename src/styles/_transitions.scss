@@ -1,0 +1,11 @@
+.instant-fade-enter-active {
+  transition: opacity ease-out 300ms;
+}
+
+.instant-fade-leave-active {
+  transition: opacity ease-in 15ms;
+}
+
+.instant-fade-enter {
+  opacity: 0;
+}
