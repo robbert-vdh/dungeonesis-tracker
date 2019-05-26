@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>{{ Object.keys(characters).length }} characters</h1>
+    <!-- TODO: Add buttons for adding and removing characters -->
+    <!-- TODO: Add a button for renaming a character to the character detail page -->
 
     <ul>
       <li v-for="character in characters">
