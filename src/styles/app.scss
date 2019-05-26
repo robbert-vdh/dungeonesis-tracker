@@ -7,3 +7,9 @@ $body-bg: #e9ecef;
 
 @import 'page';
 @import 'transitions';
+
+ul:last-child,
+ol:last-child,
+p:last-child {
+  margin-bottom: 0;
+}
