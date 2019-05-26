@@ -70,7 +70,10 @@ class CharacterViewSet(viewsets.ModelViewSet):
         if old_stars != new_stars:
             request.user.logs.create(
                 type=LogType.STARS_SPENT,
-                value=new_stars - old_stars,
+                value={
+                    "amount": new_stars - old_stars,
+                    "reason": response.data.get("reason", None),
+                },
                 character=character,
             )
 

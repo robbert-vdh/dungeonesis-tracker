@@ -4,9 +4,12 @@ from ..models import Character, User
 
 
 class CharacterSerializer(serializers.ModelSerializer):
+    # An optional reason for the change, used when updating characters
+    reason = serializers.CharField(required=False)
+
     class Meta:
         model = Character
-        fields = ("id", "name", "stars")
+        fields = ("id", "name", "stars", "reason")
 
 
 class StarRequestSerializer(serializers.Serializer):

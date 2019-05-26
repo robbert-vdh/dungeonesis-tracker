@@ -113,12 +113,8 @@ class LogEntry(models.Model):
                 raise ValidationError({"character": "Missing character."})
 
         # Verify that the type of `self.value` matches the log entry's type
-        if self.type in {LogType.STARS_SPENT}:
-            if type(self.value) != int:
-                raise ValidationError(
-                    {"value": "Incorrect value type, expected 'int'."}
-                )
-        elif self.type in {
+        if self.type in {
+            LogType.STARS_SPENT,
             LogType.STARS_ADDED,
             LogType.CHARACTER_ADDED,
             LogType.CHARACTER_DELETED,
