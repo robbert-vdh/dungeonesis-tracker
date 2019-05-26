@@ -4,9 +4,17 @@ import { mapState } from "vuex";
 
 import * as utils from "../../utils";
 
+(<any>Window).utils = utils;
+
 @Component({ computed: mapState(["characters"]) })
 export default class OverviewPage extends Vue {
-  calculateLevel(stars: number): number {
-    return utils.starsToLevel(stars).level;
+  calculateProgress(stars: number): string {
+    const character = utils.starsToLevel(stars);
+    if (character.level >= 20) {
+      return `lvl ${character.level} + ${character.banners}b`;
+    }
+
+    const progression = utils.nextLeveLprogress(character) * 100;
+    return `lvl ${character.level} (${progression}%)`;
   }
 }

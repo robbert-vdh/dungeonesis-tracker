@@ -52,8 +52,7 @@ export const STARS_FOR_LEVEL: { [level: number]: number } = starsForLevel;
 
 const reversedLevels = Object.keys(STARS_FOR_LEVEL)
   .map(Number)
-  .sort()
-  .reverse();
+  .sort((a, b) => b - a);
 
 /**
  * The progression of a character. This includes the character's level, the
@@ -91,4 +90,24 @@ export function starsToLevel(characterStars: number): CharacterProgression {
 
 export function levelToStars(level: number): number {
   return STARS_FOR_LEVEL[level] || 0;
+}
+
+/**
+ * Calculate how for the character has progressed towards the next level.
+ *
+ * @param progression - A character's current progression.
+ *
+ * @returns How for the character has progressed towards the next level as a
+ *   fraction between 0 and 1. Will return the number of banners for level 20
+ *   characters.
+ */
+export function nextLeveLprogress(character: CharacterProgression): number {
+  if (character.level >= 20) {
+    return character.banners;
+  }
+
+  return (
+    (character.banners + character.stars * STARS_PER_BANNER[character.level]) /
+    BANNERS_PER_LEVEL
+  );
 }
