@@ -4,7 +4,7 @@ import BootstrapVue from "bootstrap-vue";
 
 import "./styles/app.scss";
 import { store } from "./store";
-import Router from "./components/router.vue";
+import Router from "./components/main.vue";
 import OverviewPage from "./components/pages/overview-page.vue";
 import CharacterPage from "./components/pages/character-page.vue";
 

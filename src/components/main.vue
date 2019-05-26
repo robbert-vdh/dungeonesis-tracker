@@ -29,4 +29,4 @@
   </div>
 </template>
 
-<script src="./router.ts"></script>
+<script src="./main.ts"></script>
