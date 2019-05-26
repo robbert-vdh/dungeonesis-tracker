@@ -1,5 +1,6 @@
 <template>
-  <b-modal @show="reset" id="character-add-modal" title="Add a character">
+  <b-modal @show="reset" :ok-disabled="insufficientStars"
+           id="character-add-modal" title="Add a character">
     <!-- TODO: Add validation -->
     <!-- TODO: Hook up the submit event -->
     <form class="needs-validation mb-3" novalidate>
@@ -26,12 +27,12 @@
       </div>
     </form>
 
-    <!-- TODO: Display in red if the user does not have enough stars -->
-    <!-- TODO: Disable the OK button if the user does not have enough stars -->
     <p>
       Cost:
       <span v-if="isFree || cost === 0">FREE</span>
-      <span v-else>{{ cost }} stars ({{ user.unspent_stars }} available)</span>
+      <span v-else :class="{ 'text-danger': insufficientStars }">
+        {{ cost }} stars ({{ user.unspent_stars }} available)
+      </span>
     </p>
   </b-modal>
 </template>

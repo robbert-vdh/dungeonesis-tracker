@@ -3,6 +3,11 @@ import Component from "vue-class-component";
 import { mapState } from "vuex";
 
 import * as utils from "../../utils";
+import { UserInfo } from "../../store";
+
+interface Shim {
+  user: UserInfo;
+}
 
 @Component({ computed: mapState(["user"]) })
 export default class CharacterAddModel extends Vue {
@@ -15,6 +20,14 @@ export default class CharacterAddModel extends Vue {
    */
   get cost(): number {
     return utils.CHARACTER_CREATION_COST[this.characterLevel];
+  }
+
+  /**
+   * This value is true if the player does not have enough stars to create this
+   * character.
+   */
+  get insufficientStars(): boolean {
+    return this.cost > (<Shim>(<any>this)).user.unspent_stars && !this.isFree;
   }
 
   /**
