@@ -1,8 +1,13 @@
 import Vue from "vue";
-import { mapState } from "vuex";
 import Component from "vue-class-component";
+import { mapState } from "vuex";
 
-@Component({ computed: mapState(["user"]) })
+import CharacterAddModal from "./modals/character-add-modal.vue";
+
+@Component({
+  components: { "character-add-modal": CharacterAddModal },
+  computed: mapState(["user"])
+})
 export default class Router extends Vue {
   /** Whether we have finished initializing our data. */
   hasLoaded = false;

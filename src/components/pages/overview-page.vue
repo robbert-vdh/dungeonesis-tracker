@@ -23,11 +23,11 @@
         You do not have any characters yet.
       </li>
 
-      <a href="#"
-         class="list-group-item list-group-item-action list-group-item-light
-                d-flex align-items-center">
+      <button v-b-modal.character-add-modal type="button"
+              class="list-group-item list-group-item-action list-group-item-light
+                     d-flex align-items-center">
         <i class="icon-plus mr-2" aria-hidden="true"></i>Add a character
-      </a>
+      </button>
     </div>
   </div>
 </template>

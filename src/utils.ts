@@ -9,9 +9,30 @@
 
 import * as _ from "lodash";
 
-// TODO: Add a function to calculate the current progress to the next level.
-
 export const BANNERS_PER_LEVEL: number = 8;
+
+export const CHARACTER_CREATION_COST: { [level: number]: number } = {
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0,
+  5: 0,
+  6: 1,
+  7: 1,
+  8: 5,
+  9: 5,
+  10: 5,
+  11: 20,
+  12: 20,
+  13: 20,
+  14: 40,
+  15: 40,
+  16: 40,
+  17: 80,
+  18: 80,
+  19: 80,
+  20: 42069
+};
 
 export const STARS_PER_BANNER: { [level: number]: number } = {
   1: 1,
