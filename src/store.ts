@@ -1,27 +1,34 @@
-import axios from 'axios';
-import Vue from 'vue';
-import Vuex from 'vuex';
+import axios from "axios";
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export interface Character {
-  name: string,
-  stars: number
-}
-
 /**
  * A character as returned by the REST API. This will be transformed into the
- * Character definition above.
+ * Character definition below.
  */
 export interface ApiCharacter {
-  id: number,
-  name: string,
-  stars: number
+  id: number;
+  name: string;
+  stars: number;
+}
+
+export interface Character {
+  name: string;
+  stars: number;
+}
+
+export interface UserInfo {
+  first_name: string;
+  last_name: string;
+  unspent_stars: number;
 }
 
 export var store = new Vuex.Store({
   state: {
-    characters: <{ [id: number]: Character }>{}
+    characters: <{ [id: number]: Character }>{},
+    userInfo: <UserInfo | null>null
   },
   mutations: {
     addCharacter(state, character: ApiCharacter) {
@@ -29,16 +36,30 @@ export var store = new Vuex.Store({
         name: character.name,
         stars: character.stars
       });
+    },
+    adjustStars(state, delta: number) {
+      // This mutation should only be callable after the user's initial
+      // information has been loaded
+      if (state.userInfo !== null) {
+        state.userInfo.unspent_stars += delta;
+      }
+    },
+    initUserInfo(state, info: UserInfo) {
+      state.userInfo = info;
     }
   },
   actions: {
     async fetchCharacters({ commit }) {
-      const response = await axios.get('/api/characters/');
-      const characters = response.data;
+      const response = await axios.get("/api/characters/");
 
-      for (const character of characters) {
-        commit('addCharacter', character);
+      for (const character of response.data) {
+        commit("addCharacter", character);
       }
+    },
+    async fetchUserInfo({ commit }) {
+      const response = await axios.get("/api/user/");
+
+      commit("initUserInfo", response.data);
     }
   }
 });
