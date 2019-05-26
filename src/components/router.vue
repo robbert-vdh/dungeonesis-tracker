@@ -17,7 +17,9 @@
           </div>
         </div>
 
-        <router-view></router-view>
+        <transition name="fast-fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </div>
 
       <div v-else key="loading" class="spinner-grow m-3" role="status">
