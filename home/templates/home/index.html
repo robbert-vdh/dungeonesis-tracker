@@ -2,11 +2,14 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    <p>Welcome back, {{ user.first_name }}</p>
-
     <div id="app">
       <noscript>
-        This application requires JavaScript to be enabled.
+        <p>Welcome back, {{ user.first_name }}</p>
+
+        <p>
+          This application requires JavaScript to be enabled. Please enable
+          JavaScript and try again.
+        </p>
       </noscript>
     </div>
 
