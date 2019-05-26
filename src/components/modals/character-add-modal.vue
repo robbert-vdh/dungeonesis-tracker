@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="character-add-modal" title="Add a character">
+  <b-modal @show="reset" id="character-add-modal" title="Add a character">
     <!-- TODO: Add validation -->
     <!-- TODO: Hook up the submit event -->
     <form class="needs-validation mb-3" novalidate>
@@ -20,8 +20,8 @@
           Import existing character
         </label>
         <small id="character-add-free-help" class="form-text text-muted">
-          Do not spend any stars when adding the character. Creating a new
-          character costs stars starting at level six or higher.
+          Do not spend any stars when adding this character. Normally creating a
+          new character costs stars starting at level six or higher.
         </small>
       </div>
     </form>
