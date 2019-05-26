@@ -1,9 +1,9 @@
 <template>
-  <b-modal @show="reset" :ok-disabled="insufficientStars"
-           id="character-add-modal" title="Add a character">
-    <!-- TODO: Add validation -->
-    <!-- TODO: Hook up the submit event -->
-    <form class="needs-validation mb-3" novalidate>
+  <b-modal ref="modal" @show="reset" @ok.prevent="submit"
+           :ok-disabled="insufficientStars" id="character-add-modal"
+           title="Add a character">
+    <form ref="form" @submit.stop.prevent="submit" class="mb-3"
+          :class="{ 'was-validated': wasSubmitted }" novalidate>
       <div class="form-group">
         <label for="character-add-name">Character name</label>
         <input v-model="characterName" type="text" class="form-control"

@@ -3,7 +3,20 @@ import Vue from "vue";
 import Vuex from "vuex";
 import * as _ from "lodash";
 
+// TODO: Add toasts with error messages for any actiosn that can go wrong.
+
 Vue.use(Vuex);
+
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.xsrfCookieName = "csrftoken";
+
+/**
+ * Parameters for POST requests to `/api/user/adjust/`.
+ */
+export interface AdjustRequest {
+  stars: number;
+  reason?: string;
+}
 
 /**
  * A character as returned by the REST API. This will be transformed into the
@@ -45,6 +58,16 @@ export var store = new Vuex.Store({
     }
   },
   actions: {
+    async adjustStars({ commit }, params: AdjustRequest) {
+      await axios.post("/api/user/adjust/", params);
+
+      commit("adjustStars", params.stars);
+    },
+    async createCharacter({ commit }, character: Character) {
+      await axios.post("/api/characters/", character);
+
+      commit("addCharacter", character);
+    },
     async fetchCharacters({ commit }) {
       const response = await axios.get("/api/characters/");
 
