@@ -1,6 +1,7 @@
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
+import * as _ from "lodash";
 
 Vue.use(Vuex);
 
@@ -29,6 +30,9 @@ export var store = new Vuex.Store({
   state: {
     characters: <{ [id: number]: Character }>{},
     user: <UserInfo | null>null
+  },
+  getters: {
+    sortedCharacters: state => _.orderBy(state.characters, ["stars"], ["desc"])
   },
   mutations: {
     addCharacter(state, character: ApiCharacter) {
