@@ -1,7 +1,7 @@
 <template>
   <b-modal ref="modal" @show="reset" @ok.prevent="submit"
-           :ok-disabled="insufficientStars" id="character-add-modal"
-           title="Add a character">
+           :ok-disabled="insufficientStars || cost === undefined"
+           id="character-add-modal" title="Add a character">
     <form ref="form" @submit.stop.prevent="submit" class="mb-3"
           :class="{ 'was-validated': wasSubmitted }" novalidate>
       <div class="form-group">
@@ -30,6 +30,9 @@
     <p>
       Cost:
       <span v-if="isFree || cost === 0">FREE</span>
+      <span v-else-if="cost === undefined" class="text-danger">
+        way too much, probably
+      </span>
       <span v-else :class="{ 'text-danger': insufficientStars }">
         {{ cost }} stars ({{ user.unspent_stars }} available)
       </span>
