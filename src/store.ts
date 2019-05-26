@@ -9,13 +9,8 @@ Vue.use(Vuex);
  * A character as returned by the REST API. This will be transformed into the
  * Character definition below.
  */
-export interface ApiCharacter {
-  id: number;
-  name: string;
-  stars: number;
-}
-
 export interface Character {
+  id: number;
   name: string;
   stars: number;
 }
@@ -35,11 +30,8 @@ export var store = new Vuex.Store({
     sortedCharacters: state => _.orderBy(state.characters, ["stars"], ["desc"])
   },
   mutations: {
-    addCharacter(state, character: ApiCharacter) {
-      Vue.set(state.characters, character.id, {
-        name: character.name,
-        stars: character.stars
-      });
+    addCharacter(state, character: Character) {
+      Vue.set(state.characters, character.id, character);
     },
     adjustStars(state, delta: number) {
       // This mutation should only be callable after the user's initial

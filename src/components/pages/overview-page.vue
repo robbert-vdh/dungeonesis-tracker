@@ -4,15 +4,16 @@
     <!-- TODO: Add a button for renaming a character to the character detail page -->
 
     <div class="list-group">
-      <!-- TODO: Route to the correct page -->
-      <a v-for="character in characters"
-         href="#"
-         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+      <router-link v-for="character in characters"
+                   :key="character.id"
+                   :to="{ name: 'detail', params: { id: character.id } }"
+                   class="list-group-item list-group-item-action d-flex
+                          justify-content-between align-items-center">
         {{ character.name }}
         <span class="badge badge-primary badge-pill">
           {{ calculateProgress(character.stars) }}
         </span>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
