@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import BootstrapVue from "bootstrap-vue";
 
 import "./styles/app.scss";
 import { store } from "./store";
@@ -10,6 +11,7 @@ import CharacterPage from "./components/pages/character-page.vue";
 // TODO: Add an undo button
 
 if (document.getElementById("app")) {
+  Vue.use(BootstrapVue);
   Vue.use(VueRouter);
 
   const router = new VueRouter({
