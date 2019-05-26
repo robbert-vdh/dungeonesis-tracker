@@ -10,12 +10,12 @@
           This application requires JavaScript to be enabled. Please enable
           JavaScript and try again.
         </p>
+
+        <a class="btn btn-outline-secondary" href="{% url "logout" %}">
+          Log out
+        </a>
       </noscript>
     </div>
-
-    <a class="btn btn-outline-secondary" href="{% url "logout" %}">
-      Log out
-    </a>
   {% else %}
     <div class="d-f flex-column align-items-center text-center">
       <h1 class="title">Gate Marches</h1>
