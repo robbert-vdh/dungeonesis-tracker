@@ -3,11 +3,15 @@
     <!-- TODO: Add buttons for adding and removing characters -->
     <!-- TODO: Add a button for renaming a character to the character detail page -->
 
-    <ul>
-      <li v-for="character in characters">
-        {{ character.name }} ({{ character.stars }} stars)
-      </li>
-    </ul>
+    <div class="list-group">
+      <!-- TODO: Route to the correct page -->
+      <a v-for="character in characters"
+         href="#"
+         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        {{ character.name }}
+        <span class="badge badge-primary badge-pill">{{ character.stars }} stars</span>
+      </a>
+    </div>
   </div>
 </template>
 

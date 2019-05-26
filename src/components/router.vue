@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition name="instant-fade" mode="out-in">
+    <transition name="instant-fade" mode="out-in" :duration="15">
       <div v-if="hasLoaded" key="loaded">
         <div class="row align-items-end mb-3">
           <!-- TODO: Replace this with a character drop down when not on the overview page. -->
