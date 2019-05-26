@@ -13,7 +13,7 @@
                      class="list-group-item list-group-item-action d-flex
                            justify-content-between align-items-center">
           {{ character.name }}
-          <span class="badge badge-primary badge-pill">
+          <span class="badge badge-primary badge-pill ml-2">
             {{ calculateProgress(character.stars) }}
           </span>
         </router-link>

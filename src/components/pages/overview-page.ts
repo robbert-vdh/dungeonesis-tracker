@@ -20,6 +20,6 @@ export default class OverviewPage extends Vue {
     }
 
     const progression = utils.nextLeveLprogress(character) * 100;
-    return `lvl ${character.level} (${progression}%)`;
+    return `lvl ${character.level} + ${progression}%`;
   }
 }
