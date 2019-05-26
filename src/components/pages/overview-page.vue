@@ -9,7 +9,9 @@
          href="#"
          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
         {{ character.name }}
-        <span class="badge badge-primary badge-pill">{{ character.stars }} stars</span>
+        <span class="badge badge-primary badge-pill">
+          lvl {{ calculateLevel(character.stars) }}
+        </span>
       </a>
     </div>
   </div>

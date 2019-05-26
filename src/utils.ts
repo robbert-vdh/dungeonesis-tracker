@@ -7,6 +7,8 @@
  * leveling characters and adding rewards.
  */
 
+// TODO: Add a function to calculate the current progress to the next level.
+
 export const BANNERS_PER_LEVEL: number = 8;
 
 export const STARS_PER_BANNER: { [level: number]: number } = {
