@@ -32,6 +32,9 @@ class CharacterViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.characters.all()
 
+    # TODO: It might be useful to have a method here to 'buy' a high level
+    #       character with points, but I'm not sure if that has any added value
+    #       except for preventing data races
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
 

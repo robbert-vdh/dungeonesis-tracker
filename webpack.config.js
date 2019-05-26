@@ -52,8 +52,13 @@ module.exports = (env, argv) => {
           ]
         },
         {
-          test: /\.(png|jpg|svg)$/,
-          use: "file-loader"
+          test: /\.(png|jpg|svg|woff|ttf)$/,
+          use: {
+            loader: "url-loader",
+            options: {
+              limit: 8192
+            }
+          }
         }
       ]
     },

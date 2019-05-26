@@ -1,12 +1,17 @@
 import Vue from "vue";
 import Component from "vue-class-component";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 import * as utils from "../../utils";
 
 (<any>Window).utils = utils;
 
-@Component({ computed: mapGetters({ characters: "sortedCharacters" }) })
+@Component({
+  computed: {
+    ...mapState(["user"]),
+    ...mapGetters({ characters: "sortedCharacters" })
+  }
+})
 export default class OverviewPage extends Vue {
   calculateProgress(stars: number): string {
     const character = utils.starsToLevel(stars);
