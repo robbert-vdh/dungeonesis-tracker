@@ -15,7 +15,7 @@
    version="1.1"
    id="svg2181"
    inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="banner.svg">
+   sodipodi:docname="banner-filled.svg">
   <defs
      id="defs2175" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="73.210996"
-     inkscape:cy="220.97596"
+     inkscape:cx="128.74671"
+     inkscape:cy="220.97595"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -58,7 +58,7 @@
      id="layer1"
      transform="translate(-68.82897,-75.003997)">
     <path
-       style="fill:none;fill-opacity:0.02178901;stroke:#212529;stroke-width:3.17499995;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:6.19999981;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#212529;fill-opacity:0.02293576;stroke:#212529;stroke-width:3.17499995;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:6.19999981;stroke-dasharray:none;stroke-opacity:1"
        d="M 140.84109,76.698037 V 217.01872 L 106.09112,182.26893 70.41647,217.94358 V 76.591497 Z"
        id="path2164"
        inkscape:connector-curvature="0"
