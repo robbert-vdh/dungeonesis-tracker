@@ -8,7 +8,10 @@
 
     <div class="btn-group btn-group-sm col-md-auto order-1 order-md-2" role="group">
       <!-- TODO: Add a help page -->
-      <button type="button" class="btn btn-info">Help</button>
+      <button v-b-popover.hover.bottom="'Just click on stuff and hope for the best.'"
+              title="TODO" type="button" class="btn btn-info">
+        Help
+      </button>
       <a class="btn btn-secondary" href="/logout">
         Log out
       </a>
