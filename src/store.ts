@@ -84,9 +84,10 @@ export var store = new Vuex.Store({
       commit("adjustStars", params.stars);
     },
     async createCharacter({ commit }, character: Character) {
-      await axios.post("/api/characters/", character);
+      const response = await axios.post("/api/characters/", character);
 
-      commit("addCharacter", character);
+      // The server generates the new character's ID for us
+      commit("addCharacter", response.data);
     },
     async deleteCharacter({ commit }, id: number) {
       await axios.delete(`/api/characters/${id}/`);
