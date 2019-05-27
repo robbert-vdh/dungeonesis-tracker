@@ -138,7 +138,7 @@ export default class CharacterPage extends Vue {
     },
     "divider",
     {
-      name: "Buy 1 inspriation (-1 star)",
+      name: "Buy inspriation (-1 star)",
       characterBound: true,
       calculate: _ => -1
     }
