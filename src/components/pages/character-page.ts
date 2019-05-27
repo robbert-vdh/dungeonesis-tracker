@@ -178,6 +178,7 @@ export default class CharacterPage extends Vue {
     const rewardStars = reward.calculate(this.progress);
 
     if (reward.characterBound) {
+      // TODO: Add EXPLOSIONS when leveling up a character
       await this.$store.dispatch("adjustCharacterStars", {
         ...this.character,
         stars: this.character.stars + rewardStars,
