@@ -14,9 +14,9 @@
           </b-dropdown>
           <b-dropdown id="modify-character-dropdown" text="Modify" :no-flip="true"
                       size="sm" variant="secondary" :no-caret="true">
-            TODO
-            <button type="button" class="btn btn-secondary">Rename</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <b-dropdown-item v-b-modal.character-rename-modal>Rename</b-dropdown-item>
+            <!-- TODO: Delete character -->
+            <b-dropdown-item>Delete</b-dropdown-item>
           </b-dropdown>
         </div>
       </div>
@@ -41,6 +41,9 @@
       <li>Banner display similar to the actual sheet</li>
       <li>Find a spot to display how many unspent stars the player has</li>
     </ul>
+
+    <character-rename-modal :id="character.id">
+    </character-rename-modal>
   </div>
   <div v-else>
     <header-bar></header-bar>
