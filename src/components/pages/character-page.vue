@@ -9,10 +9,12 @@
         </b-dropdown>
         <div class="btn-group btn-group-sm mt-2 mt-md-0" role="group"
              aria-label="Character management">
+
           <b-dropdown id="add-stars-dropdown" text="Add stars" :no-flip="true"
                       size="sm" variant="primary" :no-caret="true">
             TODO:
           </b-dropdown>
+
           <b-dropdown id="modify-character-dropdown" text="Modify" :no-flip="true"
                       size="sm" variant="secondary" :no-caret="true">
             <b-dropdown-item-button v-b-modal.character-rename-modal>
@@ -39,7 +41,9 @@
       </div>
     </div>
 
-    <p>You have <strong>{{ user.unspent_stars }}</strong> unspent stars.</p>
+    <p v-if="user.unspent_stars > 0">
+      You have <strong>{{ user.unspent_stars }}</strong> unspent stars.
+    </p>
 
     <h3>
       TODO:
