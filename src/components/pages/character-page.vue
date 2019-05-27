@@ -14,9 +14,13 @@
           </b-dropdown>
           <b-dropdown id="modify-character-dropdown" text="Modify" :no-flip="true"
                       size="sm" variant="secondary" :no-caret="true">
-            <b-dropdown-item v-b-modal.character-rename-modal>Rename</b-dropdown-item>
-            <!-- TODO: Delete character -->
-            <b-dropdown-item>Delete</b-dropdown-item>
+            <b-dropdown-item-button v-b-modal.character-rename-modal>
+              Rename
+            </b-dropdown-item-button>
+            <b-dropdown-item-button variant="danger">
+              <!-- TODO: Delete character -->
+              Delete
+            </b-dropdown-item-button>
           </b-dropdown>
         </div>
       </div>
