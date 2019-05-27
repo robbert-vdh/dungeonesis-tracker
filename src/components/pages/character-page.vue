@@ -70,10 +70,9 @@
             <!-- TODO: Make clickable -->
             <button v-for="(banner, bannerId) in level.banners" type="button" class="level__banner"
                     :title="`Level to level $(level.level) + $(bannerId + 1) banners`">
-              <ul class="level__stars" aria-hidden>
+              <ul class="level__stars list-unstyled" aria-hidden>
                 <li v-for="star in banner" class="level__star">
-                  <!-- TODO: Add star icon -->
-                  <i :icon="star < character.stars ? 'icon-filled-star' : 'icon-star'"></i>
+                  <i :class="star < character.stars ? 'icon-star-full' : 'icon-star-empty'"></i>
                 </li>
               </ul>
             </button>
