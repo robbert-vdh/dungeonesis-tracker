@@ -54,97 +54,99 @@ interface Reward {
   computed: mapState(["user"])
 })
 export default class CharacterPage extends Vue {
-  availableRewards: (Reward | "divider")[] = [
-    {
-      name: "Completed a quest (1 banner)",
-      characterBound: false,
-      calculate: character => utils.bannerCost(character, 1, true)
-    },
-    {
-      name: "Completed a quest (2 banners)",
-      characterBound: false,
-      calculate: character => utils.bannerCost(character, 2, true)
-    },
-    {
-      name: "Completed a quest (3 banners)",
-      characterBound: false,
-      calculate: character => utils.bannerCost(character, 3, true)
-    },
-    "divider",
-    {
-      name: "This character has won an NPC auction (1 star)",
-      characterBound: true,
-      calculate: _ => 1
-    },
-    {
-      name: "My proposed quest was accepted (1 star)",
-      characterBound: false,
-      calculate: _ => 1
-    },
-    {
-      name: "I was last session's MVP (1 star)",
-      characterBound: false,
-      calculate: _ => 1
-    },
-    {
-      name: "I've written a session log (2 stars)",
-      characterBound: false,
-      calculate: _ => 2
-    },
-    {
-      name: "I've created a piece of art (2 stars)",
-      characterBound: false,
-      calculate: _ => 2
-    },
-    {
-      name: "I've brought snacks to share (2 stars)",
-      characterBound: false,
-      calculate: _ => 2
-    },
-    {
-      name: "I've arranged a location for a session (2 stars)",
-      characterBound: false,
-      calculate: _ => 2
-    },
-    {
-      name: "I've registered this character on the Drive (3 stars)",
-      characterBound: true,
-      calculate: _ => 3
-    },
-    {
-      name: "I've submitted this character's backstory (4 stars)",
-      characterBound: true,
-      calculate: _ => 4
-    },
-    {
-      name: "I've filled in a survey (5 stars)",
-      characterBound: false,
-      calculate: _ => 5
-    },
-    {
-      name: "I've made the SDM sad with my character's death (6 stars)",
-      characterBound: false,
-      calculate: _ => 6
-    },
-    {
-      name: "I've helped out with the Drive (7 stars)",
-      characterBound: false,
-      calculate: _ => 7
-    },
-    {
-      name: "I've DM'ed a session (8 stars)",
-      characterBound: false,
-      calculate: _ => 8
-    },
-    "divider",
-    {
-      name: "Buy inspriation (-1 star)",
-      // If this were set to true buying inspiration would cost experience
-      // points...
-      characterBound: false,
-      calculate: _ => -1
-    }
-  ];
+  get availableRewards(): (Reward | "divider")[] {
+    return [
+      {
+        name: "Completed a quest (1 banner)",
+        characterBound: false,
+        calculate: character => utils.bannerCost(character, 1, true)
+      },
+      {
+        name: "Completed a quest (2 banners)",
+        characterBound: false,
+        calculate: character => utils.bannerCost(character, 2, true)
+      },
+      {
+        name: "Completed a quest (3 banners)",
+        characterBound: false,
+        calculate: character => utils.bannerCost(character, 3, true)
+      },
+      "divider",
+      {
+        name: "This character has won an NPC auction (1 star)",
+        characterBound: true,
+        calculate: _ => 1
+      },
+      {
+        name: "My proposed quest was accepted (1 star)",
+        characterBound: false,
+        calculate: _ => 1
+      },
+      {
+        name: "I was last session's MVP (1 star)",
+        characterBound: false,
+        calculate: _ => 1
+      },
+      {
+        name: "I've written a session log (2 stars)",
+        characterBound: false,
+        calculate: _ => 2
+      },
+      {
+        name: "I've created a piece of art (2 stars)",
+        characterBound: false,
+        calculate: _ => 2
+      },
+      {
+        name: "I've brought snacks to share (2 stars)",
+        characterBound: false,
+        calculate: _ => 2
+      },
+      {
+        name: "I've arranged a location for a session (2 stars)",
+        characterBound: false,
+        calculate: _ => 2
+      },
+      {
+        name: "I've registered this character on the Drive (3 stars)",
+        characterBound: true,
+        calculate: _ => 3
+      },
+      {
+        name: "I've submitted this character's backstory (4 stars)",
+        characterBound: true,
+        calculate: _ => 4
+      },
+      {
+        name: "I've filled in a survey (5 stars)",
+        characterBound: false,
+        calculate: _ => 5
+      },
+      {
+        name: "I've made the SDM sad with my character's death (6 stars)",
+        characterBound: false,
+        calculate: _ => 6
+      },
+      {
+        name: "I've helped out with the Drive (7 stars)",
+        characterBound: false,
+        calculate: _ => 7
+      },
+      {
+        name: "I've DM'ed a session (8 stars)",
+        characterBound: false,
+        calculate: _ => 8
+      },
+      "divider",
+      {
+        name: "Buy inspriation (-1 star)",
+        // If this were set to true buying inspiration would cost experience
+        // points...
+        characterBound: false,
+        calculate: _ => -1
+      }
+    ];
+  }
 
   get character(): Character {
     return this.$store.state.characters[(<Shim>(<any>this)).characterId];
@@ -152,6 +154,10 @@ export default class CharacterPage extends Vue {
 
   get level(): number {
     return this.progress.level;
+  }
+
+  get levelingTable(): utils.LevelingTable {
+    return utils.LEVELING_TABLE;
   }
 
   /**

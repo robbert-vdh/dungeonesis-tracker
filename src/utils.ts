@@ -73,10 +73,6 @@ for (const [levelKey, bannerCost] of Object.entries(STARS_PER_BANNER)) {
 
 export const STARS_FOR_LEVEL: { [level: number]: number } = starsForLevel;
 
-const reversedLevels = Object.keys(STARS_FOR_LEVEL)
-  .map(Number)
-  .sort((a, b) => b - a);
-
 /**
  * The progression of a character. This includes the character's level, the
  * number of banners towards the next level the character currently has and the
@@ -87,6 +83,54 @@ export interface CharacterProgression {
   banners: number;
   stars: number;
 }
+
+/**
+ * The entire character progression path divided into brackets, levels, banners
+ * and stars. This is built programatically in `buildLevelingTable()` and is
+ * used in the front end to iterate over.
+ */
+export type LevelingTable = TableBracket[];
+
+export interface TableBracket {
+  name: string;
+  levels: TableLevel[];
+}
+
+export interface TableLevel {
+  level: number;
+  banners: TableBanner[];
+}
+
+/**
+ * The values here should be, for every star part of the banner, the number of
+ * that star. This means that every value in this array should be unique for the
+ * entire LevelingTable. We'll use this in the front end to color in the stars
+ * by comparing these numbers to the number of stars the character has. An
+ * example for the first level is listed below. The number of elements in this
+ * array depends on the cost of the banner.
+ *
+ * TODO: Find a way to make this clearer, since it's still pretty confusing
+ *
+ * @example
+ * const table: LevelingTable = [
+ *   {
+ *     name: "Recruit (levels 1-5)",
+ *     levels: [
+ *       {
+ *         level: 1,
+ *         banners: [[1], [2], [3], [4], [5], [6], [7], [8]]
+ *       },
+ *       ...
+ *     ]
+ *   },
+ *   ...
+ * ]
+ */
+export type TableBanner = number[];
+
+const reversedLevels = Object.keys(STARS_FOR_LEVEL)
+  .map(Number)
+  .sort((a, b) => b - a);
 
 // The functions below are documented in detail in `exptracker/utils.py`
 export function starsToLevel(characterStars: number): CharacterProgression {
@@ -186,3 +230,52 @@ export function bannerCost(
 
   return cost;
 }
+
+/**
+ * Calculate the leveling table from the constants defined above. This table can
+ * be iterated over on the character detail page to show the exact leveling
+ * progress.
+ */
+function buildLevelingTable(): LevelingTable {
+  const brackets = [
+    { name: "Recruit", levels: [1, 2, 3, 4] },
+    { name: "Mercenary", levels: [5, 6, 7] },
+    { name: "Private", levels: [8, 9, 10] },
+    { name: "Veteran", levels: [11, 12, 13] },
+    { name: "Elite", levels: [14, 15, 16] },
+    { name: "Marshal", levels: [17, 18, 19] },
+    { name: "Legend", levels: [20] }
+  ];
+
+  // Because we need to keep track of the current star number (see
+  // `TableBanner`'s docstring) this step is performed iteratively. This feels
+  // and looks weird we are simply mapping the above list of brackets to the
+  // format of `LevelingTable`.
+  let currentStar = 1;
+  let table: LevelingTable = [];
+  for (const bracket of brackets) {
+    let levels: TableLevel[] = [];
+    for (const level of bracket.levels) {
+      let banners: TableBanner[] = [];
+
+      // TODO: Make BANNERS_PER_LEVEL a function, maybe
+      let numBanners = level < 20 ? BANNERS_PER_LEVEL : 16;
+      for (let bannerId = 0; bannerId < numBanners; bannerId++) {
+        let stars: number[] = [];
+        for (let starId = 0; starId < STARS_PER_BANNER[level]; starId++) {
+          stars.push(currentStar++);
+        }
+
+        banners.push(stars);
+      }
+
+      levels.push({ level: level, banners });
+    }
+
+    table.push({ name: bracket.name, levels });
+  }
+
+  return table;
+}
+
+export const LEVELING_TABLE: LevelingTable = buildLevelingTable();
