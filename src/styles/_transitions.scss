@@ -10,9 +10,10 @@
   opacity: 0;
 }
 
+// This fade is mostly to have a little bit of time to load all the banners
 .fast-fade-enter-active,
 .fast-fade-leave-active {
-  transition: opacity ease-out 42ms;
+  transition: opacity ease-out 69ms;
 }
 
 .fast-fade-enter,

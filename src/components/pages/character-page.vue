@@ -76,7 +76,7 @@
                         @click="levelCharacterTo(banner[banner.length - 1])" type="button"
                         class="banner col-3 my-1"
                         :title="`Level to level $(level.level) + $(bannerId + 1) banners`">
-                  <!-- TODO: Perhaps inline the SVG so we can modify it with programatically -->
+                  <!-- TODO: Perhaps inline the SVG so we can modify it with programatically and it doesn't cause any popping -->
                   <img class="banner__background" alt="banner background" aria-hidden
                        :src="`/static/dist/images/${character.stars >= banner[banner.length - 1] ? 'banner-filled' : 'banner'}.svg`">
 
