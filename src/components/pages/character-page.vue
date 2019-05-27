@@ -59,24 +59,29 @@
 
     <!-- TODO: Make collapsible -->
     <!-- TODO: Add level 20 -->
-    <div v-for="bracket in levelingTable">
-      <h2>{{ bracket.name }}</h2>
+    <div v-for="bracket in levelingTable" class="card">
+      <div class="card-header">
+        {{ bracket.name }}
+      </div>
 
-      <div class="row">
-        <div v-for="level in bracket.levels" class="level">
-          <span class="level__name">{{ level.level }}</span>
-
-          <div class="level__banners">
-            <!-- Clicking on a banner should will buy the entire banner at once -->
-            <button v-for="(banner, bannerId) in level.banners"
-                    @click="levelCharacterTo(banner[banner.length - 1])" type="button" class="level__banner"
-                    :title="`Level to level $(level.level) + $(bannerId + 1) banners`">
-              <ul class="level__stars list-unstyled" aria-hidden>
-                <li v-for="star in banner" class="level__star">
-                  <i :class="star <= character.stars ? 'icon-star-full' : 'icon-star-empty'"></i>
-                </li>
-              </ul>
-            </button>
+      <div class="card-body">
+        <div class="card-deck">
+          <div v-for="level in bracket.levels" class="card bg-light">
+            <div class="card-header">Level {{ level.level }}</div>
+            <div class="card-body">
+              <div class="level__banners">
+                <!-- Clicking on a banner should will buy the entire banner at once -->
+                <button v-for="(banner, bannerId) in level.banners"
+                        @click="levelCharacterTo(banner[banner.length - 1])" type="button" class="level__banner"
+                        :title="`Level to level $(level.level) + $(bannerId + 1) banners`">
+                  <ul class="level__stars list-unstyled" aria-hidden>
+                    <li v-for="star in banner" class="level__star">
+                      <i :class="star <= character.stars ? 'icon-star-full' : 'icon-star-empty'"></i>
+                    </li>
+                  </ul>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -113,6 +118,7 @@
  .progress-bar > span {
    transition: color 600ms ease, padding-left 600ms ease;
  }
+
  .no-progress > span {
    color: #212529;
    padding-left: 0.6rem;

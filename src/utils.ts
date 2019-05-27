@@ -238,13 +238,13 @@ export function bannerCost(
  */
 function buildLevelingTable(): LevelingTable {
   const brackets = [
-    { name: "Recruit", levels: [1, 2, 3, 4] },
-    { name: "Mercenary", levels: [5, 6, 7] },
-    { name: "Private", levels: [8, 9, 10] },
-    { name: "Veteran", levels: [11, 12, 13] },
-    { name: "Elite", levels: [14, 15, 16] },
-    { name: "Marshal", levels: [17, 18, 19] },
-    { name: "Legend", levels: [20] }
+    { name: "Recruit (levels 1-4)", levels: [1, 2, 3, 4] },
+    { name: "Mercenary (levels 5-7)", levels: [5, 6, 7] },
+    { name: "Private (levels 8-10)", levels: [8, 9, 10] },
+    { name: "Veteran (levels 11-13)", levels: [11, 12, 13] },
+    { name: "Elite (levels 14-16)", levels: [14, 15, 16] },
+    { name: "Marshal (levels 17-19)", levels: [17, 18, 19] },
+    { name: "Legend (level 20)", levels: [20] }
   ];
 
   // Because we need to keep track of the current star number (see
