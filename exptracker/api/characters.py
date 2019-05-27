@@ -81,21 +81,27 @@ class CharacterViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["post"], name="Spend stars from pool")
     def spend(self, request, pk):
-        """Spend stars from the pool on this character."""
+        """
+        Spend stars from the pool on this character. A negative amount of stars
+        will result in stars getting refunded back to the pool.
+
+        """
 
         serializer = StarRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         stars = serializer.validated_data["stars"]
-        if stars <= 0:
-            raise APIException(
-                "The number of stars spent must be positive and non-zero."
-            )
+        if stars == 0:
+            raise APIException("The number of stars spent must non-zero.")
 
         character = self.get_object()
         with transaction.atomic():
             if stars > request.user.unspent_stars:
                 raise APIException("You do not have enough stars.")
+            if character.stars + stars < 0:
+                raise APIException(
+                    "Your character can't have a negative number of stars."
+                )
 
             character.stars = F("stars") + stars
             request.user.unspent_stars = F("unspent_stars") - stars
