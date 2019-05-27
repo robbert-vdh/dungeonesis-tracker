@@ -47,7 +47,7 @@ export default class CharacterList extends Vue {
       return `lvl ${character.level} + ${character.banners}b`;
     }
 
-    const progression = utils.nextLeveLprogress(character) * 100;
+    const progression = utils.nextLevelProgress(character) * 100;
     return `lvl ${character.level} + ${progression}%`;
   }
 }

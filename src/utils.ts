@@ -124,7 +124,7 @@ export function levelToStars(level: number): number {
  *   fraction between 0 and 1. Will return the number of banners for level 20
  *   characters.
  */
-export function nextLeveLprogress(character: CharacterProgression): number {
+export function nextLevelProgress(character: CharacterProgression): number {
   if (character.level >= 20) {
     return character.banners;
   }

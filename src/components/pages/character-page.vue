@@ -26,7 +26,18 @@
       </div>
     </header-bar>
 
-    <p>({{ character.stars }} stars)</p>
+    <div class="row mb-2">
+      <div class="col-auto">
+        Level {{ level }}
+      </div>
+      <div class="col pl-0">
+        <b-progress :max="1.0" height="1.5rem">
+          <b-progress-bar :value="nextLevelProgress" :class="{ 'no-progress': nextLevelProgress < 0.1 }"
+                          :label="level < 20 ? `${(nextLevelProgress * 100).toFixed(1)}%` : `${progress.banners} banners`">
+          </b-progress-bar>
+        </b-progress>
+      </div>
+    </div>
 
     <p>You have <strong>{{ user.unspent_stars }}</strong> unspent stars.</p>
 
@@ -43,7 +54,7 @@
           <li><strike>Delete</strike></li>
         </ul>
       </li>
-      <li>Level progress bar with current level</li>
+      <li><strike>Level progress bar with current level</strike></li>
       <li>Banner display similar to the actual sheet</li>
       <li>Find a spot to display how many unspent stars the player has</li>
     </ul>
@@ -68,5 +79,14 @@
    overflow-y: scroll;
    padding: 0;
    width: 16rem;
+ }
+
+ // The label is unreadable when the bar is at 0%
+ .progress-bar > span {
+   transition: color 600ms ease, padding-left 600ms ease;
+ }
+ .no-progress > span {
+   color: #212529;
+   padding-left: 0.6rem;
  }
 </style>
