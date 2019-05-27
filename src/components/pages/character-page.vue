@@ -1,13 +1,14 @@
 <template>
   <div v-if="character !== undefined">
     <header-bar>
-      <div class="col-auto">
+      <div class="col-auto order-2 order-md-1">
         <b-dropdown id="character-select-dropdown" :text="character.name" :no-flip="true"
                     size="sm" variant="outline-secondary" menu-class="scrollable-dropdown"
-                    class="mr-2">
+                    class="mr-2 mt-2 mt-md-0">
           <character-list :active-id="id"></character-list>
         </b-dropdown>
-        <div class="btn-group btn-group-sm" role="group" aria-label="Character management">
+        <div class="btn-group btn-group-sm mt-2 mt-md-0" role="group"
+             aria-label="Character management">
           <b-dropdown id="add-stars-dropdown" text="Add stars" :no-flip="true"
                       size="sm" variant="primary" :no-caret="true">
             TODO

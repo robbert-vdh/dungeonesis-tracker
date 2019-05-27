@@ -1,12 +1,12 @@
 <template>
   <div class="row align-items-end justify-content-between mb-3">
     <slot>
-      <span class="col lead">
+      <span class="col lead mt-3 mt-md-0 order-2 order-md-1">
         Welcome back, {{ user.first_name }}
       </span>
     </slot>
 
-    <div class="btn-group btn-group-sm col-md-auto" role="group">
+    <div class="btn-group btn-group-sm col-md-auto order-1 order-md-2" role="group">
       <!-- TODO: Add a help page -->
       <button type="button" class="btn btn-info">Help</button>
       <a class="btn btn-secondary" href="/logout">
