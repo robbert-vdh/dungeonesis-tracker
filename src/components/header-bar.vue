@@ -1,8 +1,10 @@
 <template>
-  <div class="row align-items-end mb-3">
-    <span class="col lead">
-      Welcome back, {{ user.first_name }}
-    </span>
+  <div class="row align-items-end justify-content-between mb-3">
+    <slot>
+      <span class="col lead">
+        Welcome back, {{ user.first_name }}
+      </span>
+    </slot>
 
     <div class="btn-group btn-group-sm col-md-auto" role="group">
       <!-- TODO: Add a help page -->
