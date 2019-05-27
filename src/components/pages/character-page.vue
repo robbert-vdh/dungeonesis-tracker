@@ -1,11 +1,25 @@
 <template>
   <div v-if="character !== undefined">
     <header-bar>
-      <b-dropdown id="character-select-dropdown" :text="character.name" :no-flip="true"
-                  size="sm" variant="outline-secondary" menu-class="scrollable-dropdown"
-                  class="col-auto">
-        <character-list :active-id="id"></character-list>
-      </b-dropdown>
+      <div class="col-auto">
+        <b-dropdown id="character-select-dropdown" :text="character.name" :no-flip="true"
+                    size="sm" variant="outline-secondary" menu-class="scrollable-dropdown"
+                    class="mr-2">
+          <character-list :active-id="id"></character-list>
+        </b-dropdown>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Character management">
+          <b-dropdown id="add-stars-dropdown" text="Add stars" :no-flip="true"
+                      size="sm" variant="primary" :no-caret="true">
+            TODO
+          </b-dropdown>
+          <b-dropdown id="modify-character-dropdown" text="Modify" :no-flip="true"
+                      size="sm" variant="secondary" :no-caret="true">
+            TODO
+            <button type="button" class="btn btn-secondary">Rename</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </b-dropdown>
+        </div>
+      </div>
     </header-bar>
 
     <p>({{ character.stars }} stars)</p>
@@ -15,7 +29,6 @@
     <h3>TODO:</h3>
 
     <ul>
-      <li>Character selection dropdown</li>
       <li>
         Buttons after character name:
         <ul>
@@ -40,7 +53,7 @@
 
 <style lang="scss">
  .scrollable-dropdown {
-   height: 20rem;
+   max-height: 20rem;
    overflow-y: scroll;
    padding: 0;
    width: 16rem;
