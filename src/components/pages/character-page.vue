@@ -11,7 +11,7 @@
              aria-label="Character management">
           <b-dropdown id="add-stars-dropdown" text="Add stars" :no-flip="true"
                       size="sm" variant="primary" :no-caret="true">
-            TODO
+            TODO:
           </b-dropdown>
           <b-dropdown id="modify-character-dropdown" text="Modify" :no-flip="true"
                       size="sm" variant="secondary" :no-caret="true">
@@ -30,15 +30,17 @@
 
     <p>You have <strong>{{ user.unspent_stars }}</strong> unspent stars.</p>
 
-    <h3>TODO:</h3>
+    <h3>
+      TODO:
+    </h3>
 
     <ul>
       <li>
         Buttons after character name:
         <ul>
           <li>Add stars</li>
-          <li>Rename</li>
-          <li>Delete</li>
+          <li><strike>Rename</strike></li>
+          <li><strike>Delete</strike></li>
         </ul>
       </li>
       <li>Level progress bar with current level</li>
