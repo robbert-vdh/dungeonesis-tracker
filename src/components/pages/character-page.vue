@@ -94,7 +94,7 @@
  .scrollable-dropdown {
    max-height: 20rem;
    overflow-y: scroll;
-   width: 16rem;
+   min-width: 16rem;
 
    &.large {
      max-height: 25rem;
