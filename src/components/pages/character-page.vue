@@ -1,6 +1,9 @@
 <template>
   <div v-if="character !== undefined">
-    <h1>{{ character.name }}</h1>
+    <b-dropdown id="character-select-dropdown" :text="character.name" :no-flip="true"
+                menu-class="scrollable-dropdown" variant="outline-secondary" class="mb-3">
+      <character-list :active-id="id"></character-list>
+    </b-dropdown>
 
     <p>({{ character.stars }} stars)</p>
 
@@ -20,6 +23,7 @@
       </li>
       <li>Level progress bar with current level</li>
       <li>Banner display similar to the actual sheet</li>
+      <li>Find a spot to display how many unspent stars the player has</li>
     </ul>
   </div>
   <p v-else>
@@ -28,3 +32,12 @@
 </template>
 
 <script src="./character-page.ts"></script>
+
+<style lang="scss">
+ .scrollable-dropdown {
+   height: 20rem;
+   overflow-y: scroll;
+   padding: 0;
+   width: 16rem;
+ }
+</style>

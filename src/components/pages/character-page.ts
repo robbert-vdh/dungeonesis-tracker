@@ -3,6 +3,7 @@ import Component from "vue-class-component";
 import { mapState } from "vuex";
 
 import { Character } from "../../store";
+import CharacterList from "../character-list.vue";
 
 // TypeScript does not allow decorators to add properties, so we need to somehow
 // work around this
@@ -11,6 +12,7 @@ interface Shim {
 }
 
 @Component({
+  components: { "character-list": CharacterList },
   props: {
     id: Number
   },

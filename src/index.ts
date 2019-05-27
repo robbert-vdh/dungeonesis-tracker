@@ -17,7 +17,14 @@ if (document.getElementById("app")) {
   const router = new VueRouter({
     routes: [
       { path: "/", component: OverviewPage, name: "overview" },
-      { path: "/:id", component: CharacterPage, props: true, name: "detail" },
+      {
+        path: "/:id",
+        component: CharacterPage,
+        props: route => ({
+          id: Number(route.params.id)
+        }),
+        name: "detail"
+      },
       { path: "*", redirect: "/" }
     ]
   });
