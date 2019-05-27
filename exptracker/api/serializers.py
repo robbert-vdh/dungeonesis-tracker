@@ -20,7 +20,7 @@ class StarRequestSerializer(serializers.Serializer):
     """
 
     stars = serializers.IntegerField()
-    reason = serializers.CharField(required=False)
+    reason = serializers.CharField(allow_null=True, required=False)
 
 
 class UserInfoSerializer(serializers.ModelSerializer):

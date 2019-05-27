@@ -8,14 +8,13 @@ import CharacterList from "../character-list.vue";
 import HeaderBar from "../header-bar.vue";
 import CharacterDeleteModal from "../modals/character-delete-modal.vue";
 import CharacterRenameModal from "../modals/character-rename-modal.vue";
+import StarAdjustModal from "../modals/star-adjust-modal.vue";
 
 // TypeScript does not allow decorators to add properties, so we need to somehow
 // work around this
 interface Shim {
   characterId: number;
 }
-
-// TODO: Add manual star entry and removal.
 
 /**
  * An ingame or out of game reward that yields stars. Completing quests yields
@@ -46,7 +45,8 @@ interface Reward {
     "character-list": CharacterList,
     "header-bar": HeaderBar,
     "character-delete-modal": CharacterDeleteModal,
-    "character-rename-modal": CharacterRenameModal
+    "character-rename-modal": CharacterRenameModal,
+    "star-adjust-modal": StarAdjustModal
   },
   props: {
     characterId: Number
@@ -139,7 +139,9 @@ export default class CharacterPage extends Vue {
     "divider",
     {
       name: "Buy inspriation (-1 star)",
-      characterBound: true,
+      // If this were set to true buying inspiration would cost experience
+      // points...
+      characterBound: false,
       calculate: _ => -1
     }
   ];

@@ -3,7 +3,7 @@
     <header-bar>
       <div class="col-auto order-2 order-md-1">
         <b-dropdown id="character-select-dropdown" :text="character.name" :no-flip="true"
-                    size="sm" variant="outline-secondary" menu-class="scrollable-dropdown"
+                    size="sm" variant="outline-secondary" menu-class="scrollable-dropdown p-0"
                     class="mr-2 mt-2 mt-md-0">
           <character-list :active-id="characterId"></character-list>
         </b-dropdown>
@@ -20,6 +20,11 @@
                                        title="bound to this character">*</span>
               </b-dropdown-item-button>
             </template>
+
+            <!-- The margin is here to compensate for the lost padding because of the scroll bar -->
+            <b-dropdown-item-button v-b-modal.star-adjust-modal class="mb-2">
+              Edit manually
+            </b-dropdown-item-button>
           </b-dropdown>
 
           <b-dropdown id="modify-character-dropdown" text="Modify" :no-flip="true"
@@ -67,13 +72,14 @@
       </li>
       <li><strike>Level progress bar with current level</strike></li>
       <li>Banner display similar to the actual sheet</li>
-      <li>Find a spot to display how many unspent stars the player has</li>
+      <li><strike>Find a spot to display how many unspent stars the player has</strike></li>
     </ul>
 
     <character-rename-modal :character-id="character.id">
     </character-rename-modal>
     <character-delete-modal :character-id="character.id">
     </character-delete-modal>
+    <star-adjust-modal></star-adjust-modal>
   </div>
   <div v-else>
     <header-bar></header-bar>
@@ -88,7 +94,6 @@
  .scrollable-dropdown {
    max-height: 20rem;
    overflow-y: scroll;
-   padding: 0;
    width: 16rem;
 
    &.large {
