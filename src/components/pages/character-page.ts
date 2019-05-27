@@ -58,7 +58,7 @@ interface Reward {
   computed: mapState(["user"])
 })
 export default class CharacterPage extends Vue {
-  availableRewards: Reward[] = [
+  availableRewards: (Reward | "divider")[] = [
     {
       name: "Completed a quest (1 banner)",
       characterBound: false,
@@ -74,6 +74,7 @@ export default class CharacterPage extends Vue {
       characterBound: false,
       reward: character => utils.bannerCost(character, 3, true)
     },
+    "divider",
     {
       name: "This character has won an NPC auction (1 star)",
       characterBound: true,
@@ -139,6 +140,7 @@ export default class CharacterPage extends Vue {
       characterBound: false,
       reward: _ => 8
     },
+    "divider",
     {
       name: "Buy 1 inspriation (-1 star)",
       characterBound: true,

@@ -11,8 +11,15 @@
              aria-label="Character management">
 
           <b-dropdown id="add-stars-dropdown" text="Add stars" :no-flip="true"
-                      size="sm" variant="primary" :no-caret="true">
-            TODO:
+                      size="sm" variant="primary" :no-caret="true"
+                      menu-class="large scrollable-dropdown">
+            <template v-for="reward in availableRewards">
+              <b-dropdown-divider v-if="reward === 'divider'"></b-dropdown-divider>
+              <b-dropdown-item-button v-else :variant="reward.reward(progress) < 0 ? 'danger' : ''">
+                {{ reward.name }}<span v-if="reward.characterBound" class="font-weight-bolder"
+                                       title="bound to this character">*</span>
+              </b-dropdown-item-button>
+            </template>
           </b-dropdown>
 
           <b-dropdown id="modify-character-dropdown" text="Modify" :no-flip="true"
@@ -83,6 +90,11 @@
    overflow-y: scroll;
    padding: 0;
    width: 16rem;
+
+   &.large {
+     max-height: 25rem;
+     width: unset;
+   }
  }
 
  // The label is unreadable when the bar is at 0%
