@@ -67,12 +67,13 @@
           <span class="level__name">{{ level.level }}</span>
 
           <div class="level__banners">
-            <!-- TODO: Make clickable -->
-            <button v-for="(banner, bannerId) in level.banners" type="button" class="level__banner"
+            <!-- Clicking on a banner should will buy the entire banner at once -->
+            <button v-for="(banner, bannerId) in level.banners"
+                    @click="levelCharacterTo(banner[banner.length - 1])" type="button" class="level__banner"
                     :title="`Level to level $(level.level) + $(bannerId + 1) banners`">
               <ul class="level__stars list-unstyled" aria-hidden>
                 <li v-for="star in banner" class="level__star">
-                  <i :class="star < character.stars ? 'icon-star-full' : 'icon-star-empty'"></i>
+                  <i :class="star <= character.stars ? 'icon-star-full' : 'icon-star-empty'"></i>
                 </li>
               </ul>
             </button>

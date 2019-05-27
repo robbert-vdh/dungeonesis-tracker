@@ -187,7 +187,7 @@ export default class CharacterPage extends Vue {
       // TODO: Add EXPLOSIONS when leveling up a character
       await this.$store.dispatch("adjustCharacterStars", {
         ...this.character,
-        stars: this.character.stars + rewardStars,
+        stars: rewardStars,
         reason: reward.name
       });
     } else {
@@ -196,5 +196,21 @@ export default class CharacterPage extends Vue {
         reason: reward.name
       });
     }
+  }
+
+  /**
+   * Level up a character to the specified amount of stars. We specify stars
+   * here instead of an exact combination of level and banners since this number
+   * is already known and in use. See `utils.LEVELING_TABLE` for more
+   * information.
+   */
+  async levelCharacterTo(stars: number) {
+    const delta = stars - this.character.stars;
+
+    // TODO: Also add EXPLOSIONS here
+    await this.$store.dispatch("spendStars", {
+      id: this.character.id,
+      stars: delta
+    });
   }
 }

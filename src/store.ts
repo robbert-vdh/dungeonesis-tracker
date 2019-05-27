@@ -19,6 +19,15 @@ export interface AdjustRequest {
 }
 
 /**
+ * Parameters for POST requests to `/api/characters/<id>/spend/`. The id here is
+ * part of this object.
+ */
+export interface StarSpendRequest {
+  id: number;
+  stars: number;
+}
+
+/**
  * A character as returned by the REST API. This will be transformed into the
  * Character definition below.
  */
@@ -48,7 +57,7 @@ export var store = new Vuex.Store({
       Vue.set(state.characters, character.id, character);
     },
     adjustCharacterStars(state, updatedCharacter: Character) {
-      state.characters[updatedCharacter.id].stars = updatedCharacter.stars;
+      state.characters[updatedCharacter.id].stars += updatedCharacter.stars;
     },
     adjustStars(state, delta: number) {
       // This mutation should only be callable after the user's initial
@@ -112,6 +121,12 @@ export var store = new Vuex.Store({
       });
 
       commit("renameCharacter", renamedCharacter);
+    },
+    async spendStars({ commit }, params: StarSpendRequest) {
+      await axios.post(`/api/characters/${params.id}/spend/`, params);
+
+      commit("adjustStars", -params.stars);
+      commit("adjustCharacterStars", params);
     }
   }
 });
