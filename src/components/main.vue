@@ -2,21 +2,6 @@
   <div id="app">
     <transition name="instant-fade" mode="out-in" :duration="15">
       <div v-if="hasLoaded" key="loaded">
-        <div class="row align-items-end mb-3">
-          <!-- TODO: Replace this with a character drop down when not on the overview page. -->
-          <span class="col lead">
-            Welcome back, {{ user.first_name }}
-          </span>
-
-          <div class="btn-group btn-group-sm col-md-auto" role="group">
-            <!-- TODO: Add a help page -->
-            <button type="button" class="btn btn-info">Help</button>
-            <a class="btn btn-secondary" href="/logout">
-              Log out
-            </a>
-          </div>
-        </div>
-
         <transition name="fast-fade" mode="out-in">
           <router-view></router-view>
         </transition>
