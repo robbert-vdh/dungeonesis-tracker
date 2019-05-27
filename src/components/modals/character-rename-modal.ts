@@ -6,12 +6,12 @@ import { Character } from "../../store";
 
 interface Shim {
   characters: Character[];
-  id: number;
+  characterId: number;
 }
 
 @Component({
   computed: mapState(["characters"]),
-  props: { id: Number }
+  props: { characterId: Number }
 })
 export default class CharacterRenameModel extends Vue {
   newName: string = "";
@@ -28,7 +28,7 @@ export default class CharacterRenameModel extends Vue {
   }
 
   get character(): Character {
-    return (<Shim>(<any>this)).characters[(<Shim>(<any>this)).id];
+    return (<Shim>(<any>this)).characters[(<Shim>(<any>this)).characterId];
   }
 
   /**

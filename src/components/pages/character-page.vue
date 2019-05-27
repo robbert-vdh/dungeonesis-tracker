@@ -5,7 +5,7 @@
         <b-dropdown id="character-select-dropdown" :text="character.name" :no-flip="true"
                     size="sm" variant="outline-secondary" menu-class="scrollable-dropdown"
                     class="mr-2 mt-2 mt-md-0">
-          <character-list :active-id="id"></character-list>
+          <character-list :active-id="characterId"></character-list>
         </b-dropdown>
         <div class="btn-group btn-group-sm mt-2 mt-md-0" role="group"
              aria-label="Character management">
@@ -47,7 +47,7 @@
       <li>Find a spot to display how many unspent stars the player has</li>
     </ul>
 
-    <character-rename-modal :id="character.id">
+    <character-rename-modal :character-id="character.id">
     </character-rename-modal>
   </div>
   <div v-else>

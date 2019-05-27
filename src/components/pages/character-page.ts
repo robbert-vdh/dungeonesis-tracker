@@ -10,7 +10,7 @@ import CharacterRenameModal from "../modals/character-rename-modal.vue";
 // TypeScript does not allow decorators to add properties, so we need to somehow
 // work around this
 interface Shim {
-  id: number;
+  characterId: number;
 }
 
 @Component({
@@ -20,12 +20,12 @@ interface Shim {
     "character-rename-modal": CharacterRenameModal
   },
   props: {
-    id: Number
+    characterId: Number
   },
   computed: mapState(["user"])
 })
 export default class CharacterPage extends Vue {
   get character(): Character {
-    return this.$store.state.characters[(<Shim>(<any>this)).id];
+    return this.$store.state.characters[(<Shim>(<any>this)).characterId];
   }
 }

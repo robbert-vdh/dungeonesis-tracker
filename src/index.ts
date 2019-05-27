@@ -21,7 +21,7 @@ if (document.getElementById("app")) {
         path: "/:id",
         component: CharacterPage,
         props: route => ({
-          id: Number(route.params.id)
+          characterId: Number(route.params.id)
         }),
         name: "detail"
       },
