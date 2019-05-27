@@ -26,6 +26,7 @@ export interface Character {
   id: number;
   name: string;
   stars: number;
+  reason?: string;
 }
 
 export interface UserInfo {
@@ -46,6 +47,9 @@ export var store = new Vuex.Store({
     addCharacter(state, character: Character) {
       Vue.set(state.characters, character.id, character);
     },
+    adjustCharacterStars(state, updatedCharacter: Character) {
+      state.characters[updatedCharacter.id].stars = updatedCharacter.stars;
+    },
     adjustStars(state, delta: number) {
       // This mutation should only be callable after the user's initial
       // information has been loaded
@@ -64,6 +68,16 @@ export var store = new Vuex.Store({
     }
   },
   actions: {
+    // This modifies the character directly without using the star pool, see
+    // `exptracker/api/character.py` for more information
+    async adjustCharacterStars({ commit }, updatedCharacter: Character) {
+      await axios.patch(`/api/characters/${updatedCharacter.id}/`, {
+        stars: updatedCharacter.stars,
+        reason: updatedCharacter.reason
+      });
+
+      commit("adjustCharacterStars", updatedCharacter);
+    },
     async adjustStars({ commit }, params: AdjustRequest) {
       await axios.post("/api/user/adjust/", params);
 
