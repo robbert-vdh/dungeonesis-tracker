@@ -59,6 +59,7 @@
 
     <!-- TODO: Make collapsible -->
     <!-- TODO: Add level 20 -->
+    <!-- TODO: Color filled banners differently -->
     <div v-for="bracket in levelingTable" class="card">
       <div class="card-header">
         {{ bracket.name }}
@@ -69,13 +70,17 @@
           <div v-for="level in bracket.levels" class="card bg-light">
             <div class="card-header">Level {{ level.level }}</div>
             <div class="card-body">
-              <div class="level__banners">
+              <div class="row my-n1">
                 <!-- Clicking on a banner should will buy the entire banner at once -->
                 <button v-for="(banner, bannerId) in level.banners"
-                        @click="levelCharacterTo(banner[banner.length - 1])" type="button" class="level__banner"
+                        @click="levelCharacterTo(banner[banner.length - 1])" type="button"
+                        class="banner col-3 my-1"
                         :title="`Level to level $(level.level) + $(bannerId + 1) banners`">
-                  <ul class="level__stars list-unstyled" aria-hidden>
-                    <li v-for="star in banner" class="level__star">
+                  <img class="banner__background" src="/static/dist/images/banner.svg"
+                       alt="banner background" aria-hidden>
+
+                  <ul :class="`banner__stars banner__stars--${banner.length}`" aria-hidden>
+                    <li v-for="star in banner" class="banner__star">
                       <i :class="star <= character.stars ? 'icon-star-full' : 'icon-star-empty'"></i>
                     </li>
                   </ul>
@@ -123,4 +128,7 @@
    color: #212529;
    padding-left: 0.6rem;
  }
+
+ // The banner styling is a bit more complicated and can be found in
+ // src/styles/_banners.scss
 </style>

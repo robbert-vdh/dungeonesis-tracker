@@ -1,0 +1,143 @@
+.banner {
+  background: none;
+  border: 0;
+  padding: 0 0.5rem;
+  position: relative;
+
+  &__background {
+    display: block;
+    width: 100%;
+  }
+
+  &__stars {
+    height: 78%;
+    left: 0;
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &--1 {
+      .banner__star:nth-child(1) {
+        top: 50%;
+        left: 50%;
+      }
+    }
+
+    &--2 {
+      .banner__star:nth-child(1) {
+        top: 35%;
+        left: 50%;
+      }
+
+      .banner__star:nth-child(2) {
+        top: 65%;
+        left: 50%;
+      }
+    }
+
+    &--3 {
+      .banner__star:nth-child(1) {
+        top: 25%;
+        left: 50%;
+      }
+
+      .banner__star:nth-child(2) {
+        top: 50%;
+        left: 50%;
+      }
+
+      .banner__star:nth-child(3) {
+        top: 75%;
+        left: 50%;
+      }
+    }
+
+    &--4 {
+      .banner__star:nth-child(1) {
+        top: 35%;
+        left: 35%;
+      }
+
+      .banner__star:nth-child(2) {
+        top: 35%;
+        left: 65%;
+      }
+
+      .banner__star:nth-child(3) {
+        top: 65%;
+        left: 35%;
+      }
+
+      .banner__star:nth-child(4) {
+        top: 65%;
+        left: 65%;
+      }
+    }
+
+    &--5 {
+      .banner__star:nth-child(1) {
+        top: 28%;
+        left: 35%;
+      }
+
+      .banner__star:nth-child(2) {
+        top: 28%;
+        left: 65%;
+      }
+
+      .banner__star:nth-child(3) {
+        top: 50%;
+        left: 50%;
+      }
+
+      .banner__star:nth-child(4) {
+        top: 72%;
+        left: 35%;
+      }
+
+      .banner__star:nth-child(5) {
+        top: 72%;
+        left: 65%;
+      }
+    }
+
+    &--6 {
+      .banner__star:nth-child(1) {
+        top: 25%;
+        left: 35%;
+      }
+
+      .banner__star:nth-child(2) {
+        top: 25%;
+        left: 65%;
+      }
+
+      .banner__star:nth-child(3) {
+        top: 50%;
+        left: 35%;
+      }
+
+      .banner__star:nth-child(4) {
+        top: 50%;
+        left: 65%;
+      }
+
+      .banner__star:nth-child(5) {
+        top: 75%;
+        left: 35%;
+      }
+
+      .banner__star:nth-child(6) {
+        top: 75%;
+        left: 65%;
+      }
+    }
+  }
+
+  &__star {
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+}
