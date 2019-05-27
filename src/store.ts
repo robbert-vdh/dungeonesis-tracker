@@ -55,6 +55,9 @@ export var store = new Vuex.Store({
     },
     initUserInfo(state, info: UserInfo) {
       state.user = info;
+    },
+    renameCharacter(state, renamedCharacter: Character) {
+      state.characters[renamedCharacter.id].name = renamedCharacter.name;
     }
   },
   actions: {
@@ -79,6 +82,13 @@ export var store = new Vuex.Store({
       const response = await axios.get("/api/user/");
 
       commit("initUserInfo", response.data);
+    },
+    async renameCharacter({ commit }, renamedCharacter: Character) {
+      await axios.patch(`/api/characters/${renamedCharacter.id}/`, {
+        name: renamedCharacter.name
+      });
+
+      commit("renameCharacter", renamedCharacter);
     }
   }
 });

@@ -51,7 +51,6 @@ export default class CharacterRenameModel extends Vue {
       return;
     }
 
-    // TODO: Implement this
     await this.$store.dispatch("renameCharacter", {
       id: this.character.id,
       name: this.newName
