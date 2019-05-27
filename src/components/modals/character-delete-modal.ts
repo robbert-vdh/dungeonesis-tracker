@@ -13,8 +13,8 @@ interface Shim {
   computed: mapState(["characters"]),
   props: { characterId: Number }
 })
-export default class CharacterRenameModel extends Vue {
-  newName: string = "";
+export default class CharacterDeleteModel extends Vue {
+  confirmationName: string = "";
 
   /**
    * Whether we have attempted submitting the form. This is used to trigger the
@@ -31,7 +31,6 @@ export default class CharacterRenameModel extends Vue {
    * reused once rendered.
    */
   reset() {
-    this.newName = "";
     this.wasSubmitted = false;
   }
 
@@ -44,12 +43,10 @@ export default class CharacterRenameModel extends Vue {
       return;
     }
 
-    await this.$store.dispatch("renameCharacter", {
-      id: this.character.id,
-      name: this.newName
-    });
+    await this.$store.dispatch("deleteCharacter", this.character.id);
 
-    await this.$nextTick;
-    (<any>this.$refs.modal).hide();
+    // No need to hide the modal because the entire element gets removed from
+    // the DOM after the character has been removed
+    this.$router.push({ name: "overview" });
   }
 }

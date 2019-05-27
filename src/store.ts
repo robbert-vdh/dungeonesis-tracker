@@ -53,6 +53,9 @@ export var store = new Vuex.Store({
         state.user.unspent_stars += delta;
       }
     },
+    deleteCharacter(state, id: number) {
+      Vue.delete(state.characters, id);
+    },
     initUserInfo(state, info: UserInfo) {
       state.user = info;
     },
@@ -70,6 +73,11 @@ export var store = new Vuex.Store({
       await axios.post("/api/characters/", character);
 
       commit("addCharacter", character);
+    },
+    async deleteCharacter({ commit }, id: number) {
+      await axios.delete(`/api/characters/${id}/`);
+
+      commit("deleteCharacter", id);
     },
     async fetchCharacters({ commit }) {
       const response = await axios.get("/api/characters/");

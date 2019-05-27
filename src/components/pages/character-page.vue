@@ -18,8 +18,7 @@
             <b-dropdown-item-button v-b-modal.character-rename-modal>
               Rename
             </b-dropdown-item-button>
-            <b-dropdown-item-button variant="danger">
-              <!-- TODO: Delete character -->
+            <b-dropdown-item-button v-b-modal.character-delete-modal variant="danger">
               Delete
             </b-dropdown-item-button>
           </b-dropdown>
@@ -49,6 +48,8 @@
 
     <character-rename-modal :character-id="character.id">
     </character-rename-modal>
+    <character-delete-modal :character-id="character.id">
+    </character-delete-modal>
   </div>
   <div v-else>
     <header-bar></header-bar>

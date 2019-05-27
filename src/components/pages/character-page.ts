@@ -5,6 +5,7 @@ import { mapState } from "vuex";
 import { Character } from "../../store";
 import CharacterList from "../character-list.vue";
 import HeaderBar from "../header-bar.vue";
+import CharacterDeleteModal from "../modals/character-delete-modal.vue";
 import CharacterRenameModal from "../modals/character-rename-modal.vue";
 
 // TypeScript does not allow decorators to add properties, so we need to somehow
@@ -17,6 +18,7 @@ interface Shim {
   components: {
     "character-list": CharacterList,
     "header-bar": HeaderBar,
+    "character-delete-modal": CharacterDeleteModal,
     "character-rename-modal": CharacterRenameModal
   },
   props: {
