@@ -2,16 +2,15 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { mapState } from "vuex";
 
-import { Character, UserInfo } from "../../store";
+import { Character } from "../../store";
 
 interface Shim {
   characters: Character[];
   id: number;
-  user: UserInfo;
 }
 
 @Component({
-  computed: mapState(["characters", "user"]),
+  computed: mapState(["characters"]),
   props: { id: Number }
 })
 export default class CharacterRenameModel extends Vue {
