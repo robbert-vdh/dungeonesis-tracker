@@ -3,22 +3,13 @@ body {
   height: 100%;
 }
 
-// This is used for the 8 banners per column in the banner display for the 20th
-// level
-.col-md-1-5 {
-  @include media-breakpoint-up(md) {
-    @include make-col(1, 8);
-  }
-}
-
 .page-card {
-  @include make-container-max-widths();
-
   background: $white;
   border-radius: $border-radius-sm;
   box-shadow: $box-shadow-sm;
-  padding: 2rem;
   margin: 2rem 2rem 1rem 2rem;
+  max-width: map-get($container-max-widths, lg);
+  padding: 2rem;
 }
 
 .page-wrapper {

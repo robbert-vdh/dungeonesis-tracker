@@ -1,3 +1,23 @@
+// This speciaal grid class is used for the 8 banners per column in the banner
+// display for the 20th level
+.col-sm-1-5 {
+  @include media-breakpoint-up(sm) {
+    @include make-col(1, 8);
+  }
+}
+
+.level-20-padding {
+  @include media-breakpoint-up(md) {
+    padding-left: calc(35vw - 13rem);
+    padding-right: calc(35vw - 13rem);
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-left: 9rem;
+    padding-right: 9rem;
+  }
+}
+
 // TODO: Lower the size of the stars on the md breakpoint
 .banner {
   background: none;
