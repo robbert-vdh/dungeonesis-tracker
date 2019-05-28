@@ -54,7 +54,8 @@
     </div>
 
     <p v-if="user.unspent_stars > 0" class="mt-2">
-      You have <strong>{{ user.unspent_stars }}</strong> unspent stars.
+      You have <strong>{{ user.unspent_stars }}</strong> unspent
+      {{ user.unspent_stars == 1 ? 'star' : 'stars' }}.
     </p>
 
     <!-- TODO: Add level 20 -->
