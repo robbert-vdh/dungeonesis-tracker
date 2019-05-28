@@ -85,13 +85,13 @@ export interface CharacterProgression {
 }
 
 /**
- * The entire character progression path divided into brackets, levels, banners
+ * The entire character progression path divided into sections, levels, banners
  * and stars. This is built programatically in `buildLevelingTable()` and is
  * used in the front end to iterate over.
  */
-export type LevelingTable = TableBracket[];
+export type LevelingTable = TableSection[];
 
-export interface TableBracket {
+export interface TableSection {
   name: string;
   levels: TableLevel[];
 }
@@ -237,7 +237,7 @@ export function bannerCost(
  * progress.
  */
 function buildLevelingTable(): LevelingTable {
-  const brackets = [
+  const sections = [
     { name: "Recruit (levels 1-4)", levels: [1, 2, 3, 4] },
     { name: "Mercenary (levels 5-7)", levels: [5, 6, 7] },
     { name: "Private (levels 8-10)", levels: [8, 9, 10] },
@@ -249,13 +249,13 @@ function buildLevelingTable(): LevelingTable {
 
   // Because we need to keep track of the current star number (see
   // `TableBanner`'s docstring) this step is performed iteratively. This feels
-  // and looks weird we are simply mapping the above list of brackets to the
+  // and looks weird we are simply mapping the above list of sections to the
   // format of `LevelingTable`.
   let currentStar = 1;
   let table: LevelingTable = [];
-  for (const bracket of brackets) {
+  for (const section of sections) {
     let levels: TableLevel[] = [];
-    for (const level of bracket.levels) {
+    for (const level of section.levels) {
       let banners: TableBanner[] = [];
 
       // TODO: Make BANNERS_PER_LEVEL a function, maybe
@@ -272,7 +272,7 @@ function buildLevelingTable(): LevelingTable {
       levels.push({ level: level, banners });
     }
 
-    table.push({ name: bracket.name, levels });
+    table.push({ name: section.name, levels });
   }
 
   return table;

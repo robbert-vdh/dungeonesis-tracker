@@ -59,16 +59,16 @@
     </p>
 
     <!-- TODO: Add level 20 -->
-    <div v-for="(bracket, bracketId) in levelingTable" class="card mt-3">
-      <button v-b-toggle="`bracket-${bracketId}`" class="card-header btn btn-no-focus"
-              :title="`Toggle section for ${bracket.name}`">
-        {{ bracket.name }}
+    <div v-for="(section, sectionId) in levelingTable" class="card mt-3">
+      <button v-b-toggle="`section-${sectionId}`" class="card-header btn btn-no-focus"
+              :title="`Toggle section for ${section.name}`">
+        {{ section.name }}
       </button>
 
-      <b-collapse :visible="!collapsedBrackets[bracket.name]" :id="`bracket-${bracketId}`">
+      <b-collapse :visible="!collapsedSections[section.name]" :id="`section-${sectionId}`">
         <div class="card-body">
           <div class="card-deck">
-            <div v-for="level in bracket.levels" class="card bg-light">
+            <div v-for="level in section.levels" class="card bg-light">
               <div class="card-header">Level {{ level.level }}</div>
               <div class="card-body">
                 <div class="row my-n1">

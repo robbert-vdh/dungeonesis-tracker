@@ -56,31 +56,31 @@ interface Reward {
 })
 export default class CharacterPage extends Vue {
   /**
-   * Indicates whether a bracket (level range) in the leveling table should
-   * start collapsed. All brackets that a character has already fulfilled will
+   * Indicates whether a section (level range) in the leveling table should
+   * start collapsed. All sections that a character has already fulfilled will
    * be collapsed by default to minimize clutter. These values are calculated
-   * when the displayed character changes in `collapseBrackets()`.
+   * when the displayed character changes in `collapseSections()`.
    */
-  collapsedBrackets: { [bracket: string]: boolean } = {};
+  collapsedSections: { [section: string]: boolean } = {};
 
   created() {
     // Property watchers don't fire on page load
-    this.collapseBrackets();
+    this.collapseSections();
   }
 
   /**
-   * Collapse any brackets of the leveling table that have been completely
+   * Collapse any sections of the leveling table that have been completely
    * fulfilled. In other words, only show levels higher than the character's
    * level by default.
    */
   // TODO: Also use these decorators for props instead of
   @Watch("characterId")
-  collapseBrackets() {
-    this.collapsedBrackets = {};
+  collapseSections() {
+    this.collapsedSections = {};
 
-    for (const bracket of this.levelingTable) {
-      this.collapsedBrackets[bracket.name] =
-        bracket.levels[bracket.levels.length - 1].level < this.level;
+    for (const section of this.levelingTable) {
+      this.collapsedSections[section.name] =
+        section.levels[section.levels.length - 1].level < this.level;
     }
   }
 
