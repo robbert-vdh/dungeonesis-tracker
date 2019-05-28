@@ -212,9 +212,9 @@ export default class CharacterPage extends Vue {
 
     if (reward.characterBound) {
       const oldProgress = _.clone(this.progress);
-      await this.$store.dispatch("adjustCharacterStars", {
+      await this.$store.dispatch("setCharacterStars", {
         ...this.character,
-        stars: rewardStars,
+        stars: this.character.stars + rewardStars,
         reason: reward.name
       });
 

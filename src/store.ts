@@ -78,16 +78,6 @@ export var store = new Vuex.Store({
     }
   },
   actions: {
-    // This modifies the character directly without using the star pool, see
-    // `exptracker/api/character.py` for more information
-    async adjustCharacterStars({ commit }, updatedCharacter: Character) {
-      await axios.patch(`/api/characters/${updatedCharacter.id}/`, {
-        stars: updatedCharacter.stars,
-        reason: updatedCharacter.reason
-      });
-
-      commit("adjustCharacterStars", updatedCharacter);
-    },
     async adjustStars({ commit }, params: AdjustRequest) {
       await axios.post("/api/user/adjust/", params);
 
@@ -122,6 +112,20 @@ export var store = new Vuex.Store({
       });
 
       commit("renameCharacter", renamedCharacter);
+    },
+    // This modifies the character directly without using the star pool, see
+    // `exptracker/api/character.py` for more information
+    async setCharacterStars({ commit, state }, updatedCharacter: Character) {
+      const oldStars = state.characters[updatedCharacter.id].stars;
+      await axios.patch(`/api/characters/${updatedCharacter.id}/`, {
+        stars: updatedCharacter.stars,
+        reason: updatedCharacter.reason
+      });
+
+      commit("adjustCharacterStars", {
+        id: updatedCharacter.id,
+        stars: updatedCharacter.stars - oldStars
+      });
     },
     async spendStars({ commit }, params: StarSpendRequest) {
       await axios.post(`/api/characters/${params.id}/spend/`, params);
