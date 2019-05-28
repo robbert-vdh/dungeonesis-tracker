@@ -166,6 +166,11 @@ export default class CharacterPage extends Vue {
       },
       "divider",
       {
+        name: "I've received an inspiration star (1 star)",
+        characterBound: false,
+        calculate: _ => 1
+      },
+      {
         name: "Buy inspriation (-1 star)",
         // If this were set to true buying inspiration would cost experience
         // points...
