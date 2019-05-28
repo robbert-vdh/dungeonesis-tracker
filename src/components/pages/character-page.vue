@@ -76,9 +76,13 @@
                         @click="levelCharacterTo(banner[banner.length - 1])" type="button"
                         class="banner col-3 my-1"
                         :title="`Level to level $(level.level) + $(bannerId + 1) banners`">
-                  <!-- TODO: Perhaps inline the SVG so we can modify it with programatically and it doesn't cause any popping -->
-                  <img class="banner__background" alt="banner background" aria-hidden
-                       :src="`/static/dist/images/${character.stars >= banner[banner.length - 1] ? 'banner-filled' : 'banner'}.svg`">
+                  <!-- The combination of vue-loader and url-loader will inline these SVGs -->
+                  <!-- TODO: Perhaps go a step further and inline these in <svg></svg> tags using v-html? -->
+                  <!--       That way we can modify them using CSS -->
+                  <img v-if="character.stars >= banner[banner.length - 1] " class="banner__background"
+                       alt="banner background" src="../../images/banner-filled.svg">
+                  <img v-else class="banner__background"
+                       alt="banner background" src="../../images/banner.svg">
 
                   <ul :class="`banner__stars banner__stars--${banner.length}`" aria-hidden>
                     <li v-for="star in banner" class="banner__star">
