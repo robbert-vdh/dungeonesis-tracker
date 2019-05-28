@@ -75,7 +75,7 @@
                   <!-- Clicking on a banner should will buy the entire banner at once -->
                   <button v-for="(banner, bannerId) in level.banners"
                           @click="levelCharacterTo(banner[banner.length - 1])" type="button"
-                          class="banner col-3 my-1"
+                          class="banner col-3 my-1" :class="{ 'col-md-1-5': level.level == 20 }"
                           :title="`Level to level $(level.level) + $(bannerId + 1) banners`">
                     <!-- The combination of vue-loader and url-loader will inline these SVGs -->
                     <!-- TODO: Perhaps go a step further and inline these in <svg></svg> tags using v-html? -->

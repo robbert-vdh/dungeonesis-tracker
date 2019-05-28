@@ -3,6 +3,14 @@ body {
   height: 100%;
 }
 
+// This is used for the 8 banners per column in the banner display for the 20th
+// level
+.col-md-1-5 {
+  @include media-breakpoint-up(md) {
+    @include make-col(1, 8);
+  }
+}
+
 .page-card {
   @include make-container-max-widths();
 
@@ -24,7 +32,7 @@ body {
 // The little banner that links to the GitHub repo
 .repo-link {
   margin-bottom: 2rem;
-  opacity: 1.0;
+  opacity: 1;
   transition: opacity 150ms ease-in-out;
 
   @include hover-focus {
