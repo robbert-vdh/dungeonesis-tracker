@@ -6,14 +6,15 @@ write a webapp instead?
 
 ## Building and running
 
-All dependencies are managed using [Poetry](https://poetry.eustace.io/) and the
-back end relies on a PostgreSQL server. By default the application uses the
-included [Docker Compose](https://docs.docker.com/compose/) configuration. To
-the dependencies and run the application, simply run:
+All dependencies are managed using
+[Pipenv](https://pipenv.readthedocs.io/en/latest/) and the back end relies on a
+PostgreSQL server. By default the application uses the included [Docker
+Compose](https://docs.docker.com/compose/) configuration. To the dependencies
+and run the application, simply run:
 
 ```shell
 docker-compose up -d
 yarn build  # Or `yarn dev` for a quicker build without optimizations
-poetry run ./manage.py migrate
-poetry run ./manage.py runserver
+pipenv run ./manage.py migrate
+pipenv run ./manage.py runserver
 ```
