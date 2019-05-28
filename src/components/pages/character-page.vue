@@ -58,7 +58,6 @@
       {{ user.unspent_stars == 1 ? 'star' : 'stars' }}.
     </p>
 
-    <!-- TODO: Add level 20 -->
     <div v-for="(section, sectionId) in levelingTable" class="card mt-3">
       <button v-b-toggle="`section-${sectionId}`" class="card-header btn btn-no-focus border-bottom-0"
               :title="`Toggle section for ${section.name}`">

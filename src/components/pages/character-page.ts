@@ -2,6 +2,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
 import { mapState } from "vuex";
+import * as _ from "lodash";
 
 import { Character, UserInfo } from "../../store";
 import * as utils from "../../utils";
@@ -210,12 +211,14 @@ export default class CharacterPage extends Vue {
     const rewardStars = reward.calculate(this.progress);
 
     if (reward.characterBound) {
-      // TODO: Add EXPLOSIONS when leveling up a character
+      const oldProgress = _.clone(this.progress);
       await this.$store.dispatch("adjustCharacterStars", {
         ...this.character,
         stars: rewardStars,
         reason: reward.name
       });
+
+      this.handleLevelUp(oldProgress, this.progress);
     } else {
       await this.$store.dispatch("adjustStars", {
         stars: rewardStars,
@@ -232,11 +235,37 @@ export default class CharacterPage extends Vue {
    */
   async levelCharacterTo(stars: number) {
     const delta = stars - this.character.stars;
+    if (delta === 0) {
+      return;
+    }
 
-    // TODO: Also add EXPLOSIONS here
+    const oldProgress = _.clone(this.progress);
     await this.$store.dispatch("spendStars", {
       id: this.character.id,
       stars: delta
     });
+
+    this.handleLevelUp(oldProgress, this.progress);
+  }
+
+  /**
+   * Show a toast if the character levels up from spending stars. Explosions and
+   * Mariachi band would have been better but this will do for now. Vue's
+   * reactivity somehow updates properties before the store action promises are
+   * resolved, so `this.progress` will have changed immediatly after we've
+   * commited an action.
+   *
+   * TODO: Perhaps still add some explosions
+   */
+  handleLevelUp(
+    before: utils.CharacterProgression,
+    after: utils.CharacterProgression
+  ) {
+    if (after.level > before.level) {
+      this.$bvToast.toast(`You're now level ${after.level}!`, {
+        title: "Level up",
+        variant: "success"
+      });
+    }
   }
 }
