@@ -10,8 +10,6 @@ import Router from "./components/main.vue";
 import OverviewPage from "./components/pages/overview-page.vue";
 import CharacterPage from "./components/pages/character-page.vue";
 
-// TODO: Add an undo button
-
 if (document.getElementById("app")) {
   Vue.use(BootstrapVue);
   Vue.use(VueRouter);
