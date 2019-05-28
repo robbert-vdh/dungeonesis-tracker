@@ -1,19 +1,18 @@
 import Vue from "vue";
 import Component from "vue-class-component";
+import { Prop } from "vue-property-decorator";
 import { mapState } from "vuex";
 
 import { Character } from "../../store";
-
-interface Shim {
-  characters: Character[];
-  characterId: number;
-}
 
 @Component({
   computed: mapState(["characters"]),
   props: { characterId: Number }
 })
 export default class CharacterDeleteModel extends Vue {
+  @Prop({ type: Number, required: true }) characterId!: number;
+  characters!: Character[];
+
   confirmationName: string = "";
 
   /**
@@ -23,7 +22,7 @@ export default class CharacterDeleteModel extends Vue {
   wasSubmitted: boolean = false;
 
   get character(): Character {
-    return (<Shim>(<any>this)).characters[(<Shim>(<any>this)).characterId];
+    return this.characters[this.characterId];
   }
 
   /**

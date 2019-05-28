@@ -1,21 +1,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
+import { Prop, Watch } from "vue-property-decorator";
 import { mapState } from "vuex";
 
-import { Character } from "../../store";
+import { Character, UserInfo } from "../../store";
 import * as utils from "../../utils";
 import CharacterList from "../character-list.vue";
 import HeaderBar from "../header-bar.vue";
 import CharacterDeleteModal from "../modals/character-delete-modal.vue";
 import CharacterRenameModal from "../modals/character-rename-modal.vue";
 import StarAdjustModal from "../modals/star-adjust-modal.vue";
-
-// TypeScript does not allow decorators to add properties, so we need to somehow
-// work around this
-interface Shim {
-  characterId: number;
-}
 
 /**
  * An ingame or out of game reward that yields stars. Completing quests yields
@@ -55,6 +49,9 @@ interface Reward {
   computed: mapState(["user"])
 })
 export default class CharacterPage extends Vue {
+  @Prop({ type: Number, required: true }) characterId!: number;
+  user!: UserInfo;
+
   /**
    * Indicates whether a section (level range) in the leveling table should
    * start collapsed. All sections that a character has already fulfilled will
@@ -73,7 +70,6 @@ export default class CharacterPage extends Vue {
    * fulfilled. In other words, only show levels higher than the character's
    * level by default.
    */
-  // TODO: Also use these decorators for props instead of
   @Watch("characterId")
   collapseSections() {
     this.collapsedSections = {};
@@ -179,7 +175,7 @@ export default class CharacterPage extends Vue {
   }
 
   get character(): Character {
-    return this.$store.state.characters[(<Shim>(<any>this)).characterId];
+    return this.$store.state.characters[this.characterId];
   }
 
   get level(): number {

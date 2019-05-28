@@ -5,12 +5,10 @@ import { mapState } from "vuex";
 import * as utils from "../../utils";
 import { UserInfo } from "../../store";
 
-interface Shim {
-  user: UserInfo;
-}
-
 @Component({ computed: mapState(["user"]) })
 export default class CharacterAddModel extends Vue {
+  user!: UserInfo;
+
   characterName: string = "";
   characterLevel: number = 5;
   isFree: boolean = false;
@@ -33,7 +31,7 @@ export default class CharacterAddModel extends Vue {
    * character.
    */
   get insufficientStars(): boolean {
-    return this.cost > (<Shim>(<any>this)).user.unspent_stars && !this.isFree;
+    return this.cost > this.user.unspent_stars && !this.isFree;
   }
 
   /**

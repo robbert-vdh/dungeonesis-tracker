@@ -2,15 +2,12 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { mapState } from "vuex";
 
-import * as utils from "../../utils";
 import { UserInfo } from "../../store";
-
-interface Shim {
-  user: UserInfo;
-}
 
 @Component({ computed: mapState(["user"]) })
 export default class StarAdjustModal extends Vue {
+  user!: UserInfo;
+
   stars: number = 0;
   reason: string = "";
 
@@ -21,11 +18,11 @@ export default class StarAdjustModal extends Vue {
   wasSubmitted: boolean = false;
 
   created() {
-    this.stars = (<Shim>(<any>this)).user.unspent_stars;
+    this.stars = this.user.unspent_stars;
   }
 
   get delta(): number {
-    return this.stars - (<Shim>(<any>this)).user.unspent_stars;
+    return this.stars - this.user.unspent_stars;
   }
 
   /**
@@ -33,7 +30,7 @@ export default class StarAdjustModal extends Vue {
    * reused once rendered.
    */
   reset() {
-    this.stars = (<Shim>(<any>this)).user.unspent_stars;
+    this.stars = this.user.unspent_stars;
     this.reason = "";
   }
 
