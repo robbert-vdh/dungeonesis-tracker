@@ -3,7 +3,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import * as _ from "lodash";
 
-// TODO: Add toasts with error messages for any actiosn that can go wrong.
+// Any error messages received while sending requests to the API are shown using
+// toasts. For this we use an axios interceptor defined in index.ts.
 
 Vue.use(Vuex);
 

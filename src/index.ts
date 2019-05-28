@@ -1,3 +1,4 @@
+import axios from "axios";
 import Vue from "vue";
 import Component from "vue-class-component";
 import VueRouter from "vue-router";
@@ -36,5 +37,24 @@ if (document.getElementById("app")) {
     ]
   });
 
-  new Router({ router, store }).$mount("#app");
+  const vm = new Router({ router, store }).$mount("#app");
+
+  // Show a toast notification when API requests fail. This should only happen
+  // when the player tries to spend too much stars on a character.
+  axios.interceptors.response.use(response => response, function(error) {
+    const data = error.response.data;
+    console.log(data);
+    if (data.detail !== undefined) {
+      vm.$bvToast.toast(data.detail, {
+        title: "Something went wrong",
+        variant: "danger",
+        autoHideDelay: 4000
+      });
+    }
+
+    // Rethrow the error so that we don't make client side changes we are not
+    // supposed to make
+    // TODO: Find a more elegant solution without having to hardcode this everywhere
+    throw error;
+  });
 }
