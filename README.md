@@ -14,7 +14,10 @@ and run the application, simply run:
 
 ```shell
 docker-compose up -d
-yarn build  # Or `yarn dev` for a quicker build without optimizations
+yarn build
+# Alternatively:
+#   - `yarn dev` for a quicker build without optimizations
+#   - `yarn watch` for a development server with hot reloading
 pipenv run ./manage.py migrate
 pipenv run ./manage.py runserver
 ```
