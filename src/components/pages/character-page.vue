@@ -60,13 +60,13 @@
 
     <!-- TODO: Add level 20 -->
     <div v-for="(section, sectionId) in levelingTable" class="card mt-3">
-      <button v-b-toggle="`section-${sectionId}`" class="card-header btn btn-no-focus"
+      <button v-b-toggle="`section-${sectionId}`" class="card-header btn btn-no-focus border-bottom-0"
               :title="`Toggle section for ${section.name}`">
         {{ section.name }}
       </button>
 
       <b-collapse :visible="!collapsedSections[section.name]" :id="`section-${sectionId}`">
-        <div class="card-body">
+        <div class="card-body border-top">
           <div class="card-deck">
             <div v-for="level in section.levels" class="card bg-light">
               <div class="card-header">Level {{ level.level }}</div>
