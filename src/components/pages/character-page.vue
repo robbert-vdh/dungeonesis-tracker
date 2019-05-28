@@ -55,7 +55,7 @@
 
     <p v-if="user.unspent_stars > 0" class="mt-2">
       You have <strong>{{ user.unspent_stars }}</strong> unspent
-      {{ user.unspent_stars == 1 ? 'star' : 'stars' }}.
+      {{ user.unspent_stars == 1 ? 'star' : 'stars' }} left.
     </p>
 
     <div v-for="(section, sectionId) in levelingTable" class="card mt-3">
