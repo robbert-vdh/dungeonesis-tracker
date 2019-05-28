@@ -60,7 +60,7 @@
 
     <!-- TODO: Add level 20 -->
     <div v-for="(bracket, bracketId) in levelingTable" class="card mt-3">
-      <button v-b-toggle="`bracket-${bracketId}`" class="card-header btn"
+      <button v-b-toggle="`bracket-${bracketId}`" class="card-header btn btn-no-focus"
               :title="`Toggle section for ${bracket.name}`">
         {{ bracket.name }}
       </button>
@@ -134,6 +134,15 @@
  .no-progress > span {
    color: #212529;
    padding-left: 0.6rem;
+ }
+
+ // The section headers are buttons but we do not want any additional feedback
+ // when clicking on them since it already toggles the card below it
+ .btn-no-focus {
+   &:focus,
+   &.focus {
+     box-shadow: none;
+   }
  }
 
  // The banner styling is a bit more complicated and can be found in
