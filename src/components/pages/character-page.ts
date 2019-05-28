@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
+import { Watch } from "vue-property-decorator";
 import { mapState } from "vuex";
 
 import { Character } from "../../store";
@@ -54,6 +55,35 @@ interface Reward {
   computed: mapState(["user"])
 })
 export default class CharacterPage extends Vue {
+  /**
+   * Indicates whether a bracket (level range) in the leveling table should
+   * start collapsed. All brackets that a character has already fulfilled will
+   * be collapsed by default to minimize clutter. These values are calculated
+   * when the displayed character changes in `collapseBrackets()`.
+   */
+  collapsedBrackets: { [bracket: string]: boolean } = {};
+
+  created() {
+    // Property watchers don't fire on page load
+    this.collapseBrackets();
+  }
+
+  /**
+   * Collapse any brackets of the leveling table that have been completely
+   * fulfilled. In other words, only show levels higher than the character's
+   * level by default.
+   */
+  // TODO: Also use these decorators for props instead of
+  @Watch("characterId")
+  collapseBrackets() {
+    this.collapsedBrackets = {};
+
+    for (const bracket of this.levelingTable) {
+      this.collapsedBrackets[bracket.name] =
+        bracket.levels[bracket.levels.length - 1].level < this.level;
+    }
+  }
+
   get availableRewards(): (Reward | "divider")[] {
     return [
       {
