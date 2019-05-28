@@ -36,6 +36,31 @@ body {
   }
 }
 
+.scrollable-dropdown {
+  max-height: 20rem;
+  overflow: auto;
+  min-width: 16rem;
+
+  &.large {
+    max-height: 25rem;
+    min-width: unset;
+
+    @include media-breakpoint-down(xs) {
+      left: -1.1rem !important;
+      right: -4rem !important;
+    }
+  }
+}
+
+// This combined with the above makes the 'Add stars' dropdown fill up almost
+// the entire screen's width on small screens instead of being anchored to the
+// button
+.scrollable-dropdown-button {
+  @include media-breakpoint-down(sm) {
+    position: static;
+  }
+}
+
 .subtitle {
   color: $gray-700;
   font-size: 1.5rem;

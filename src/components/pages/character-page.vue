@@ -7,10 +7,10 @@
                     class="mr-2 mt-2 mt-md-0">
           <character-list :active-id="characterId"></character-list>
         </b-dropdown>
-        <div class="btn-group btn-group-sm mt-2 mt-md-0" role="group"
+        <div class="btn-group btn-group-sm position-static mt-2 mt-md-0" role="group"
              aria-label="Character management">
 
-          <b-dropdown id="add-stars-dropdown" text="Add stars" :no-flip="true"
+          <b-dropdown id="add-stars-dropdown" text="Add stars" class="scrollable-dropdown-button"
                       size="sm" variant="primary" :no-caret="true"
                       menu-class="large scrollable-dropdown">
             <template v-for="reward in availableRewards">
@@ -114,17 +114,6 @@
 <script src="./character-page.ts"></script>
 
 <style lang="scss">
- .scrollable-dropdown {
-   max-height: 20rem;
-   overflow-y: scroll;
-   min-width: 16rem;
-
-   &.large {
-     max-height: 25rem;
-     width: unset;
-   }
- }
-
  // The label is unreadable when the bar is at 0%
  .progress-bar > span {
    transition: color 600ms ease, padding-left 600ms ease;
