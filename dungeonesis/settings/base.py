@@ -13,18 +13,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "j%8-3s^_r7va1w8x1d_u=+f&tfgx($8@6_&m9!qqlsl@b+c&ty"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -157,11 +151,3 @@ SOCIAL_AUTH_URL_NAMESPACE = "social"
 LOGIN_URL = "/auth/login/google-oauth2/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
-
-
-# Local overrides
-
-try:
-    from .local import *
-except ImportError:
-    pass
