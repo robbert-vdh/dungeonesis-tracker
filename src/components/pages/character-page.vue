@@ -53,14 +53,14 @@
       </div>
     </div>
 
-    <p v-if="user.unspent_stars > 0">
+    <p v-if="user.unspent_stars > 0" class="mt-2">
       You have <strong>{{ user.unspent_stars }}</strong> unspent stars.
     </p>
 
     <!-- TODO: Make collapsible -->
     <!-- TODO: Add level 20 -->
     <!-- TODO: Color filled banners differently -->
-    <div v-for="bracket in levelingTable" class="card">
+    <div v-for="bracket in levelingTable" class="card mt-3">
       <div class="card-header">
         {{ bracket.name }}
       </div>
