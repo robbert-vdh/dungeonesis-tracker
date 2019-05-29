@@ -14,12 +14,6 @@ if (document.getElementById("app")) {
   Vue.use(BootstrapVue);
   Vue.use(VueRouter);
 
-  Component.registerHooks([
-    "beforeRouteEnter",
-    "beforeRouteLeave",
-    "beforeRouteUpdate"
-  ]);
-
   const router = new VueRouter({
     routes: [
       { path: "/", component: OverviewPage, name: "overview" },

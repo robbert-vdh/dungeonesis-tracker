@@ -2,8 +2,9 @@
   <div v-if="character !== undefined">
     <header-bar>
       <div class="col-auto order-2 order-md-1">
-        <b-dropdown id="character-select-dropdown" :text="character.name" :no-flip="true"
-                    size="sm" variant="outline-secondary" menu-class="scrollable-dropdown p-0"
+        <b-dropdown id="character-select-dropdown" ref="characterSelectDropdown"
+                    :text="character.name" :no-flip="true" size="sm"
+                    variant="outline-secondary" menu-class="scrollable-dropdown p-0"
                     class="mr-2 mt-2 mt-md-0">
           <character-list :active-id="characterId"></character-list>
         </b-dropdown>

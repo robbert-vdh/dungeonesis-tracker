@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
 import { mapState } from "vuex";
 import * as _ from "lodash";
 
@@ -36,6 +37,8 @@ interface Reward {
   calculate: (character: utils.CharacterProgression) => number;
 }
 
+Component.registerHooks(["beforeRouteUpdate"]);
+
 @Component({
   components: {
     "character-list": CharacterList,
@@ -60,6 +63,18 @@ export default class CharacterPage extends Vue {
    * when the displayed character changes in `collapseSections()`.
    */
   collapsedSections: { [section: string]: boolean } = {};
+
+  /**
+   * On non-touch screens the character selection dropdown closes as you would
+   * expect after clicking on a vue-router link, but this does not happen
+   * automatically on touch events. There might be a better solution here than
+   * closing the dropdown manually.
+   */
+  beforeRouteUpdate(_from: Route, _to: Route, next: () => void) {
+    (<BDropdown>this.$refs.characterSelectDropdown).hide(true);
+
+    next();
+  }
 
   created() {
     // Property watchers don't fire on page load
