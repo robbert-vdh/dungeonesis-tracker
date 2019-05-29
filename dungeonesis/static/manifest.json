@@ -1,0 +1,10 @@
+{
+  "short_name": "Dungeonesis",
+  "name": "Gate Marches character tracker",
+  "icons": [],
+  "start_url": "/#/",
+  "background_color": "#e9ecef",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#e9ecef"
+}
