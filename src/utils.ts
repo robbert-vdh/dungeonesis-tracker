@@ -174,7 +174,7 @@ export function nextLevelProgress(character: CharacterProgression): number {
   }
 
   return (
-    (character.banners + character.stars * STARS_PER_BANNER[character.level]) /
+    (character.banners + character.stars / STARS_PER_BANNER[character.level]) /
     BANNERS_PER_LEVEL
   );
 }
