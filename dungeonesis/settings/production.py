@@ -3,6 +3,8 @@ from .base import *
 
 DEBUG = False
 
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
 # Don't forget to set these in local.py
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = None
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = None
