@@ -1,3 +1,5 @@
+$highlight-color: scale-color($mark-bg, $lightness: 60%);
+
 // This speciaal grid class is used for the 8 banners per column in the banner
 // display for the 20th level
 .col-sm-1-5 {
@@ -22,7 +24,7 @@
   background: none;
   color: $gray-800;
   border: 0;
-  transition: color 150ms ease;
+  transition: color 150ms ease-out;
   padding: 0 0.5rem;
   position: relative;
 
@@ -37,6 +39,9 @@
     overflow: visible;
 
     .outline {
+      // As a transition fallback for when .banner--can-afford is getting
+      // removed
+      color: rgba($highlight-color, 0.5);
       fill: rgba($white, 0);
       stroke-opacity: 0.9;
       stroke-width: 1.4px;
@@ -202,7 +207,6 @@
 
 // This animation is for SVG's color property. See the comment in
 // `.banner--can-afford .banner__background--outline` for an explanation.
-$highlight-color: scale-color($mark-bg, $lightness: 60%);
 @keyframes highlight {
   0% {
     color: rgba($highlight-color, 0.2);
