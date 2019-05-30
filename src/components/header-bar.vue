@@ -8,7 +8,10 @@
 
     <div class="btn-group btn-group-sm col-md-auto order-1 order-md-2" role="group">
       <!-- TODO: Add a help page -->
-      <button v-b-popover.hover.bottom="'Just click on stuff and hope for the best.'"
+      <button v-b-popover.hover.bottom.html="`
+                <p>Just click on stuff and hope for the best.</p>
+                <p>The reward for completing a quest depends on the currently selected character.</p>
+                `"
               title="TODO" type="button" class="btn btn-info">
         Help
       </button>
