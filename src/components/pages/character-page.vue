@@ -1,17 +1,17 @@
 <template>
   <div v-if="character !== undefined">
     <header-bar>
-      <div class="col-auto order-2 order-md-1">
+      <div class="col-auto order-2 order-md-1 pt-2 pt-md-0">
         <b-dropdown id="character-select-dropdown" ref="characterSelectDropdown"
                     :text="character.name" :no-flip="true" size="sm"
                     variant="outline-secondary" menu-class="scrollable-dropdown p-0"
                     class="mr-2 mt-2 mt-md-0">
           <character-list :active-id="characterId"></character-list>
         </b-dropdown>
-        <div class="btn-group btn-group-sm position-static mt-2 mt-md-0" role="group"
+        <div class="btn-group btn-group-sm mt-2 mt-md-0" role="group"
              aria-label="Character management">
 
-          <b-dropdown id="add-stars-dropdown" text="Add stars" class="scrollable-dropdown-button"
+          <b-dropdown id="add-stars-dropdown" text="Add stars" :no-flip="true"
                       size="sm" variant="primary" :no-caret="true"
                       menu-class="large scrollable-dropdown">
             <template v-for="reward in availableRewards">

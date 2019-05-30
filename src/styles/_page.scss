@@ -7,12 +7,13 @@ body {
   background: $white;
   box-shadow: $box-shadow-sm;
   max-width: map-get($container-max-widths, lg);
-  margin-bottom: 1rem;
-  padding: 2rem;
+  margin: 1rem;
+  padding: $card-spacer-x;
 
   @include media-breakpoint-up(sm) {
     border-radius: $border-radius-sm;
     margin: 2rem 2rem 1rem 2rem;
+    padding: 2rem;
   }
 }
 
@@ -48,20 +49,6 @@ body {
   &.large {
     max-height: 25rem;
     min-width: unset;
-
-    @include media-breakpoint-down(xs) {
-      left: -1.1rem !important;
-      right: -4rem !important;
-    }
-  }
-}
-
-// This combined with the above makes the 'Add stars' dropdown fill up almost
-// the entire screen's width on small screens instead of being anchored to the
-// button
-.scrollable-dropdown-button {
-  @include media-breakpoint-down(sm) {
-    position: static;
   }
 }
 

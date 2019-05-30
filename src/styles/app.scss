@@ -17,6 +17,7 @@ $body-bg: #e9ecef;
 
 ul:last-child,
 ol:last-child,
-p:last-child {
+p:last-child,
+.card-deck .card:last-child {
   margin-bottom: 0;
 }
