@@ -277,6 +277,26 @@ export default class CharacterPage extends Vue {
   }
 
   /**
+   * Determine which classes to apply to a banner based on the character's level
+   * and whether the player can afford to purchase the banner.
+   */
+  bannerClasses(level: utils.TableLevel, banner: utils.TableBanner): string[] {
+    let classes = [];
+    if (level.level === 20) {
+      classes.push("col-sm-1-5");
+    }
+
+    const bannerCost = banner[banner.length - 1];
+    if (this.character.stars >= bannerCost) {
+      classes.push("banner--filled");
+    } else if (bannerCost - this.character.stars <= this.user.unspent_stars) {
+      classes.push("banner--can-afford");
+    }
+
+    return classes;
+  }
+
+  /**
    * Show a toast if the character levels up from spending stars. Explosions and
    * Mariachi band would have been better but this will do for now. Vue's
    * reactivity somehow updates properties before the store action promises are

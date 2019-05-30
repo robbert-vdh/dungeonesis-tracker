@@ -75,11 +75,9 @@
                   <!-- Clicking on a banner should will buy the entire banner at once -->
                   <button v-for="(banner, bannerId) in level.banners"
                           @click="levelCharacterTo(banner[banner.length - 1])" type="button"
-                          class="banner col-3 col-sm-6 col-md-3 my-1" :class="{
-                                   'banner--filled': character.stars >= banner[banner.length - 1],
-                                   'banner--can-afford': banner[banner.length - 1] - character.stars <= user.unspent_stars,
-                                   'col-sm-1-5': level.level === 20,
-                            }" :title="`Level to level ${level.level} + ${bannerId + 1} banners`">
+                          class="banner col-3 col-sm-6 col-md-3 my-1"
+                          :class="bannerClasses(level, banner)"
+                          :title="`Level to level ${level.level} + ${bannerId + 1} banners`">
                     <banner-background-svg class="banner__background"></banner-background-svg>
 
                     <ul :class="`banner__stars banner__stars--${banner.length}`" aria-hidden>
