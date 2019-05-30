@@ -14,6 +14,13 @@ import CharacterRenameModal from "../modals/character-rename-modal.vue";
 import StarAdjustModal from "../modals/star-adjust-modal.vue";
 
 /**
+ * The background image for the banners. We will load it inline in an `<svg>`
+ * instead instead of as in image so that we can use CSS to modify the banners
+ * depending on the situation.
+ */
+import BannerBackgroundSvg from "!!vue-svg-loader!../../images/banner.svg";
+
+/**
  * An ingame or out of game reward that yields stars. Completing quests yields
  * one to three banners worth of stars. This is why we have to calculate the
  * amount of stars based on the player's character.
@@ -41,6 +48,7 @@ Component.registerHooks(["beforeRouteUpdate"]);
 
 @Component({
   components: {
+    "banner-background-svg": BannerBackgroundSvg,
     "character-list": CharacterList,
     "header-bar": HeaderBar,
     "character-delete-modal": CharacterDeleteModal,

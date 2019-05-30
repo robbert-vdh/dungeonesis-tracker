@@ -60,6 +60,7 @@
     <path
        style="fill:none;fill-opacity:0.02178901;stroke:#212529;stroke-width:3.17499995;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:6.19999981;stroke-dasharray:none;stroke-opacity:1"
        d="M 140.84109,76.698037 V 217.01872 L 106.09112,182.26893 70.41647,217.94358 V 76.591497 Z"
+       class="outline"
        id="path2164"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccc" />
