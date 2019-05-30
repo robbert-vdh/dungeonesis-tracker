@@ -97,7 +97,7 @@ class CharacterViewSet(viewsets.ModelViewSet):
         character = self.get_object()
         with transaction.atomic():
             if stars > request.user.unspent_stars:
-                raise APIException("You do not have enough stars.")
+                raise APIException("You do not have enough stars to buy this banner.")
             if character.stars + stars < 0:
                 raise APIException(
                     "Your character can't have a negative number of stars."
