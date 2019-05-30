@@ -20,6 +20,7 @@
 
 .banner {
   background: none;
+  color: $gray-800;
   border: 0;
   padding: 0 0.5rem;
   position: relative;
@@ -36,7 +37,9 @@
 
     .outline {
       fill: rgba($white, 0);
+      stroke-opacity: 0.9;
       stroke-width: 1.4px;
+      stroke: $gray-800;
       transition: fill 150ms ease, stroke 150ms ease;
       vector-effect: non-scaling-stroke;
     }
