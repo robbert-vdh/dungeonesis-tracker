@@ -1,7 +1,8 @@
 import axios from "axios";
+import BootstrapVue from "bootstrap-vue";
 import Vue from "vue";
 import VueRouter from "vue-router";
-import BootstrapVue from "bootstrap-vue";
+import Vuex from "vuex";
 
 import "./styles/app.scss";
 import { store } from "./store";
@@ -12,6 +13,7 @@ import CharacterPage from "./components/pages/character-page.vue";
 if (document.getElementById("app")) {
   Vue.use(BootstrapVue);
   Vue.use(VueRouter);
+  Vue.use(Vuex);
 
   const router = new VueRouter({
     routes: [
