@@ -2,6 +2,10 @@
   <div id="app">
     <transition name="instant-fade" mode="out-in" :duration="15">
       <div v-if="hasLoaded" key="loaded">
+        <div :class="{ 'request-spinner--shown': activeRequests > 0 }" class="request-spinner">
+          <div class="spinner-border text-secondary" title="Fetching requests" role="status"></div>
+        </div>
+
         <transition name="fast-fade" mode="out-in">
           <router-view></router-view>
         </transition>

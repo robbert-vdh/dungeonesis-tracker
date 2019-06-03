@@ -1,6 +1,5 @@
 import axios from "axios";
 import Vue from "vue";
-import Component from "vue-class-component";
 import VueRouter from "vue-router";
 import BootstrapVue from "bootstrap-vue";
 
@@ -31,22 +30,37 @@ if (document.getElementById("app")) {
 
   const vm = new Router({ router, store }).$mount("#app");
 
-  // Show a toast notification when API requests fail. This should only happen
-  // when the player tries to spend too much stars on a character.
-  axios.interceptors.response.use(response => response, function(error) {
-    const data = error.response.data;
-    console.log(data);
-    if (data.detail !== undefined) {
-      vm.$bvToast.toast(data.detail, {
-        title: "Something went wrong",
-        variant: "danger",
-        autoHideDelay: 4000
-      });
-    }
+  // We keep track of the amount of requests running in the background so we can
+  // show a spinner to indicate that there are still requests being processed
+  axios.interceptors.request.use(function(request) {
+    vm.$store.commit("startRequest");
 
-    // Rethrow the error so that we don't make client side changes we are not
-    // supposed to make
-    // TODO: Find a more elegant solution without having to hardcode this everywhere
-    throw error;
+    return request;
   });
+  axios.interceptors.response.use(
+    function(response) {
+      vm.$store.commit("finishRequest");
+
+      return response;
+    },
+    function(error) {
+      vm.$store.commit("finishRequest");
+
+      // Show a toast notification when API requests fail. This should only happen
+      // when the player tries to spend too much stars on a character.
+      const data = error.response.data;
+      console.log(data);
+      if (data.detail !== undefined) {
+        vm.$bvToast.toast(data.detail, {
+          title: "Something went wrong",
+          variant: "danger",
+          autoHideDelay: 4000
+        });
+      }
+
+      // Rethrow the error so that we don't make client side changes we are not
+      // supposed to make
+      throw error;
+    }
+  );
 }

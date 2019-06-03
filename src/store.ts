@@ -47,6 +47,7 @@ export interface UserInfo {
 
 export var store = new Vuex.Store({
   state: {
+    activeRequests: <number>0,
     characters: <{ [id: number]: Character }>{},
     user: <UserInfo | null>null
   },
@@ -70,11 +71,17 @@ export var store = new Vuex.Store({
     deleteCharacter(state, id: number) {
       Vue.delete(state.characters, id);
     },
+    finishRequest(state) {
+      state.activeRequests -= 1;
+    },
     initUserInfo(state, info: UserInfo) {
       state.user = info;
     },
     renameCharacter(state, renamedCharacter: Character) {
       state.characters[renamedCharacter.id].name = renamedCharacter.name;
+    },
+    startRequest(state) {
+      state.activeRequests += 1;
     }
   },
   actions: {
