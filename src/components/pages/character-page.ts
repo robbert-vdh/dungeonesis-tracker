@@ -73,6 +73,13 @@ export default class CharacterPage extends Vue {
   collapsedSections: { [section: string]: boolean } = {};
 
   /**
+   * Wheter the animatinos should be disabled. This is used to briefly disable
+   * and restart the animations whenever the amount of stars allocated to a
+   * character changes. This ensures that every animation is in sync.
+   */
+  disableAnimations: boolean = false;
+
+  /**
    * On non-touch screens the character selection dropdown closes as you would
    * expect after clicking on a vue-router link, but this does not happen
    * automatically on touch events. There might be a better solution here than
@@ -252,6 +259,8 @@ export default class CharacterPage extends Vue {
         stars: rewardStars,
         reason: reward.name
       });
+
+      this.resetAnimations();
     }
   }
 
@@ -289,7 +298,10 @@ export default class CharacterPage extends Vue {
     const bannerCost = banner[banner.length - 1];
     if (this.character.stars >= bannerCost) {
       classes.push("banner--filled");
-    } else if (bannerCost - this.character.stars <= this.user.unspent_stars) {
+    } else if (
+      bannerCost - this.character.stars <= this.user.unspent_stars &&
+      !this.disableAnimations
+    ) {
       classes.push("banner--can-afford");
     }
 
@@ -315,5 +327,22 @@ export default class CharacterPage extends Vue {
         variant: "success"
       });
     }
+
+    // Resetting animations is only necessary if the player now has fewer
+    // banners than before, otherwise the animation for new banner will be out
+    // of sync with the existing banners
+    if (after.level < before.level || after.banners < before.banners) {
+      this.resetAnimations();
+    }
+  }
+
+  /**
+   * Reset all animations by briefly setting `disableAnimations`. This is used
+   * to reapply the animation class causing the animation to restart.
+   */
+  async resetAnimations() {
+    this.disableAnimations = true;
+    await new Promise(x => setTimeout(x, 1));
+    this.disableAnimations = false;
   }
 }
