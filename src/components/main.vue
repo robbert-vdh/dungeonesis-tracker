@@ -2,7 +2,7 @@
   <div id="app">
     <transition name="instant-fade" mode="out-in" :duration="15">
       <div v-if="hasLoaded" key="loaded">
-        <div :class="{ 'request-spinner--shown': activeRequests > 0 }" class="request-spinner">
+        <div :class="{ 'request-spinner--shown': activeRequests > 0 }" class="request-spinner" aria-hidden>
           <div class="spinner-border text-secondary" title="Fetching requests" role="status"></div>
         </div>
 
