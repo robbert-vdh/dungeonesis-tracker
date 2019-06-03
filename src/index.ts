@@ -5,7 +5,7 @@ import BootstrapVue from "bootstrap-vue";
 
 import "./styles/app.scss";
 import { store } from "./store";
-import Router from "./components/main.vue";
+import Main from "./components/main.vue";
 import OverviewPage from "./components/pages/overview-page.vue";
 import CharacterPage from "./components/pages/character-page.vue";
 
@@ -28,7 +28,7 @@ if (document.getElementById("app")) {
     ]
   });
 
-  const vm = new Router({ router, store }).$mount("#app");
+  const vm = new Main({ router, store }).$mount("#app");
 
   // We keep track of the amount of requests running in the background so we can
   // show a spinner to indicate that there are still requests being processed
