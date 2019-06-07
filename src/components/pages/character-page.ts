@@ -116,21 +116,33 @@ export default class CharacterPage extends Vue {
 
   get availableRewards(): (Reward | "divider")[] {
     return [
-      // TODO: Replace the first three with some presets and a freeform field
       {
-        name: "Completed a quest (1 banner)",
-        calculate: character =>
-          splitReward(utils.bannerCost(character, 1, true))
+        name: "Completed a quest (2 stars)",
+        calculate: _ => splitReward(2)
       },
       {
-        name: "Completed a quest (2 banners)",
-        calculate: character =>
-          splitReward(utils.bannerCost(character, 2, true))
+        name: "Completed a quest (4 stars)",
+        calculate: _ => splitReward(4)
       },
       {
-        name: "Completed a quest (3 banners)",
-        calculate: character =>
-          splitReward(utils.bannerCost(character, 3, true))
+        name: "Completed a quest (5 stars)",
+        calculate: _ => splitReward(5)
+      },
+      {
+        name: "Completed a quest (6 stars)",
+        calculate: _ => splitReward(6)
+      },
+      {
+        name: "Completed a quest (8 stars)",
+        calculate: _ => splitReward(8)
+      },
+      {
+        name: "Completed a quest (10 stars)",
+        calculate: _ => splitReward(10)
+      },
+      {
+        name: "Completed a quest (12 stars)",
+        calculate: _ => splitReward(12)
       },
       "divider",
       {
@@ -390,7 +402,6 @@ export default class CharacterPage extends Vue {
  * star pool.
  */
 function splitReward(stars: number): RewardStars {
-  // TODO: Find out whether to round up or down
   return {
     globalStars: Math.ceil(stars / 2),
     characterBoundStars: Math.floor(stars / 2)
