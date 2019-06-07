@@ -150,6 +150,11 @@ export default class CharacterPage extends Vue {
         calculate: _ => 2
       },
       {
+        name: "I've written lore for my own campaign (2 stars)",
+        characterBound: false,
+        calculate: _ => 2
+      },
+      {
         name: "I've created a piece of art (2 stars)",
         characterBound: false,
         calculate: _ => 2
