@@ -173,58 +173,6 @@ export function nextLevelProgress(character: CharacterProgression): number {
 }
 
 /**
- * Calculate how many stars it would cost to buy N banners for a character.
- *
- * This is used when leveling characters and when deciding quest rewards.
- *
- * @param character - The character used for the calculations.
- * @param banners - How many banners should be bought at once. Or in the case
- *   for quest rewards: how many banners was the quest worth.
- * @param wholeBanners - Whether to round the number of banners down. This is
- *   important for calculating quest rewards to stay consistent with the pen and
- *   paper system. In our implementation it does not matter if a character has
- *   partial banners, this would otherwise result in slightly higher rewards if
- *   a character is close to leveling up.
- *
- * @returns The number of stars it would cost to acquire this many banners.
- */
-export function bannerCost(
-  character: CharacterProgression,
-  banners: number,
-  wholeBanners: boolean = false
-): number {
-  if (banners <= 0) {
-    return 0;
-  }
-
-  let newCharacter: CharacterProgression = Object.assign({}, character);
-  if (wholeBanners) {
-    newCharacter.stars = 0;
-  }
-
-  // The calculation could simply be split into two if banners would always be 8
-  // or lower, but this is sadly not the case so we'll just do it naively to
-  // avoid making errors.
-  let cost = 0;
-  for (let i = 0; i < banners; i++) {
-    cost += STARS_PER_BANNER[character.level] - newCharacter.stars;
-
-    newCharacter.stars = 0;
-    if (
-      newCharacter.banners == BANNERS_PER_LEVEL - 1 &&
-      newCharacter.level < 20
-    ) {
-      newCharacter.banners = 0;
-      newCharacter.level += 1;
-    } else {
-      newCharacter.banners += 1;
-    }
-  }
-
-  return cost;
-}
-
-/**
  * Calculate the leveling table from the constants defined above. This table can
  * be iterated over on the character detail page to show the exact leveling
  * progress.
