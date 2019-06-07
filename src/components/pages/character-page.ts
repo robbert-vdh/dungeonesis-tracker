@@ -242,7 +242,6 @@ export default class CharacterPage extends Vue {
     // same time.
     let rewardPromises = [];
 
-    // TODO: Make both async
     if (globalStars !== 0) {
       rewardPromises.push(
         new Promise(async next => {
@@ -272,8 +271,6 @@ export default class CharacterPage extends Vue {
         })
       );
     }
-
-    console.log(rewardPromises);
 
     await Promise.all(rewardPromises);
   }
