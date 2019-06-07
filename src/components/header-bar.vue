@@ -12,7 +12,7 @@
                 <p>Just click on stuff and hope for the best.</p>
                 <p>The reward for completing a quest depends on the currently selected character.</p>
                 `"
-              title="TODO" type="button" class="btn btn-info">
+              title="Updated for patch 5.4" type="button" class="btn btn-info">
         Help
       </button>
       <a class="btn btn-secondary" href="/logout">
