@@ -23,12 +23,10 @@ import BannerBackgroundSvg from "!!vue-svg-loader!../../images/banner.svg";
 /**
  * The distribution of stars gained from receiving a reward. This is needed
  * because some of the rewards are bound to the character earning them.
- *
- * TODO: Rename to `globalStars` and `characterBoundStars` for clarity
  */
 interface RewardStars {
-  global: number;
-  characterBound: number;
+  globalStars: number;
+  characterBoundStars: number;
 }
 
 /**
@@ -137,68 +135,68 @@ export default class CharacterPage extends Vue {
       "divider",
       {
         name: "This character has won an NPC auction (1 star)",
-        calculate: _ => ({ global: 0, characterBound: 1 })
+        calculate: _ => ({ globalStars: 0, characterBoundStars: 1 })
       },
       {
         name: "My proposed quest was accepted (1 star)",
-        calculate: _ => ({ global: 1, characterBound: 0 })
+        calculate: _ => ({ globalStars: 1, characterBoundStars: 0 })
       },
       {
         name: "I was last session's MVP (1 star)",
-        calculate: _ => ({ global: 1, characterBound: 0 })
+        calculate: _ => ({ globalStars: 1, characterBoundStars: 0 })
       },
       {
         name: "I've written a session log (2 stars)",
-        calculate: _ => ({ global: 2, characterBound: 0 })
+        calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
       },
       {
         name: "I've written lore for my own campaign (2 stars)",
-        calculate: _ => ({ global: 2, characterBound: 0 })
+        calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
       },
       {
         name: "I've created a piece of art (2 stars)",
-        calculate: _ => ({ global: 2, characterBound: 0 })
+        calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
       },
       {
         name: "I've brought snacks to share (2 stars)",
-        calculate: _ => ({ global: 2, characterBound: 0 })
+        calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
       },
       {
         name: "I've arranged a location for a session (2 stars)",
-        calculate: _ => ({ global: 2, characterBound: 0 })
+        calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
       },
       {
         name: "I've registered this character on the Drive (3 stars)",
-        calculate: _ => ({ global: 0, characterBound: 3 })
+        calculate: _ => ({ globalStars: 0, characterBoundStars: 3 })
       },
       {
         name: "I've submitted this character's backstory (4 stars)",
-        calculate: _ => ({ global: 0, characterBound: 4 })
+        calculate: _ => ({ globalStars: 0, characterBoundStars: 4 })
       },
       {
         name: "I've filled in a survey (5 stars)",
-        calculate: _ => ({ global: 5, characterBound: 0 })
+        calculate: _ => ({ globalStars: 5, characterBoundStars: 0 })
       },
       {
         name: "I've made the SDM sad with my character's death (6 stars)",
-        calculate: _ => ({ global: 6, characterBound: 0 })
+        calculate: _ => ({ globalStars: 6, characterBoundStars: 0 })
       },
       {
         name: "I've helped out with the Drive (7 stars)",
-        calculate: _ => ({ global: 7, characterBound: 0 })
+        calculate: _ => ({ globalStars: 7, characterBoundStars: 0 })
       },
       {
         name: "I've DM'ed a session (8 stars)",
-        calculate: _ => ({ global: 8, characterBound: 0 })
+        calculate: _ => ({ globalStars: 8, characterBoundStars: 0 })
       },
       "divider",
       {
         name: "I've received an inspiration star (1 star)",
-        calculate: _ => ({ global: 1, characterBound: 0 })
+        calculate: _ => ({ globalStars: 1, characterBoundStars: 0 })
       },
       {
         name: "Buy inspriation (-1 star)",
-        calculate: _ => ({ global: -1, characterBound: 0 })
+        calculate: _ => ({ globalStars: -1, characterBoundStars: 0 })
       }
     ];
   }
@@ -236,18 +234,20 @@ export default class CharacterPage extends Vue {
    * star pool, directly to the character that earned the reward or both.
    */
   async claimReward(reward: Reward) {
-    const { global, characterBound } = reward.calculate(this.progress);
+    const { globalStars, characterBoundStars } = reward.calculate(
+      this.progress
+    );
 
     // The two reward types don't interact, so we can process them both at the
     // same time.
     let rewardPromises = [];
 
     // TODO: Make both async
-    if (global !== 0) {
+    if (globalStars !== 0) {
       rewardPromises.push(
         new Promise(async next => {
           await this.$store.dispatch("adjustStars", {
-            stars: global,
+            stars: globalStars,
             reason: reward.name
           });
 
@@ -257,13 +257,13 @@ export default class CharacterPage extends Vue {
       );
     }
 
-    if (characterBound !== 0) {
+    if (characterBoundStars !== 0) {
       rewardPromises.push(
         new Promise(async next => {
           const oldProgress = _.clone(this.progress);
           await this.$store.dispatch("setCharacterStars", {
             ...this.character,
-            stars: this.character.stars + characterBound,
+            stars: this.character.stars + characterBoundStars,
             reason: reward.name
           });
 
@@ -355,11 +355,13 @@ export default class CharacterPage extends Vue {
    * character's stars.
    */
   rewardIsCharacterBound(reward: Reward): boolean {
-    const { global, characterBound } = reward.calculate(this.progress);
+    const { globalStars, characterBoundStars } = reward.calculate(
+      this.progress
+    );
 
     // Quest rewards also modify the character's own stars but these should not
     // be considered character bound, hence the `global === 0`
-    return global === 0 && characterBound !== 0;
+    return globalStars === 0 && characterBoundStars !== 0;
   }
 
   /**
@@ -367,9 +369,11 @@ export default class CharacterPage extends Vue {
    * actually giving stars.
    */
   rewardIsNegative(reward: Reward): boolean {
-    const { global, characterBound } = reward.calculate(this.progress);
+    const { globalStars, characterBoundStars } = reward.calculate(
+      this.progress
+    );
 
-    return global < 0 || characterBound < 0;
+    return globalStars < 0 || characterBoundStars < 0;
   }
 
   /**
@@ -391,7 +395,7 @@ export default class CharacterPage extends Vue {
 function splitReward(stars: number): RewardStars {
   // TODO: Find out whether to round up or down
   return {
-    global: Math.ceil(stars / 2),
-    characterBound: Math.floor(stars / 2)
+    globalStars: Math.ceil(stars / 2),
+    characterBoundStars: Math.floor(stars / 2)
   };
 }
