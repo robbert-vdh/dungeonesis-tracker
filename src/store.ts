@@ -6,6 +6,8 @@ import * as _ from "lodash";
 // Any error messages received while sending requests to the API are shown using
 // toasts. For this we use an axios interceptor defined in index.ts.
 
+Vue.use(Vuex);
+
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 
