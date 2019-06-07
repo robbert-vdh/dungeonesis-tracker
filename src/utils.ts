@@ -18,20 +18,13 @@ export const CHARACTER_CREATION_COST: { [level: number]: number } = {
   4: 0,
   5: 0,
   6: 1,
-  7: 1,
+  7: 3,
   8: 5,
-  9: 5,
-  10: 5,
+  9: 10,
+  10: 15,
   11: 20,
-  12: 20,
-  13: 20,
-  14: 40,
-  15: 40,
-  16: 40,
-  17: 80,
-  18: 80,
-  19: 80,
-  20: 42069
+  12: 25,
+  13: 30
 };
 
 export const STARS_PER_BANNER: { [level: number]: number } = {
