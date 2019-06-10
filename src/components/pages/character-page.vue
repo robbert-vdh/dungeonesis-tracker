@@ -16,8 +16,8 @@
                       menu-class="large scrollable-dropdown">
             <template v-for="reward in availableRewards">
               <b-dropdown-divider v-if="reward === 'divider'"></b-dropdown-divider>
-              <b-dropdown-item-button v-else @click="claimReward(reward)" :variant="rewardIsNegative(reward) ? 'danger' : ''">
-                {{ reward.name }}<span v-if="rewardIsCharacterBound(reward)" class="font-weight-bolder"
+              <b-dropdown-item-button v-else @click="claimReward(reward)" :variant="isRewardNegative(reward) ? 'danger' : ''">
+                {{ reward.name }}<span v-if="isRewardCharacterBound(reward)" class="font-weight-bolder"
                                        title="bound to this character">*</span>
               </b-dropdown-item-button>
             </template>

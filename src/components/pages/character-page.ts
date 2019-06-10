@@ -339,6 +339,32 @@ export default class CharacterPage extends Vue {
   }
 
   /**
+   * Helper function to determine whether a reward purely modifies the current
+   * character's stars.
+   */
+  isRewardCharacterBound(reward: Reward): boolean {
+    const { globalStars, characterBoundStars } = reward.calculate(
+      this.progress
+    );
+
+    // Quest rewards also modify the character's own stars but these should not
+    // be considered character bound, hence the `global === 0`
+    return globalStars === 0 && characterBoundStars !== 0;
+  }
+
+  /**
+   * Helper function to determine whether a 'reward' costs stars rather than
+   * actually giving stars.
+   */
+  isRewardNegative(reward: Reward): boolean {
+    const { globalStars, characterBoundStars } = reward.calculate(
+      this.progress
+    );
+
+    return globalStars < 0 || characterBoundStars < 0;
+  }
+
+  /**
    * Level up a character to the specified amount of stars. We specify stars
    * here instead of an exact combination of level and banners since this number
    * is already known and in use. See `utils.LEVELING_TABLE` for more
@@ -357,32 +383,6 @@ export default class CharacterPage extends Vue {
     });
 
     this.handleLevelUp(oldProgress, this.progress);
-  }
-
-  /**
-   * Helper function to determine whether a reward purely modifies the current
-   * character's stars.
-   */
-  rewardIsCharacterBound(reward: Reward): boolean {
-    const { globalStars, characterBoundStars } = reward.calculate(
-      this.progress
-    );
-
-    // Quest rewards also modify the character's own stars but these should not
-    // be considered character bound, hence the `global === 0`
-    return globalStars === 0 && characterBoundStars !== 0;
-  }
-
-  /**
-   * Helper function to determine whether a 'reward' costs stars rather than
-   * actually giving stars.
-   */
-  rewardIsNegative(reward: Reward): boolean {
-    const { globalStars, characterBoundStars } = reward.calculate(
-      this.progress
-    );
-
-    return globalStars < 0 || characterBoundStars < 0;
   }
 
   /**
