@@ -8,13 +8,16 @@
 
     <div class="btn-group btn-group-sm col-md-auto order-1 order-md-2" role="group">
       <!-- TODO: Add a help page -->
-      <button v-b-popover.hover.bottom.html="`
-                <p>Just click on stuff and hope for the best.</p>
-                <p>The reward for completing a quest depends on the currently selected character.</p>
-                `"
-              title="Updated for patch 5.4" type="button" class="btn btn-info">
-        Help
-      </button>
+      <b-dropdown id="about-dropdown" text="About" variant="info" size="sm"
+                  :no-caret="true" class="flex-fill">
+        <b-dropdown-item-button v-b-modal.changelog-modal>
+          Changelog
+        </b-dropdown-item-button>
+        <b-dropdown-divider></b-dropdown-divider>
+        <b-dropdown-text tag="small" style="min-width: 11rem">
+          Updated for patch 5.4
+        </b-dropdown-text>
+      </b-dropdown>
       <a class="btn btn-secondary" href="/logout">
         Log out
       </a>

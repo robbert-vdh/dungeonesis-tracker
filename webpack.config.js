@@ -52,6 +52,10 @@ module.exports = (env, argv) => {
           ]
         },
         {
+          test: /\.md$/,
+          use: ["html-loader", "markdown-loader"]
+        },
+        {
           test: /\.(png|jpg|svg|woff|ttf)$/,
           use: {
             loader: "url-loader",
