@@ -242,6 +242,29 @@ export default class CharacterPage extends Vue {
   }
 
   /**
+   * Determine which classes to apply to a banner based on the character's level
+   * and whether the player can afford to purchase the banner.
+   */
+  bannerClasses(level: utils.TableLevel, banner: utils.TableBanner): string[] {
+    let classes = [];
+    if (level.level === 20) {
+      classes.push("col-sm-1-5");
+    }
+
+    const bannerCost = banner[banner.length - 1];
+    if (this.character.stars >= bannerCost) {
+      classes.push("banner--filled");
+    } else if (
+      bannerCost - this.character.stars <= this.user.unspent_stars &&
+      !this.disableAnimations
+    ) {
+      classes.push("banner--can-afford");
+    }
+
+    return classes;
+  }
+
+  /**
    * Claim a reward. Depending on the reward we either add stars to the global
    * star pool, directly to the character that earned the reward or both.
    */
@@ -288,50 +311,6 @@ export default class CharacterPage extends Vue {
   }
 
   /**
-   * Level up a character to the specified amount of stars. We specify stars
-   * here instead of an exact combination of level and banners since this number
-   * is already known and in use. See `utils.LEVELING_TABLE` for more
-   * information.
-   */
-  async levelCharacterTo(stars: number) {
-    const delta = stars - this.character.stars;
-    if (delta === 0) {
-      return;
-    }
-
-    const oldProgress = _.clone(this.progress);
-    await this.$store.dispatch("spendStars", {
-      id: this.character.id,
-      stars: delta
-    });
-
-    this.handleLevelUp(oldProgress, this.progress);
-  }
-
-  /**
-   * Determine which classes to apply to a banner based on the character's level
-   * and whether the player can afford to purchase the banner.
-   */
-  bannerClasses(level: utils.TableLevel, banner: utils.TableBanner): string[] {
-    let classes = [];
-    if (level.level === 20) {
-      classes.push("col-sm-1-5");
-    }
-
-    const bannerCost = banner[banner.length - 1];
-    if (this.character.stars >= bannerCost) {
-      classes.push("banner--filled");
-    } else if (
-      bannerCost - this.character.stars <= this.user.unspent_stars &&
-      !this.disableAnimations
-    ) {
-      classes.push("banner--can-afford");
-    }
-
-    return classes;
-  }
-
-  /**
    * Show a toast if the character levels up from spending stars. Explosions and
    * Mariachi band would have been better but this will do for now. Vue's
    * reactivity somehow updates properties before the store action promises are
@@ -357,6 +336,27 @@ export default class CharacterPage extends Vue {
     if (after.level < before.level || after.banners < before.banners) {
       this.resetAnimations();
     }
+  }
+
+  /**
+   * Level up a character to the specified amount of stars. We specify stars
+   * here instead of an exact combination of level and banners since this number
+   * is already known and in use. See `utils.LEVELING_TABLE` for more
+   * information.
+   */
+  async levelCharacterTo(stars: number) {
+    const delta = stars - this.character.stars;
+    if (delta === 0) {
+      return;
+    }
+
+    const oldProgress = _.clone(this.progress);
+    await this.$store.dispatch("spendStars", {
+      id: this.character.id,
+      stars: delta
+    });
+
+    this.handleLevelUp(oldProgress, this.progress);
   }
 
   /**
