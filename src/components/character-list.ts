@@ -35,13 +35,17 @@ export default class CharacterList extends Vue {
     }
   }
 
-  formatProgress(stars: number): string {
-    const character = utils.starsToLevel(stars);
-    if (character.level >= 20) {
-      return `lvl ${character.level} + ${character.banners}b`;
+  formatProgress(character: Character): string {
+    const progress = utils.starsToLevel(character.stars);
+    if (character.dead) {
+      return `lvl ${progress.level} (dead)`;
     }
 
-    const progression = utils.nextLevelProgress(character) * 100;
-    return `lvl ${character.level} + ${progression}%`;
+    if (progress.level >= 20) {
+      return `lvl ${progress.level} + ${progress.banners}b`;
+    }
+
+    const nextLevelProgression = utils.nextLevelProgress(progress) * 100;
+    return `lvl ${progress.level} + ${nextLevelProgression}%`;
   }
 }

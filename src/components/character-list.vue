@@ -8,8 +8,9 @@
                      class="list-group-item list-group-item-action d-flex
                            justify-content-between align-items-center">
           {{ character.name }}
-          <span class="badge badge-primary badge-pill ml-2">
-            {{ formatProgress(character.stars) }}
+          <span class="badge badge-pill ml-2"
+                :class="{'badge-secondary': character.dead, 'badge-primary': !character.dead}">
+            {{ formatProgress(character) }}
           </span>
         </router-link>
       </template>

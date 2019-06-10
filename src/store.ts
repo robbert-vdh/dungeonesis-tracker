@@ -36,6 +36,7 @@ export interface Character {
   id: number;
   name: string;
   stars: number;
+  dead: boolean;
   reason?: string;
 }
 
@@ -79,6 +80,9 @@ export var store = new Vuex.Store({
     },
     renameCharacter(state, renamedCharacter: Character) {
       state.characters[renamedCharacter.id].name = renamedCharacter.name;
+    },
+    setDeathStatus(state, updatedCharacter: Character) {
+      state.characters[updatedCharacter.id].dead = updatedCharacter.dead;
     },
     startRequest(state) {
       state.activeRequests += 1;
@@ -133,6 +137,13 @@ export var store = new Vuex.Store({
         id: updatedCharacter.id,
         stars: updatedCharacter.stars - oldStars
       });
+    },
+    async setDeathStatus({ commit }, updatedCharacter: Character) {
+      await axios.patch(`/api/characters/${updatedCharacter.id}/`, {
+        dead: updatedCharacter.dead
+      });
+
+      commit("setDeathStatus", updatedCharacter);
     },
     async spendStars({ commit }, params: StarSpendRequest) {
       await axios.post(`/api/characters/${params.id}/spend/`, params);

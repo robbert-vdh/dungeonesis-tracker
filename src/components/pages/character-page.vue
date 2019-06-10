@@ -13,7 +13,7 @@
 
           <b-dropdown id="add-stars-dropdown" text="Add stars" :no-flip="true"
                       size="sm" variant="primary" :no-caret="true"
-                      menu-class="large scrollable-dropdown">
+                      menu-class="large scrollable-dropdown" :disabled="character.dead">
             <template v-for="reward in availableRewards">
               <b-dropdown-divider v-if="reward === 'divider'"></b-dropdown-divider>
               <b-dropdown-item-button v-else @click="claimReward(reward)" :variant="isRewardNegative(reward) ? 'danger' : ''">
@@ -32,6 +32,9 @@
                       size="sm" variant="secondary" :no-caret="true">
             <b-dropdown-item-button v-b-modal.character-rename-modal>
               Rename
+            </b-dropdown-item-button>
+            <b-dropdown-item-button @click="toggleDeathStatus()">
+              Mark as {{ character.dead ? 'living' : 'dead' }}
             </b-dropdown-item-button>
             <b-dropdown-item-button v-b-modal.character-delete-modal variant="danger">
               Delete
@@ -73,8 +76,9 @@
               <div class="card-body">
                 <div class="row my-n1" :class="{ 'level-20-padding': level.level === 20 }">
                   <!-- Clicking on a banner should will buy the entire banner at once -->
-                  <button v-for="(banner, bannerId) in level.banners"
-                          @click="levelCharacterTo(banner[banner.length - 1])" type="button"
+                  <button v-for="(banner, bannerId) in level.banners" type="button"
+                          @click="levelCharacterTo(banner[banner.length - 1])"
+                          :disabled="character.dead"
                           class="banner col-3 col-sm-6 col-md-3 my-1"
                           :class="bannerClasses(level, banner)"
                           :title="`Level to level ${level.level} + ${bannerId + 1} banners`">

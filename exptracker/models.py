@@ -43,6 +43,7 @@ class Character(models.Model):
 
     name = models.CharField(max_length=255)
     stars = models.PositiveIntegerField()
+    dead = models.BooleanField(default=False)
 
     @property
     def level(self):

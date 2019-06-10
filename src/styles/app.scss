@@ -7,6 +7,12 @@ $font-family-sans-serif: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI"
 // Equivalent to $gray-200
 $body-bg: #e9ecef;
 
+// Opacity is used to show that a button is disabled, but opacity is not part of
+// the default list of transitioned properties
+$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+  opacity 0.15s ease-in-out;
+
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-vue/src/index";
 @import "fonts/style";

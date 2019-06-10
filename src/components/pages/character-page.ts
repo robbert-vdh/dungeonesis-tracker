@@ -394,6 +394,18 @@ export default class CharacterPage extends Vue {
     await new Promise(x => setTimeout(x, 1));
     this.disableAnimations = false;
   }
+
+  /**
+   * Toggle the death status of the current character. This simply marks the
+   * character as dead and prevents claiming rewards for and allocating stars to
+   * this character.
+   */
+  async toggleDeathStatus() {
+    await this.$store.dispatch("setDeathStatus", {
+      ...this.character,
+      dead: !this.character.dead
+    });
+  }
 }
 
 /**
