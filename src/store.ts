@@ -50,9 +50,19 @@ export var store = new Vuex.Store({
   state: {
     activeRequests: <number>0,
     characters: <{ [id: number]: Character }>{},
+    lastVersion: window.localStorage.getItem("last-version") || CURRENT_VERSION,
     user: <UserInfo | null>null
   },
   getters: {
+    // Returns true the first time the application loads for a new version. This
+    // is solely used to show the changelog once whenever a new version gets
+    // released.
+    isNewVersion: state => {
+      const isNewVersion = state.lastVersion != CURRENT_VERSION;
+      window.localStorage.setItem("last-version", CURRENT_VERSION);
+
+      return isNewVersion;
+    },
     sortedCharacters: state => _.orderBy(state.characters, ["stars"], ["desc"])
   },
   mutations: {

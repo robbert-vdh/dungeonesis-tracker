@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="changelog-modal" title="Changelog" :ok-only="true">
+  <b-modal id="changelog-modal" title="Changelog" :ok-only="true" :visible="startVisible">
     <div v-html="contents" class="changelog"></div>
   </b-modal>
 </template>

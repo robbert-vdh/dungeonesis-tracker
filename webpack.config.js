@@ -82,6 +82,9 @@ module.exports = (env, argv) => {
       }),
       new ImageMinPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }),
       new VueLoaderPlugin(),
+      new webpack.DefinePlugin({
+        CURRENT_VERSION: JSON.stringify(require("./package.json")["version"])
+      }),
       new webpack.HotModuleReplacementPlugin()
     ]
   };

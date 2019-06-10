@@ -11,7 +11,7 @@
         </transition>
 
         <!-- We'll register our modals here so that we can use them throughout the application -->
-        <changelog-modal></changelog-modal>
+        <changelog-modal :startVisible="showChangelog"></changelog-modal>
         <character-add-modal></character-add-modal>
       </div>
 
