@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Fix inconsistent margins around the page.
+
 ## [1.1.0] - 2019-06-10
 
 ### Added
