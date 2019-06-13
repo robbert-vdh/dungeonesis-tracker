@@ -391,7 +391,7 @@ export default class CharacterPage extends Vue {
    */
   async resetAnimations() {
     this.disableAnimations = true;
-    await new Promise(x => setTimeout(x, 1));
+    await new Promise(x => setTimeout(x, 5));
     this.disableAnimations = false;
   }
 
