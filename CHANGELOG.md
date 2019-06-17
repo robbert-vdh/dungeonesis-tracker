@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- Increase the delay so that the animations reset properly.
 - Fix inconsistent margins around the page.
 
 ## [1.1.0] - 2019-06-10
