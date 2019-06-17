@@ -40,6 +40,30 @@ export interface Character {
   reason?: string;
 }
 
+/**
+ * A single entry in a player's log.
+ */
+export type LogEntry = {
+  character: number;
+  created_at: string;
+} & (
+  | {
+      type: "LogType.STARS_SPENT";
+      value: { amount: number; reason: string };
+    }
+  | {
+      type: "LogType.STARS_ADDED";
+      value: { stars: number; reason: string };
+    }
+  | {
+      type: "LogType.CHARACTER_ADDED";
+      value: Character;
+    }
+  | {
+      type: "LogType.CHARACTER_DELETED";
+      value: Character;
+    });
+
 export interface UserInfo {
   first_name: string;
   last_name: string;
@@ -51,6 +75,7 @@ export var store = new Vuex.Store({
     activeRequests: <number>0,
     characters: <{ [id: number]: Character }>{},
     lastVersion: window.localStorage.getItem("last-version") || CURRENT_VERSION,
+    logs: <LogEntry[]>[],
     user: <UserInfo | null>null
   },
   getters: {
@@ -94,6 +119,9 @@ export var store = new Vuex.Store({
     setDeathStatus(state, updatedCharacter: Character) {
       state.characters[updatedCharacter.id].dead = updatedCharacter.dead;
     },
+    setLogs(state, logs: LogEntry[]) {
+      state.logs = logs;
+    },
     startRequest(state) {
       state.activeRequests += 1;
     }
@@ -126,6 +154,11 @@ export var store = new Vuex.Store({
       const response = await axios.get("/api/user/");
 
       commit("initUserInfo", response.data);
+    },
+    async fetchLogs({ commit }) {
+      const response = await axios.get("/api/user/logs/");
+
+      commit("setLogs", response.data);
     },
     async renameCharacter({ commit }, renamedCharacter: Character) {
       await axios.patch(`/api/characters/${renamedCharacter.id}/`, {
