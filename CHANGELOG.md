@@ -5,8 +5,8 @@
 ### Added
 
 - A log of all your actions. This allows you to keep track of stars received and
-  spent on characters as well as character creation and deletion. Click 'View
-  logs under 'About' to find out more.
+  spent on characters as well as character creation and deletion. Click _View
+  logs_ under _About_ to find out more.
 
 ### Fixed
 
