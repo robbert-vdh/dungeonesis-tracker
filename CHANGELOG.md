@@ -8,6 +8,10 @@
   spent on characters as well as character creation and deletion. Click _View
   logs_ under _About_ to find out more.
 
+### Changed
+
+- Round all percentages to one digit for display.
+
 ### Fixed
 
 - Increase the delay so that the animations reset properly.

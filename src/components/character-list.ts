@@ -46,6 +46,6 @@ export default class CharacterList extends Vue {
     }
 
     const nextLevelProgression = utils.nextLevelProgress(progress) * 100;
-    return `lvl ${progress.level} + ${nextLevelProgression}%`;
+    return `lvl ${progress.level} + ${nextLevelProgression.toFixed(1)}%`;
   }
 }
