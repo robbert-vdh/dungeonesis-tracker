@@ -15,7 +15,7 @@ class CharacterSerializer(serializers.ModelSerializer):
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = LogEntry
-        fields = ("character", "type", "value", "created_at")
+        fields = ("id", "character", "type", "value", "created_at")
 
 
 class StarRequestSerializer(serializers.Serializer):

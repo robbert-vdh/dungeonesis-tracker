@@ -44,6 +44,7 @@ export interface Character {
  * A single entry in a player's log.
  */
 export type LogEntry = {
+  id: number;
   character: number;
   created_at: string;
 } & (
