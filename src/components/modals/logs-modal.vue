@@ -19,7 +19,7 @@
             {{ Math.abs(log.value.amount) === 1 ? 'star' : 'stars' }}
             {{ log.value.amount >= 0
                 ? (log.value.reason !== null ? 'added to' : 'spent on')
-                : 'received from' }}
+                : 'refunded from' }}
             <span v-if="log.character === null" class="font-weight-bold text-secondary">
               &lt;REDACTED&gt;
             </span>
