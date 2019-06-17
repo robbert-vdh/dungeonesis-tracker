@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- A log of all your actions. This allows you to keep track of stars received and
+  spent on characters as well as character creation and deletion. Click 'View
+  logs under 'About' to find out more.
+
 ### Fixed
 
 - Increase the delay so that the animations reset properly.
