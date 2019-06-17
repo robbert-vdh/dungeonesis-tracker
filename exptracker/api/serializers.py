@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Character, User
+from ..models import LogEntry, Character, User
 
 
 class CharacterSerializer(serializers.ModelSerializer):
@@ -10,6 +10,12 @@ class CharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = ("id", "name", "stars", "dead", "reason")
+
+
+class LogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LogEntry
+        fields = ("character", "type", "value", "created_at")
 
 
 class StarRequestSerializer(serializers.Serializer):

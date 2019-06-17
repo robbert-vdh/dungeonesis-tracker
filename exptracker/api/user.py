@@ -5,7 +5,7 @@ from rest_framework.exceptions import APIException
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .serializers import StarRequestSerializer, UserInfoSerializer
+from .serializers import LogSerializer, StarRequestSerializer, UserInfoSerializer
 
 from ..models import LogType
 
@@ -35,6 +35,20 @@ def adjust_stars(request):
         )
 
     return Response({"added_stars": stars})
+
+
+class UserLogs(generics.ListAPIView):
+    """
+    An API view for listing all log entries associated with the currently
+    logged in user.
+
+    """
+
+    serializer_class = LogSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return self.request.user.logs.order_by("-created_at")
 
 
 class UserInfo(generics.RetrieveAPIView):
