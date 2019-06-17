@@ -13,6 +13,7 @@
         <!-- We'll register our modals here so that we can use them throughout the application -->
         <changelog-modal :startVisible="showChangelog"></changelog-modal>
         <character-add-modal></character-add-modal>
+        <logs-modal></logs-modal>
       </div>
 
       <div v-else key="loading" class="spinner-grow m-3" role="status">

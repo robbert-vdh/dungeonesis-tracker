@@ -4,11 +4,13 @@ import { mapGetters, mapState } from "vuex";
 
 import ChangelogModal from "./modals/changelog-modal.vue";
 import CharacterAddModal from "./modals/character-add-modal.vue";
+import LogsModal from "./modals/logs-modal.vue";
 
 @Component({
   components: {
     "changelog-modal": ChangelogModal,
-    "character-add-modal": CharacterAddModal
+    "character-add-modal": CharacterAddModal,
+    "logs-modal": LogsModal
   },
   computed: {
     ...mapState(["activeRequests"]),

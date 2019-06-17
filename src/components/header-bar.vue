@@ -10,6 +10,9 @@
       <!-- TODO: Add a help page -->
       <b-dropdown id="about-dropdown" text="About" variant="info" size="sm"
                   :no-caret="true" class="flex-fill">
+        <b-dropdown-item-button v-b-modal.logs-modal>
+          View logs
+        </b-dropdown-item-button>
         <b-dropdown-item-button v-b-modal.changelog-modal>
           Changelog
         </b-dropdown-item-button>
