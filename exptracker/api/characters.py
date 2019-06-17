@@ -90,27 +90,32 @@ class CharacterViewSet(viewsets.ModelViewSet):
         serializer = StarRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        stars = serializer.validated_data["stars"]
-        if stars == 0:
+        star_delta = serializer.validated_data["stars"]
+        if star_delta == 0:
             raise APIException("The number of stars spent must non-zero.")
 
         character = self.get_object()
         with transaction.atomic():
-            if stars > request.user.unspent_stars:
+            if star_delta > request.user.unspent_stars:
                 raise APIException("You do not have enough stars to buy this banner.")
-            if character.stars + stars < 0:
+            if character.stars + star_delta < 0:
                 raise APIException(
                     "Your character can't have a negative number of stars."
                 )
 
-            character.stars = F("stars") + stars
-            request.user.unspent_stars = F("unspent_stars") - stars
+            character.stars = F("stars") + star_delta
+            request.user.unspent_stars = F("unspent_stars") - star_delta
 
             character.save()
             request.user.save()
 
+            # TODO: Either create functions for instantiating the individual
+            #       log entry types or somehow enforce a schema since this is
+            #       easy to get wrong
             request.user.logs.create(
-                type=LogType.STARS_SPENT, value=stars, character=character
+                type=LogType.STARS_SPENT,
+                value={"amount": star_delta, "reason": None},
+                character=character,
             )
 
-        return Response({"spent_stars": stars})
+        return Response({"spent_stars": star_delta})
