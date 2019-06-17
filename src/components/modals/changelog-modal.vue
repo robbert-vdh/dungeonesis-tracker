@@ -21,6 +21,7 @@
    h3 {
      font-size: 1.2rem;
      font-weight: 600;
+     margin: 0.5rem 0 0.2rem;
    }
 
    ul {
