@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1] - 2019-07-02
+
+### Fixed
+
+- Allow importing characters of level 14 and up again.
+
 ## [1.2.0] - 2019-06-17
 
 ### Added

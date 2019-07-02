@@ -1,7 +1,7 @@
 <template>
   <b-modal ref="modal" @show="reset" @ok.prevent="submit"
-           :ok-disabled="insufficientStars || cost === undefined"
-           id="character-add-modal" title="Add a character">
+           :ok-disabled="insufficientStars" id="character-add-modal"
+           title="Add a character">
     <form ref="form" @submit.stop.prevent="submit" class="mb-3"
           :class="{ 'was-validated': wasSubmitted }" novalidate>
       <div class="form-group">

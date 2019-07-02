@@ -31,7 +31,10 @@ export default class CharacterAddModel extends Vue {
    * character.
    */
   get insufficientStars(): boolean {
-    return this.cost > this.user.unspent_stars && !this.isFree;
+    return (
+      !this.isFree &&
+      (this.cost > this.user.unspent_stars || this.cost === undefined)
+    );
   }
 
   /**
