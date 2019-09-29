@@ -170,7 +170,7 @@ export default class CharacterPage extends Vue {
         calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
       },
       {
-        name: "I've brought snacks to share (2 stars)",
+        name: "I brought snacks to share (2 stars)",
         calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
       },
       {
