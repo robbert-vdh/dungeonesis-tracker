@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.132",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.20",
     "clean-webpack-plugin": "^2.0.2",
