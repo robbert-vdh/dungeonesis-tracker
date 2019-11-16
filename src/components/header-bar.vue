@@ -18,7 +18,7 @@
         </b-dropdown-item-button>
         <b-dropdown-divider></b-dropdown-divider>
         <b-dropdown-text tag="small" style="min-width: 11rem">
-          Updated for patch 5.4
+          Updated for patch 6.0
         </b-dropdown-text>
       </b-dropdown>
       <a class="btn btn-secondary" href="/logout">
