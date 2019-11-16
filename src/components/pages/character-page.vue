@@ -36,7 +36,7 @@
             <b-dropdown-item-button @click="toggleDeathStatus()">
               Mark as {{ character.dead ? 'living' : 'dead' }}
             </b-dropdown-item-button>
-            <b-dropdown-item-button @click="toggleIronManStatus()">
+            <b-dropdown-item-button @click="toggleIronManStatus()" :disabled="character.dead">
               {{ character.iron_man ? 'Disable' : 'Enable' }} Iron Man mode
             </b-dropdown-item-button>
             <b-dropdown-item-button v-b-modal.character-delete-modal variant="danger">

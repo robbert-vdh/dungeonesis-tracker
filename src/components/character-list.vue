@@ -6,10 +6,11 @@
                      :key="character.id"
                      :to="{ name: 'detail', params: { id: character.id } }"
                      class="list-group-item list-group-item-action d-flex
-                           justify-content-between align-items-center">
+                            justify-content-between align-items-center">
           {{ character.name }}
           <span class="badge badge-pill ml-2"
-                :class="{'badge-secondary': character.dead, 'badge-primary': !character.dead}">
+                :class="{'badge-secondary': character.dead, 'badge-primary': !character.dead,
+                         'badge-danger': character.iron_man && !character.dead}">
             {{ formatProgress(character) }}
           </span>
         </router-link>
