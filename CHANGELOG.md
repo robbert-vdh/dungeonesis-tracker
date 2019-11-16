@@ -4,6 +4,9 @@
 
 ### Changed
 
+- Update for patch 6.0.
+- Add an ellipsis to the `Edit Manually` button to make it clearer that this
+  opens a modal.
 - Changed the wording on some of the rewards.
 
 ### Security

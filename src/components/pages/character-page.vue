@@ -24,7 +24,7 @@
 
             <!-- The margin is here to compensate for the lost padding because of the scroll bar -->
             <b-dropdown-item-button v-b-modal.star-adjust-modal class="mb-2">
-              Edit manually
+              Edit manually&hellip;
             </b-dropdown-item-button>
           </b-dropdown>
 
