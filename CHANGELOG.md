@@ -4,16 +4,16 @@
 
 ### Added
 
-- Add support for Iron Man characters. These characters won't be able to share
+- Added support for Iron Man characters. These characters won't be able to share
   their quest rewards with other characters. The extra bonus banner has to be
   added manually since this depends on the level of the quest.
-- Add a way to add the 60 timeskip leveling stars (don't forget to remove any
-  left over stars through `Add Stars -> Edit Manually…`).
+- Added a way to add the 60 timeskip leveling stars (don't forget to remove any
+  leftover stars through `Add Stars -> Edit Manually…`).
 
 ### Changed
 
 - Update for patch 6.0.
-- Add an ellipsis to the `Edit Manually` button to make it clearer that this
+- Added an ellipsis to the `Edit Manually` button to make it clearer that this
   opens a modal.
 - Changed the wording on some of the rewards.
 
