@@ -332,6 +332,21 @@ export default class CharacterPage extends Vue {
     before: utils.CharacterProgression,
     after: utils.CharacterProgression
   ) {
+    // Notify Iron Man mode characters that their rewards are not shared and
+    // that hey should add another banner's worth of stars
+    // TODO: Add an option to disable this
+    if (this.character.iron_man) {
+      this.$bvToast.toast(
+        "This character is in Iron Man mode! All stars have been are assigned to \
+         this character. Don't forget to add your bonus banner.",
+        {
+          title: "Iron Man 🧲",
+          isStatus: true
+          // variant: "info"
+        }
+      );
+    }
+
     if (after.level > before.level) {
       this.$bvToast.toast(`You're now level ${after.level}!`, {
         title: "Level up",
