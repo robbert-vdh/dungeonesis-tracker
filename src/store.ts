@@ -73,6 +73,11 @@ export interface UserInfo {
 
 export var store = new Vuex.Store({
   state: {
+    /**
+     * The number of pending HTTP requests currently open. We use this to show a
+     * spinner if the requests take too long to indicate that the app is still
+     * responding.
+     */
     activeRequests: <number>0,
     characters: <{ [id: number]: Character }>{},
     lastVersion: window.localStorage.getItem("last-version") || CURRENT_VERSION,
@@ -123,6 +128,9 @@ export var store = new Vuex.Store({
     setLogs(state, logs: LogEntry[]) {
       state.logs = logs;
     },
+    // This mutation together with the `finishRequest` mutation are called
+    // through axios' request interceptors so we can keep track of the number of
+    // pending HTTP requests
     startRequest(state) {
       state.activeRequests += 1;
     }
