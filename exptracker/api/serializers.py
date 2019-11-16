@@ -9,7 +9,7 @@ class CharacterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Character
-        fields = ("id", "name", "stars", "dead", "reason")
+        fields = ("id", "name", "stars", "dead", "iron_man", "reason")
 
 
 class LogSerializer(serializers.ModelSerializer):

@@ -29,6 +29,9 @@ class Character(models.Model):
 
     Attributes
     ----------
+    iron_man : bool
+        Whether the character is in Iron Man mode. This will change the way
+        rewards are earned for this character.
     stars : int
         The number stars allocated to this character. From this we can
         calculate the character's level and the banners used for character
@@ -44,6 +47,7 @@ class Character(models.Model):
     name = models.CharField(max_length=255)
     stars = models.PositiveIntegerField()
     dead = models.BooleanField(default=False)
+    iron_man = models.BooleanField(default=False)
 
     @property
     def level(self):
