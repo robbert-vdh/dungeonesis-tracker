@@ -198,12 +198,12 @@ export default class CharacterPage extends Vue {
         calculate: _ => ({ globalStars: 7, characterBoundStars: 0 })
       },
       {
-        name: "I've DM'ed a session (8 stars)",
+        name: "I DM'ed a session (8 stars)",
         calculate: _ => ({ globalStars: 8, characterBoundStars: 0 })
       },
       "divider",
       {
-        name: "I've received an inspiration star (1 star)",
+        name: "I received an inspiration star (1 star)",
         calculate: _ => ({ globalStars: 1, characterBoundStars: 0 })
       },
       {

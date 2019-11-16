@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Changed the wording on the snacks reward.
+- Changed the wording on some of the rewards.
 
 ### Security
 
