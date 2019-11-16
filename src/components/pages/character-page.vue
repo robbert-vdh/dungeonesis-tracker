@@ -17,6 +17,7 @@
             <template v-for="reward in availableRewards">
               <b-dropdown-divider v-if="reward === 'divider'"></b-dropdown-divider>
               <b-dropdown-item-button v-else @click="claimReward(reward)" :variant="isRewardNegative(reward) ? 'danger' : ''">
+                <!-- Highlight character-specific rewards with an asterisk -->
                 {{ reward.name }}<span v-if="isRewardCharacterBound(reward)" class="font-weight-bolder"
                                        title="bound to this character">*</span>
               </b-dropdown-item-button>

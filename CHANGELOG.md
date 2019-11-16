@@ -4,6 +4,9 @@
 
 ### Added
 
+- Add support for Iron Man characters. These characters won't be able to share
+  their quest rewards with other characters. The extra bonus banner has to be
+  added manually since this depends on the level of the quest.
 - Add a way to add the 60 timeskip leveling stars (don't forget to remove any
   left over stars through `Add Stars -> Edit Manually…`).
 

@@ -43,6 +43,9 @@ interface Reward {
   /**
    * How many stars this reward should yield. This number is constant for every
    * reward except for quest rewards.
+   *
+   * TODO: The rewards are all constant now, so this does not need to be a
+   *       function anymore
    */
   calculate: (character: utils.CharacterProgression) => RewardStars;
 }
@@ -124,31 +127,31 @@ export default class CharacterPage extends Vue {
       "divider",
       {
         name: "Completed a quest (2 stars)",
-        calculate: _ => splitReward(2)
+        calculate: _ => splitReward(2, this.character.iron_man)
       },
       {
         name: "Completed a quest (4 stars)",
-        calculate: _ => splitReward(4)
+        calculate: _ => splitReward(4, this.character.iron_man)
       },
       {
         name: "Completed a quest (5 stars)",
-        calculate: _ => splitReward(5)
+        calculate: _ => splitReward(5, this.character.iron_man)
       },
       {
         name: "Completed a quest (6 stars)",
-        calculate: _ => splitReward(6)
+        calculate: _ => splitReward(6, this.character.iron_man)
       },
       {
         name: "Completed a quest (8 stars)",
-        calculate: _ => splitReward(8)
+        calculate: _ => splitReward(8, this.character.iron_man)
       },
       {
         name: "Completed a quest (10 stars)",
-        calculate: _ => splitReward(10)
+        calculate: _ => splitReward(10, this.character.iron_man)
       },
       {
         name: "Completed a quest (12 stars)",
-        calculate: _ => splitReward(12)
+        calculate: _ => splitReward(12, this.character.iron_man)
       },
       "divider",
       {
@@ -427,11 +430,17 @@ export default class CharacterPage extends Vue {
 /**
  * Devide a quest reward into two. Half the stars rewarded should go directly to
  * the character earning htem, and the other half will be added to the global
- * star pool.
+ * star pool. Iron Man characters won't share any of their rewards with the
+ * global pool.
  */
-function splitReward(stars: number): RewardStars {
-  return {
-    globalStars: Math.ceil(stars / 2),
-    characterBoundStars: Math.floor(stars / 2)
-  };
+function splitReward(stars: number, ironMan: boolean): RewardStars {
+  return ironMan
+    ? {
+        globalStars: 0,
+        characterBoundStars: stars
+      }
+    : {
+        globalStars: Math.ceil(stars / 2),
+        characterBoundStars: Math.floor(stars / 2)
+      };
 }
