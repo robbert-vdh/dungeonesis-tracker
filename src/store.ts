@@ -37,6 +37,7 @@ export interface Character {
   name: string;
   stars: number;
   dead: boolean;
+  iron_man: boolean;
   reason?: string;
 }
 
@@ -63,7 +64,8 @@ export type LogEntry = {
   | {
       type: "LogType.CHARACTER_DELETED";
       value: Character;
-    });
+    }
+);
 
 export interface UserInfo {
   first_name: string;
@@ -119,11 +121,8 @@ export var store = new Vuex.Store({
     initUserInfo(state, info: UserInfo) {
       state.user = info;
     },
-    renameCharacter(state, renamedCharacter: Character) {
-      state.characters[renamedCharacter.id].name = renamedCharacter.name;
-    },
-    setDeathStatus(state, updatedCharacter: Character) {
-      state.characters[updatedCharacter.id].dead = updatedCharacter.dead;
+    updateCharacter(state, updatedCharacter: Character) {
+      state.characters[updatedCharacter.id] = updatedCharacter;
     },
     setLogs(state, logs: LogEntry[]) {
       state.logs = logs;
@@ -174,7 +173,7 @@ export var store = new Vuex.Store({
         name: renamedCharacter.name
       });
 
-      commit("renameCharacter", renamedCharacter);
+      commit("updateCharacter", renamedCharacter);
     },
     // This modifies the character directly without using the star pool, see
     // `exptracker/api/character.py` for more information
@@ -195,7 +194,14 @@ export var store = new Vuex.Store({
         dead: updatedCharacter.dead
       });
 
-      commit("setDeathStatus", updatedCharacter);
+      commit("updateCharacter", updatedCharacter);
+    },
+    async setIronManStatus({ commit }, updatedCharacter: Character) {
+      await axios.patch(`/api/characters/${updatedCharacter.id}/`, {
+        iron_man: updatedCharacter.iron_man
+      });
+
+      commit("updateCharacter", updatedCharacter);
     },
     async spendStars({ commit }, params: StarSpendRequest) {
       await axios.post(`/api/characters/${params.id}/spend/`, params);

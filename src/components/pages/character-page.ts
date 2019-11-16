@@ -412,6 +412,16 @@ export default class CharacterPage extends Vue {
       dead: !this.character.dead
     });
   }
+
+  /**
+   * Enable or disable the Iron Man status for this character.
+   */
+  async toggleIronManStatus() {
+    await this.$store.dispatch("setIronManStatus", {
+      ...this.character,
+      iron_man: !this.character.iron_man
+    });
+  }
 }
 
 /**
