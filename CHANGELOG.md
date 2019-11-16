@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.1] - 2019-11-16
+
+### Added
+
+- Added the reward for DM'ing a session involving the Reign of Fire.
+
+### Changed
+
+- Changed the rewards for making art.
+
 ## [1.3.0] - 2019-11-16
 
 ### Added

@@ -175,8 +175,8 @@ export default class CharacterPage extends Vue {
         calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
       },
       {
-        name: "I've created a piece of art (2 stars)",
-        calculate: _ => ({ globalStars: 2, characterBoundStars: 0 })
+        name: "I've created a piece of art (3 stars)",
+        calculate: _ => ({ globalStars: 3, characterBoundStars: 0 })
       },
       {
         name: "I brought snacks to share (2 stars)",
@@ -209,6 +209,10 @@ export default class CharacterPage extends Vue {
       {
         name: "I DM'ed a session (8 stars)",
         calculate: _ => ({ globalStars: 8, characterBoundStars: 0 })
+      },
+      {
+        name: "…involving the Reign of Fire (9 stars)",
+        calculate: _ => ({ globalStars: 9, characterBoundStars: 0 })
       },
       "divider",
       {
