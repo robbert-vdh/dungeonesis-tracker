@@ -14,6 +14,13 @@
         <input v-model="characterLevel" type="number" class="form-control"
                id="character-add-level" min="1" max="20" required>
       </div>
+      <div class="custom-control custom-checkbox mb-1">
+        <input v-model="isIronMan" type="checkbox" class="custom-control-input"
+               id="character-add-iron-man" aria-describedby="custom-character-add-iron-man-help">
+        <label class="custom-control-label" for="character-add-iron-man">
+          Enable Iron Man mode
+        </label>
+      </div>
       <div class="custom-control custom-checkbox">
         <input v-model="isFree" type="checkbox" class="custom-control-input"
                id="character-add-free" aria-describedby="custom-character-add-free-help">
