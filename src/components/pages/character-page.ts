@@ -116,6 +116,12 @@ export default class CharacterPage extends Vue {
 
   get availableRewards(): (Reward | "divider")[] {
     return [
+      // TODO: Remove this option after the timeskip
+      {
+        name: "Add timeskip leveling stars (60 stars)",
+        calculate: _ => ({ globalStars: 60, characterBoundStars: 0 })
+      },
+      "divider",
       {
         name: "Completed a quest (2 stars)",
         calculate: _ => splitReward(2)

@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Added
+
+- Add a way to add the 60 timeskip leveling stars (don't forget to remove any
+  left over stars through `Add Stars -> Edit Manually…`).
+
 ### Changed
 
 - Update for patch 6.0.
