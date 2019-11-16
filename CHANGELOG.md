@@ -6,6 +6,10 @@
 
 - Changed the wording on the snacks reward.
 
+### Security
+
+- Updated outdated dependencies.
+
 ## [1.2.1] - 2019-07-02
 
 ### Fixed
