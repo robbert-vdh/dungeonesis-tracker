@@ -9,8 +9,6 @@
 
 import * as _ from "lodash";
 
-export const BANNERS_PER_LEVEL: number = 8;
-
 export const CHARACTER_CREATION_COST: { [level: number]: number } = {
   1: 0,
   2: 0,
@@ -47,21 +45,34 @@ export const STARS_PER_BANNER: { [level: number]: number } = {
   17: 6,
   18: 6,
   19: 6,
-  20: 6
+  20: 6,
+  21: 6,
+  22: 6,
+  23: 6,
+  24: 6,
+  25: 6
 };
+
+/**
+ * Return the number of banners needed to level up at a certain level.
+ */
+export function bannersPerLevel(level: number): number {
+  if (level < 20) {
+    return 8;
+  } else {
+    return 16;
+  }
+}
 
 // We can use the above values to calculate how many stars we need to reach a
 // certain level
 let starsForLevel: { [level: number]: number } = { 1: 0 };
 for (const [levelKey, bannerCost] of Object.entries(STARS_PER_BANNER)) {
   const level = Number(levelKey);
-  if (level >= 20) {
-    continue;
-  }
 
   const lastLevelRequirement = starsForLevel[level];
   starsForLevel[level + 1] =
-    lastLevelRequirement + bannerCost * BANNERS_PER_LEVEL;
+    lastLevelRequirement + bannerCost * bannersPerLevel(level);
 }
 
 export const STARS_FOR_LEVEL: { [level: number]: number } = starsForLevel;
@@ -168,7 +179,7 @@ export function nextLevelProgress(character: CharacterProgression): number {
 
   return (
     (character.banners + character.stars / STARS_PER_BANNER[character.level]) /
-    BANNERS_PER_LEVEL
+    bannersPerLevel(character.level)
   );
 }
 
@@ -185,7 +196,9 @@ function buildLevelingTable(): LevelingTable {
     { name: "Veteran (levels 11-13)", levels: [11, 12, 13] },
     { name: "Elite (levels 14-16)", levels: [14, 15, 16] },
     { name: "Marshal (levels 17-19)", levels: [17, 18, 19] },
-    { name: "Legend (level 20)", levels: [20] }
+    // The levels above 20 are only symbolic tiers used for rewards, and they
+    // are hidden by default
+    { name: "Legend (level 20)", levels: [20, 21, 22, 23, 24, 25] }
   ];
 
   // Because we need to keep track of the current star number (see
@@ -199,8 +212,7 @@ function buildLevelingTable(): LevelingTable {
     for (const level of section.levels) {
       let banners: TableBanner[] = [];
 
-      // TODO: Make BANNERS_PER_LEVEL a function, maybe
-      let numBanners = level < 20 ? BANNERS_PER_LEVEL : 16;
+      const numBanners = bannersPerLevel(level);
       for (let bannerId = 0; bannerId < numBanners; bannerId++) {
         let stars: number[] = [];
         for (let starId = 0; starId < STARS_PER_BANNER[level]; starId++) {
@@ -220,3 +232,11 @@ function buildLevelingTable(): LevelingTable {
 }
 
 export const LEVELING_TABLE: LevelingTable = buildLevelingTable();
+
+export function formatLevel(level: number): string {
+  if (level <= 20) {
+    return String(level);
+  } else {
+    return "20" + "?".repeat(level - 20);
+  }
+}

@@ -5,6 +5,7 @@ import BootstrapVue from "bootstrap-vue";
 
 import "./styles/app.scss";
 import { store } from "./store";
+import { formatLevel } from "./utils";
 import Main from "./components/main.vue";
 import OverviewPage from "./components/pages/overview-page.vue";
 import CharacterPage from "./components/pages/character-page.vue";
@@ -12,6 +13,10 @@ import CharacterPage from "./components/pages/character-page.vue";
 if (document.getElementById("app")) {
   Vue.use(BootstrapVue);
   Vue.use(VueRouter);
+
+  // This filter is used to be able to better identify the 'fake' levels above
+  // level 20 since those are only used for rewards
+  Vue.filter("formatLevel", formatLevel);
 
   const router = new VueRouter({
     routes: [

@@ -68,7 +68,7 @@ export default class CharacterAddModel extends Vue {
   async submit() {
     if (
       !(<HTMLFormElement>this.$refs.form).checkValidity() ||
-      this.cost === undefined
+      this.insufficientStars
     ) {
       this.wasSubmitted = true;
       return;
@@ -77,7 +77,7 @@ export default class CharacterAddModel extends Vue {
     // This should be run in some kind of transaction, but unless the connection
     // drops somehwere in the middle this won't cause any problems and any
     // problems are solvable by the user anyway.
-    if (!this.isFree && this.cost > 0) {
+    if (this.isFree && this.cost !== undefined && this.cost > 0) {
       await this.$store.dispatch("adjustStars", {
         stars: -this.cost,
         reason: `Created a level ${this.characterLevel} ${
@@ -92,7 +92,7 @@ export default class CharacterAddModel extends Vue {
       iron_man: this.isIronMan
     });
 
-    await this.$nextTick;
+    await this.$nextTick();
     (<any>this.$refs.modal).hide();
   }
 }

@@ -65,7 +65,8 @@ Component.registerHooks(["beforeRouteUpdate"]);
   props: {
     characterId: Number
   },
-  computed: mapState(["user"])
+  computed: mapState(["user"]),
+  methods: { formatLevel: utils.formatLevel }
 })
 export default class CharacterPage extends Vue {
   @Prop({ type: Number, required: true }) characterId!: number;
@@ -261,7 +262,7 @@ export default class CharacterPage extends Vue {
    */
   bannerClasses(level: utils.TableLevel, banner: utils.TableBanner): string[] {
     let classes = [];
-    if (level.level === 20) {
+    if (level.level >= 20) {
       classes.push("col-sm-1-5");
     }
 

@@ -48,7 +48,7 @@
             at level
 
             <span class="text-secondary">
-              {{ calculateLevel(log.value.stars) }}
+              {{ calculateLevel(log.value.stars) | formatLevel }}
             </span>
           </td>
           <td v-else-if="log.type === 'LogType.CHARACTER_DELETED'">
@@ -61,7 +61,7 @@
             at level
 
             <span class="text-secondary">
-              {{ calculateLevel(log.value.stars) }}
+              {{ calculateLevel(log.value.stars) | formatLevel }}
             </span>
 
             with

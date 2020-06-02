@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Added more ???.
+
+### Fixed
+
+- Fixed regression where it was no longer possible to add an existing character
+  above level 15.
+
 ## [1.3.1] - 2019-11-16
 
 ### Added

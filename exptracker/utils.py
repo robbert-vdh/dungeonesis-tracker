@@ -22,6 +22,9 @@ BANNERS_PER_LEVEL = 8
 # The number stars needed to purchase a banner for a character of a certain
 # level. These values are hardcoded here for convenience since there are only a
 # few of them and it makes calculations a lot simpler and clearer.
+#
+# The TypeScript version includes some more levels after level 20, but those are
+# purely for comestic purposes.
 STARS_PER_BANNER = {
     1: 1,
     2: 1,

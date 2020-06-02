@@ -50,7 +50,7 @@
 
     <div class="row mb-2">
       <div class="col-auto">
-        Level {{ level }}
+        Level {{ level | formatLevel }}
       </div>
       <div class="col pl-0">
         <b-progress :max="1.0" height="1.5rem">
@@ -74,18 +74,19 @@
 
       <b-collapse :visible="!collapsedSections[section.name]" :id="`section-${sectionId}`">
         <div class="card-body border-top">
-          <div class="card-deck">
+          <!-- TODO: Definitely move this to a component, I was in a bit of a hurry -->
+          <div v-if="section.levels[0] < 20" class="card-deck">
             <div v-for="level in section.levels" class="card bg-light">
-              <div class="card-header">Level {{ level.level }}</div>
+              <div class="card-header">Level {{ level.level | formatLevel }}</div>
               <div class="card-body">
-                <div class="row my-n1" :class="{ 'level-20-padding': level.level === 20 }">
+                <div class="row my-n1" :class="{ 'level-20-padding': level.level >= 20 }">
                   <!-- Clicking on a banner should will buy the entire banner at once -->
                   <button v-for="(banner, bannerId) in level.banners" type="button"
                           @click="levelCharacterTo(banner[banner.length - 1])"
                           :disabled="character.dead"
                           class="banner col-3 col-sm-6 col-md-3 my-1"
                           :class="bannerClasses(level, banner)"
-                          :title="`Level to level ${level.level} + ${bannerId + 1} banners`">
+                          :title="`Level to level ${formatLevel(level.level)} + ${bannerId + 1} banners`">
                     <banner-background-svg class="banner__background"></banner-background-svg>
 
                     <ul :class="`banner__stars banner__stars--${banner.length}`" aria-hidden>
@@ -98,6 +99,33 @@
               </div>
             </div>
           </div>
+          <template v-else v-for="(level, index) in section.levels">
+            <!-- Levels after 20 (so the bonus reward levels) should be hidden by default -->
+            <div v-if="level.level == 20 || progress.level >= level.level" class="card-deck" :class="{ 'mt-3': index > 0 }">
+              <div class="card bg-light">
+                <div class="card-header">Level {{ level.level | formatLevel }}</div>
+                <div class="card-body">
+                  <div class="row my-n1" :class="{ 'level-20-padding': level.level >= 20 }">
+                    <!-- Clicking on a banner should will buy the entire banner at once -->
+                    <button v-for="(banner, bannerId) in level.banners" type="button"
+                            @click="levelCharacterTo(banner[banner.length - 1])"
+                            :disabled="character.dead"
+                            class="banner col-3 col-sm-6 col-md-3 my-1"
+                            :class="bannerClasses(level, banner)"
+                            :title="`Level to level ${formatLevel(level.level)} + ${bannerId + 1} banners`">
+                      <banner-background-svg class="banner__background"></banner-background-svg>
+
+                      <ul :class="`banner__stars banner__stars--${banner.length}`" aria-hidden>
+                        <li v-for="star in banner" class="banner__star">
+                          <i :class="star <= character.stars ? 'icon-star-full' : 'icon-star-empty'"></i>
+                        </li>
+                      </ul>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
       </b-collapse>
     </div>
