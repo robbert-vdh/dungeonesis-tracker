@@ -74,8 +74,8 @@
 
       <b-collapse :visible="!collapsedSections[section.name]" :id="`section-${sectionId}`">
         <div class="card-body border-top">
-          <!-- TODO: Definitely move this to a component, I was in a bit of a hurry -->
-          <div v-if="section.levels[0] < 20" class="card-deck">
+          <!-- FIXME: Definitely move this to a component, I was in a bit of a hurry -->
+          <div v-if="section.levels.some(level => level.level < 20)" class="card-deck">
             <div v-for="level in section.levels" class="card bg-light">
               <div class="card-header">Level {{ level.level | formatLevel }}</div>
               <div class="card-body">
