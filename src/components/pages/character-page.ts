@@ -3,6 +3,7 @@ import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
 import { mapState } from "vuex";
+import { BDropdown } from "bootstrap-vue";
 import * as _ from "lodash";
 
 import { Character, UserInfo } from "../../store";
